@@ -1,0 +1,116 @@
+$display: (
+        block: block,
+        inline-flex:  inline-flex,
+        inline-block:  inline-block,
+        grid: grid,
+        none: none
+);
+$sizes: (
+        xs: 15px,
+        sm: 20px,
+        md: 25px,
+        lg: 30px,
+        xl: 40px,
+        2xl: 50px,
+        3xl: 60px,
+);
+.xs{
+  height: map-get($sizes, xs);
+}
+.sm{
+  height: map-get($sizes, sm);
+}
+.md{
+  height: map-get($sizes, md);
+}
+.lg{
+  height: map-get($sizes, lg);
+}
+.xl{
+  height: map-get($sizes, xl);
+}
+.xxl{
+  height: map-get($sizes, 2xl);
+}
+.xxxl{
+  height: map-get($sizes, 3xl);
+}
+
+@for $i from 10 through 30{
+  .h#{$i}{
+    height: #{$i}px;
+  }
+  .pl#{$i}{
+    padding-left: #{$i}px;
+  }
+  .pr#{$i}{
+    padding-right: #{$i}px;
+  }
+  .pt#{$i}{
+    padding-top: #{$i}px;
+  }
+  .pb#{$i}{
+    padding-bottom: #{$i}px;
+  }
+  .gap#{$i}{
+    gap: #{$i}px;
+  }
+}
+@for $i from 10 through 50{
+  .wh#{$i} {
+    width: #{$i}px;
+    height: #{$i}px;
+  }
+}
+@for $i from 10 through 200{
+  .w#{$i} {
+    width: #{$i}px;
+  }
+}
+
+@for $i from 5 through 200 {
+  .ml#{$i} {
+    margin-left: #{$i}px;
+  }
+  .mr#{$i} {
+    margin-right: #{$i}px;
+  }
+  .mt#{$i} {
+    margin-top: #{$i}px;
+  }
+  .mb#{$i} {
+    margin-bottom: #{$i}px;
+  }
+}
+.m-auto {
+  margin: 0 auto;
+}
+
+@for $i from 1 through 50{
+  .w#{$i}r {
+    width: #{$i}rem;
+  }
+}
+.w100{
+  width: 100%;
+}
+
+@each $k, $v in $display {
+  .d-#{$k} {
+    display: #{$v};
+  }
+}
+.flex-c {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.flex-r {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
