@@ -1,9 +1,28 @@
 $display: (
         block: block,
-        inline-flex:  inline-flex,
-        inline-block:  inline-block,
+        inline-block: inline-block,
         grid: grid,
         none: none
+);
+$align-items: (
+        str: stretch,
+        c:  center,
+        s:  start,
+        e: end,
+);
+$justify-items: (
+        s: start,
+        e: end,
+        c: center,
+        sb: space-between,
+        sa: space-around,
+        se: space-evenly,
+);
+$text-align: (
+        s:  start,
+        e: end,
+        c:  center,
+        j: justify,
 );
 $sizes: (
         xs: 15px,
@@ -36,9 +55,9 @@ $sizes: (
   height: map-get($sizes, 3xl);
 }
 
-@for $i from 10 through 30{
-  .h#{$i}{
-    height: #{$i}px;
+@for $i from 1 through 30{
+  .p#{$i}{
+    padding: #{$i}px #{$i}px;
   }
   .pl#{$i}{
     padding-left: #{$i}px;
@@ -52,6 +71,14 @@ $sizes: (
   .pb#{$i}{
     padding-bottom: #{$i}px;
   }
+  .plr#{$i}{
+    padding-left: #{$i}px;
+    padding-right: #{$i}px;
+  }
+  .ptb#{$i}{
+    padding-bottom: #{$i}px;
+    padding-top: #{$i}px;
+  }
   .gap#{$i}{
     gap: #{$i}px;
   }
@@ -61,10 +88,18 @@ $sizes: (
     width: #{$i}px;
     height: #{$i}px;
   }
+  .h#{$i}{
+    height: #{$i}px;
+  }
 }
 @for $i from 10 through 200{
   .w#{$i} {
     width: #{$i}px;
+  }
+}
+@for $i from 1 through 40{
+  .w#{$i*5}p {
+    width: #{$i * 5}#{"%"};
   }
 }
 
@@ -100,6 +135,24 @@ $sizes: (
     display: #{$v};
   }
 }
+
+@each $k, $v in $align-items {
+  .align-#{$k} {
+    align-items: #{$v};
+  }
+}
+
+@each $k, $v in $align-items {
+  .justify-#{$k} {
+    justify-content: #{$v};
+  }
+}
+@each $k, $v in $text-align {
+  .text-#{$k} {
+    text-align: #{$v};
+  }
+}
+
 .flex-c {
   display: flex;
   flex-direction: column;
@@ -110,7 +163,14 @@ $sizes: (
   flex-direction: row;
   flex-wrap: wrap;
 }
-.flex {
-  display: flex;
+
+.inline-flex-c {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.inline-flex-r {
+  display: inline-flex;
+  flex-direction: row;
   flex-wrap: wrap;
 }

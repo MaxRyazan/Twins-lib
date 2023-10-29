@@ -3,8 +3,11 @@
             class="tw_button"
             :class="{
                 success,
+                f_success,
                 error,
+                f_error,
                 warn,
+                f_warn,
                 rounded,
                 circle,
                 xs,
@@ -14,6 +17,7 @@
                 xl,
                 xxl,
                 xxxl,
+                bg_white
             }">
         <slot/>
     </button>
@@ -25,6 +29,9 @@ defineProps<{
     success?: boolean
     error?: boolean
     warn?: boolean
+    f_success?: boolean
+    f_error?: boolean
+    f_warn?: boolean
     rounded?: boolean
     circle?: boolean
     xs?: boolean,
@@ -34,6 +41,7 @@ defineProps<{
     xl?: boolean,
     xxl?: boolean,
     xxxl?: boolean,
+    bg_white?: boolean,
 }>()
 defineEmits<{
     (e: 'push'): void
