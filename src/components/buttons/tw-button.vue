@@ -11,20 +11,25 @@
                 borderRadius: borderRadius,
                 borderStyle: borderType,
             }"
-            :class="{success,warn,error,disabled}">
+            :class="{success,warn,error,f_success,f_warn,f_error,disabled}">
         <slot/>
     </button>
 </template>
 
 <script setup lang="ts">
 
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 const btn = ref()
 
 const props = defineProps<{
     success?: boolean
     error?: boolean
     warn?: boolean
+
+    f_success?: boolean
+    f_error?: boolean
+    f_warn?: boolean
+
     disabled?: boolean,
 
     width?: string,
@@ -53,5 +58,14 @@ onMounted(() => {
         })
     }
 })
-
+onUnmounted(() => {
+    if(props.bgcHover) {
+        btn.value.removeEventListener('mouseover', () => {
+            btn.value.style.backgroundColor = props.bgcHover
+        })
+        btn.value.removeEventListener('mouseout', () => {
+            btn.value.style.backgroundColor = props.bgc
+        })
+    }
+})
 </script>

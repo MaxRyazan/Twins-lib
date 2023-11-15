@@ -8,6 +8,7 @@
   position: relative;
   margin: 0;
   padding: 0;
+  height: 26px;
   outline: none;
   border: 1px solid black;
   color: black;
@@ -15,34 +16,40 @@
   cursor: pointer;
 }
 
-.disabled{
+.disabled {
   background-color: gray !important;
   pointer-events: none !important;
   color: black !important;
-}
-.bg_white{
-  background-color: white;
-}
-
-.rounded {
-  border-radius: 8px;
 }
 
 .success {
   border: 1px solid forestgreen;
   color: forestgreen;
+  background-color: transparent;
+
   &:hover {
     border: 1px solid lighten(forestgreen, 20%);
     color: lighten(forestgreen, 20%);
   }
+
+  &:active {
+    border: 1px solid darken(forestgreen, 5%);
+    color: darken(forestgreen, 5%);
+  }
 }
+
 .f_success {
-  border: none;
+  border: 1px solid transparent;
   background-color: forestgreen;
   color: white;
+
   &:hover {
-    border: none;
     background-color: lighten(forestgreen, 10%);
+    color: white;
+  }
+
+  &:active {
+    background-color: darken(forestgreen, 5%);
     color: white;
   }
 }
@@ -50,42 +57,63 @@
 .error {
   color: crimson;
   border: 1px solid crimson;
+  background-color: transparent;
+
   &:hover {
-    border: 1px solid darken(crimson, 10%);
-    color: darken(crimson, 10%);
+    border: 1px solid lighten(crimson, 15%);
+    color: lighten(crimson, 15%);
+  }
+
+  &:active {
+    border: 1px solid darken(crimson, 5%);
+    color: darken(crimson, 5%);
   }
 }
+
 .f_error {
   color: white;
-  border: none;
+  border: 1px solid transparent;
   background-color: crimson;
+
   &:hover {
     color: white;
-    border: none;
     background-color: lighten(crimson, 10%);
+  }
+
+  &:active {
+    background-color: darken(crimson, 5%);
+    color: white;
   }
 }
 
 .warn {
   color: orange;
   border: 1px solid orange;
+  background-color: transparent;
+
   &:hover {
-    border: 1px solid darken(orange, 10%);
-    color: darken(orange, 10%);
+    border: 1px solid lighten(orange, 10%);
+    color: lighten(orange, 10%);
   }
-}
-.f_warn {
-  color: white;
-  border: none;
-  background-color: orange;
-  &:hover {
-    color: white;
-    border: none;
-    background-color: lighten(orange, 10%);
+
+  &:active {
+    border: 1px solid darken(orange, 5%);
+    color: darken(orange, 5%);
   }
 }
 
-.circle{
-  border-radius: 50%;
-  padding: 2px;
+.f_warn {
+  color: white;
+  border: 1px solid transparent;
+  background-color: orange;
+
+  &:hover {
+    color: white;
+    background-color: lighten(orange, 10%);
+  }
+
+  &:active {
+    color: white;
+    background-color: darken(orange, 5%);
+  }
 }

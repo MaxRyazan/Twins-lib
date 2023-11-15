@@ -1,176 +1,176 @@
-$display: (
-        block: block,
-        inline-block: inline-block,
-        grid: grid,
-        none: none
-);
-$align-items: (
-        str: stretch,
-        c:  center,
-        s:  start,
-        e: end,
-);
-$justify-items: (
-        s: start,
-        e: end,
-        c: center,
-        sb: space-between,
-        sa: space-around,
-        se: space-evenly,
-);
-$text-align: (
-        s:  start,
-        e: end,
-        c:  center,
-        j: justify,
-);
-$sizes: (
-        xs: 15px,
-        sm: 20px,
-        md: 25px,
-        lg: 30px,
-        xl: 40px,
-        2xl: 50px,
-        3xl: 60px,
-);
-.xs{
-  height: map-get($sizes, xs);
-}
-.sm{
-  height: map-get($sizes, sm);
-}
-.md{
-  height: map-get($sizes, md);
-}
-.lg{
-  height: map-get($sizes, lg);
-}
-.xl{
-  height: map-get($sizes, xl);
-}
-.xxl{
-  height: map-get($sizes, 2xl);
-}
-.xxxl{
-  height: map-get($sizes, 3xl);
-}
-
-@for $i from 1 through 30{
-  .p#{$i}{
-    padding: #{$i}px #{$i}px;
-  }
-  .pl#{$i}{
-    padding-left: #{$i}px;
-  }
-  .pr#{$i}{
-    padding-right: #{$i}px;
-  }
-  .pt#{$i}{
-    padding-top: #{$i}px;
-  }
-  .pb#{$i}{
-    padding-bottom: #{$i}px;
-  }
-  .plr#{$i}{
-    padding-left: #{$i}px;
-    padding-right: #{$i}px;
-  }
-  .ptb#{$i}{
-    padding-bottom: #{$i}px;
-    padding-top: #{$i}px;
-  }
-  .gap#{$i}{
-    gap: #{$i}px;
-  }
-}
-@for $i from 10 through 50{
-  .wh#{$i} {
-    width: #{$i}px;
-    height: #{$i}px;
-  }
-  .h#{$i}{
-    height: #{$i}px;
-  }
-}
-@for $i from 10 through 200{
-  .w#{$i} {
-    width: #{$i}px;
-  }
-}
-@for $i from 1 through 40{
-  .w#{$i*5}p {
-    width: #{$i * 5}#{"%"};
-  }
-}
-
-@for $i from 5 through 200 {
-  .ml#{$i} {
-    margin-left: #{$i}px;
-  }
-  .mr#{$i} {
-    margin-right: #{$i}px;
-  }
-  .mt#{$i} {
-    margin-top: #{$i}px;
-  }
-  .mb#{$i} {
-    margin-bottom: #{$i}px;
-  }
-}
-.m-auto {
-  margin: 0 auto;
-}
-
-@for $i from 1 through 50{
-  .w#{$i}r {
-    width: #{$i}rem;
-  }
-}
-.w100{
-  width: 100%;
-}
-
-@each $k, $v in $display {
-  .d-#{$k} {
-    display: #{$v};
-  }
-}
-
-@each $k, $v in $align-items {
-  .align-#{$k} {
-    align-items: #{$v};
-  }
-}
-
-@each $k, $v in $align-items {
-  .justify-#{$k} {
-    justify-content: #{$v};
-  }
-}
-@each $k, $v in $text-align {
-  .text-#{$k} {
-    text-align: #{$v};
-  }
-}
-
-.flex-c {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.flex-r {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.inline-flex-c {
-  display: inline-flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-.inline-flex-r {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+//$display: (
+//        block: block,
+//        inline-block: inline-block,
+//        grid: grid,
+//        none: none
+//);
+//$align-items: (
+//        str: stretch,
+//        c:  center,
+//        s:  start,
+//        e: end,
+//);
+//$justify-items: (
+//        s: start,
+//        e: end,
+//        c: center,
+//        sb: space-between,
+//        sa: space-around,
+//        se: space-evenly,
+//);
+//$text-align: (
+//        s:  start,
+//        e: end,
+//        c:  center,
+//        j: justify,
+//);
+//$sizes: (
+//        xs: 15px,
+//        sm: 20px,
+//        md: 25px,
+//        lg: 30px,
+//        xl: 40px,
+//        2xl: 50px,
+//        3xl: 60px,
+//);
+//.xs{
+//  height: map-get($sizes, xs);
+//}
+//.sm{
+//  height: map-get($sizes, sm);
+//}
+//.md{
+//  height: map-get($sizes, md);
+//}
+//.lg{
+//  height: map-get($sizes, lg);
+//}
+//.xl{
+//  height: map-get($sizes, xl);
+//}
+//.xxl{
+//  height: map-get($sizes, 2xl);
+//}
+//.xxxl{
+//  height: map-get($sizes, 3xl);
+//}
+//
+//@for $i from 1 through 30{
+//  .p#{$i}{
+//    padding: #{$i}px #{$i}px;
+//  }
+//  .pl#{$i}{
+//    padding-left: #{$i}px;
+//  }
+//  .pr#{$i}{
+//    padding-right: #{$i}px;
+//  }
+//  .pt#{$i}{
+//    padding-top: #{$i}px;
+//  }
+//  .pb#{$i}{
+//    padding-bottom: #{$i}px;
+//  }
+//  .plr#{$i}{
+//    padding-left: #{$i}px;
+//    padding-right: #{$i}px;
+//  }
+//  .ptb#{$i}{
+//    padding-bottom: #{$i}px;
+//    padding-top: #{$i}px;
+//  }
+//  .gap#{$i}{
+//    gap: #{$i}px;
+//  }
+//}
+//@for $i from 10 through 50{
+//  .wh#{$i} {
+//    width: #{$i}px;
+//    height: #{$i}px;
+//  }
+//  .h#{$i}{
+//    height: #{$i}px;
+//  }
+//}
+//@for $i from 10 through 200{
+//  .w#{$i} {
+//    width: #{$i}px;
+//  }
+//}
+//@for $i from 1 through 40{
+//  .w#{$i*5}p {
+//    width: #{$i * 5}#{"%"};
+//  }
+//}
+//
+//@for $i from 5 through 200 {
+//  .ml#{$i} {
+//    margin-left: #{$i}px;
+//  }
+//  .mr#{$i} {
+//    margin-right: #{$i}px;
+//  }
+//  .mt#{$i} {
+//    margin-top: #{$i}px;
+//  }
+//  .mb#{$i} {
+//    margin-bottom: #{$i}px;
+//  }
+//}
+//.m-auto {
+//  margin: 0 auto;
+//}
+//
+//@for $i from 1 through 50{
+//  .w#{$i}r {
+//    width: #{$i}rem;
+//  }
+//}
+//.w100{
+//  width: 100%;
+//}
+//
+//@each $k, $v in $display {
+//  .d-#{$k} {
+//    display: #{$v};
+//  }
+//}
+//
+//@each $k, $v in $align-items {
+//  .align-#{$k} {
+//    align-items: #{$v};
+//  }
+//}
+//
+//@each $k, $v in $align-items {
+//  .justify-#{$k} {
+//    justify-content: #{$v};
+//  }
+//}
+//@each $k, $v in $text-align {
+//  .text-#{$k} {
+//    text-align: #{$v};
+//  }
+//}
+//
+//.flex-c {
+//  display: flex;
+//  flex-direction: column;
+//  flex-wrap: wrap;
+//}
+//.flex-r {
+//  display: flex;
+//  flex-direction: row;
+//  flex-wrap: wrap;
+//}
+//
+//.inline-flex-c {
+//  display: inline-flex;
+//  flex-direction: column;
+//  flex-wrap: wrap;
+//}
+//.inline-flex-r {
+//  display: inline-flex;
+//  flex-direction: row;
+//  flex-wrap: wrap;
+//}
