@@ -1,0 +1,92 @@
+$primeYellow: rgb(212, 190, 50);
+$primeGreen:  #66cc03;
+$tableBGOdd: rgba(43,211,237, .15);
+$hoverNoTransparent: rgb(95, 131, 199);
+$tableBGNotOdd: rgba(43,211,237, .5);
+$tableBorderColor: #73d2e5;
+$tableTRHoverColor: rgba(43,211,237,0.7);
+$primeHeaderBackground: #3b4550;
+
+.global-table{
+  border-collapse: collapse;
+  cursor: default;
+  background-color: darkblue;
+  & th{
+    text-align: center;
+    color: $primeGreen;
+    border: 1px solid $tableBorderColor;
+    font-size: 14px;
+    cursor: default;
+    background-color: $primeHeaderBackground;
+  padding: 5px 5px;
+    @media (min-width: 2550px) and (aspect-ratio: 16 / 9){
+      font-size: 30px;
+    }
+  }
+  & td{
+    border: 1px solid $tableBorderColor;
+    text-align: center;
+    color: $primeYellow;
+    font-size: 12px;
+  padding: 5px 5px;
+    @media (min-width: 2550px) and (aspect-ratio: 16 / 9){
+      font-size: 30px;
+    }
+  }
+  & .odd{
+    background-color: $tableBGOdd;
+  }
+  & .not_odd{
+    background-color: $tableBGNotOdd;
+  }
+  & tbody tr:hover{
+    background-color: $tableTRHoverColor;
+  }
+  &.disabled {
+    &  tbody tr:hover{
+      background: transparent;
+      &.odd {
+        background-color: $tableBGOdd;
+      }
+    }
+
+  }
+}
+.selected{
+  background-color: $tableTRHoverColor !important;
+}
+.table_no_data {
+  &:hover {
+    background-color: transparent;
+    cursor: default;
+  }
+
+  td {
+    text-align: left;
+    padding: 10px 5px;
+  }
+}
+
+.td_align_left {
+  & td {
+    text-align: left;
+  }
+}
+
+.td_align_right {
+  & td {
+    text-align: right;
+  }
+}
+
+.justify_center {
+  justify-content: center;
+}
+
+.margin_auto {
+  margin: 0 auto;
+}
+
+.red_when_sub_zero {
+  color: red;
+}
