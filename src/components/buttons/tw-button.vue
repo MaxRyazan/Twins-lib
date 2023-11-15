@@ -1,52 +1,63 @@
 <template>
     <button @click="$emit('push')"
             class="tw_button"
-            :class="{
-                success,
-                f_success,
-                error,
-                f_error,
-                warn,
-                f_warn,
-                rounded,
-                circle,
-                xs,
-                sm,
-                md,
-                lg,
-                xl,
-                xxl,
-                xxxl,
-                bg_white
-            }">
+            :style="{
+                width: width,
+                height: height,
+                color: textColor,
+                backgroundColor: bgc,
+                borderColor: borderColor,
+                borderWidth: borderWidth,
+                borderRadius: borderRadius,
+
+            }"
+            :class="{success,warn,error,disabled}">
         <slot/>
     </button>
 </template>
 
 <script setup lang="ts">
 
-defineProps<{
+import {onMounted} from "vue";
+
+const props = defineProps<{
     success?: boolean
     error?: boolean
     warn?: boolean
-    f_success?: boolean
-    f_error?: boolean
-    f_warn?: boolean
-    rounded?: boolean
-    circle?: boolean
-    xs?: boolean,
-    sm?: boolean,
-    md?: boolean,
-    lg?: boolean,
-    xl?: boolean,
-    xxl?: boolean,
-    xxxl?: boolean,
-    bg_white?: boolean,
+    disabled?: boolean,
+
+    width?: string,
+    height?: string,
+    bgc?: string,
+    bgcHover?: string,
+    textColor?: string,
+    borderColor?: string,
+    borderWidth?: string,
+    borderRadius?: string,
+
 }>()
 defineEmits<{
     (e: 'push'): void
 }>()
-</script>
-<style lang="scss">
 
-</style>
+function setColor(property: string, value: string) {
+    let variables: HTMLElement = document.querySelector(':root');
+    variables.style.setProperty(property, value);
+}
+
+onMounted(() => {
+    if (props.bgc) {
+        setColor('--color-bg', props.bgc)
+    }
+    if (props.textColor) {
+        setColor('--color-text', props.textColor)
+    }
+    if (props.borderColor) {
+        setColor('--color-border', props.borderColor)
+    }
+    if (props.bgcHover) {
+        setColor('--color-bg-hover', props.bgcHover)
+    }
+})
+
+</script>
