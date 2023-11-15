@@ -1,5 +1,5 @@
 <template>
-    <button @click="$emit('push')"
+    <button ref="btn" @click="$emit('push')"
             class="tw_button"
             :style="{
                 width: width,
@@ -9,7 +9,7 @@
                 borderColor: borderColor,
                 borderWidth: borderWidth,
                 borderRadius: borderRadius,
-
+                borderStyle: borderType,
             }"
             :class="{success,warn,error,disabled}">
         <slot/>
@@ -18,7 +18,8 @@
 
 <script setup lang="ts">
 
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+const btn = ref()
 
 const props = defineProps<{
     success?: boolean
@@ -34,29 +35,22 @@ const props = defineProps<{
     borderColor?: string,
     borderWidth?: string,
     borderRadius?: string,
+    borderType?: string,
 
 }>()
 defineEmits<{
     (e: 'push'): void
 }>()
 
-function setColor(property: string, value: string) {
-    let variables: HTMLElement = document.querySelector(':root');
-    variables.style.setProperty(property, value);
-}
 
 onMounted(() => {
-    if (props.bgc) {
-        setColor('--color-bg', props.bgc)
-    }
-    if (props.textColor) {
-        setColor('--color-text', props.textColor)
-    }
-    if (props.borderColor) {
-        setColor('--color-border', props.borderColor)
-    }
-    if (props.bgcHover) {
-        setColor('--color-bg-hover', props.bgcHover)
+    if(props.bgcHover) {
+        btn.value.addEventListener('mouseover', () => {
+            btn.value.style.backgroundColor = props.bgcHover
+        })
+        btn.value.addEventListener('mouseout', () => {
+            btn.value.style.backgroundColor = props.bgc
+        })
     }
 })
 

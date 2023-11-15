@@ -1,11 +1,3 @@
-:root {
-  --color-text: black;
-  --color-bg: transparent;
-  --color-bg-hover: transparent;
-  --color-border: black;
-  --border-type: solid;
-  --border-width: 1px;
-}
 
 .tw_button {
   display: flex;
@@ -17,9 +9,9 @@
   margin: 0;
   padding: 0;
   outline: none;
-  border: var(--border-width) var(--border-type) var(--color-border);
-  color: var(--color-text);
-  background-color: var(--color-bg);
+  border: 1px solid black;
+  color: black;
+  background-color: white;
   cursor: pointer;
 }
 
