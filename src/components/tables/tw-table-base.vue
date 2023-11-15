@@ -2,6 +2,7 @@
     <table :style="{
                 width: props.width,
                 height: props.height,
+                backgroundColor: props.table_bgc ?? 'darkblue'
             }"
            class="global-table" :class="{td_align_left, td_align_right}">
         <thead>
@@ -120,6 +121,10 @@ const props = defineProps({
         required: false
     },
     cell_font_color: {
+        type: String,
+        required: false
+    },
+    table_bgc: {
         type: String,
         required: false
     },

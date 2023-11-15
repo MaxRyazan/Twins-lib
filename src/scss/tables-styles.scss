@@ -10,7 +10,6 @@ $primeHeaderBackground: #3b4550;
 .global-table{
   border-collapse: collapse;
   cursor: default;
-  background-color: darkblue;
   & th{
     text-align: center;
     color: $primeGreen;
@@ -20,7 +19,7 @@ $primeHeaderBackground: #3b4550;
     font-size: 14px;
     cursor: default;
     background-color: $primeHeaderBackground;
-  padding: 5px 5px;
+    padding: 5px 5px;
     @media (min-width: 2550px) and (aspect-ratio: 16 / 9){
       font-size: 30px;
     }
