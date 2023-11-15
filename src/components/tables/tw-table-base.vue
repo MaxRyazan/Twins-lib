@@ -1,8 +1,16 @@
 <template>
-    <table class="global-table" :class="{td_align_left, td_align_right}">
+    <table :style="{
+                width: props.width,
+                height: props.height,
+            }"
+           class="global-table" :class="{td_align_left, td_align_right}">
         <thead>
         <tr>
-            <th v-for="(columnName, idx) in header" :key="idx">{{ columnName }}</th>
+            <th :style="{
+                    backgroundColor: props.header_bgc,
+                    color: props.header_font_color,
+                    fontSize: header_font_size
+            }" v-for="(columnName, idx) in header" :key="idx">{{ columnName }}</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +24,12 @@
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
-            <td v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
+            <td :style="{
+                padding: props.cell_padding,
+                fontSize: props.cell_font_size,
+                color: props.cell_font_color
+            }"
+                v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
                     <div v-if="props.elementsWithTabulation">
                         <div v-for="(el, indInTabulation) in elementsWithTabulation" :key="indInTabulation">
@@ -43,7 +56,7 @@ const props = defineProps({
         required: false
     },
     body: {
-        type: Array,
+        type: Array<Object | []>,
         required: true,
     },
     td_align_left: {
@@ -76,6 +89,38 @@ const props = defineProps({
     },
     withFixedToTwo: {
         type: Boolean,
+        required: false
+    },
+    width: {
+        type: String,
+        required: false
+    },
+    height: {
+        type: String,
+        required: false
+    },
+    header_bgc: {
+        type: String,
+        required: false
+    },
+    header_font_color: {
+        type: String,
+        required: false
+    },
+    header_font_size: {
+        type: String,
+        required: false
+    },
+    cell_padding: {
+        type: String,
+        required: false
+    },
+    cell_font_size: {
+        type: String,
+        required: false
+    },
+    cell_font_color: {
+        type: String,
         required: false
     },
 })
@@ -111,13 +156,13 @@ const subZero = computed(() => {
 function normalizeValue(field: any) {
     if (field === ' ' || field === '') return field
     if (!isNaN(field)) {
-        if(props.withFixedToZero){
+        if (props.withFixedToZero) {
             return Number(field).toFixed()
         }
-        if(props.withFixedToOne){
+        if (props.withFixedToOne) {
             return Number(field).toFixed(1)
         }
-        if(props.withFixedToTwo){
+        if (props.withFixedToTwo) {
             return Number(field).toFixed(2)
         }
         return Number(field)
