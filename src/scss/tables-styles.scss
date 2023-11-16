@@ -1,8 +1,7 @@
 $primeYellow: rgb(212, 190, 50);
 $primeGreen:  #66cc03;
-$tableBGOdd: rgba(43,211,237, .15);
+$tableBGOdd: rgba(237, 255, 253, .56);
 $hoverNoTransparent: rgb(95, 131, 199);
-$tableBGNotOdd: rgba(43,211,237, .5);
 $tableBorderColor: #73d2e5;
 $tableTRHoverColor: rgba(43,211,237,0.2);
 $primeHeaderBackground: #3b4550;
@@ -27,18 +26,13 @@ $primeHeaderBackground: #3b4550;
   & td{
     border: 1px solid $tableBorderColor;
     text-align: center;
-    color: black;
-    font-size: 12px;
     padding: 5px 5px;
     @media (min-width: 2550px) and (aspect-ratio: 16 / 9){
       font-size: 30px;
     }
   }
   & .odd{
-    background-color: $tableBGOdd;
-  }
-  & .not_odd{
-    background-color: $tableBGNotOdd;
+    background-color: $tableBGOdd !important;
   }
   & tbody tr:hover{
     background-color: $tableTRHoverColor !important;

@@ -21,7 +21,12 @@
             </td>
         </tr>
         <tr v-for="(bodyElement, index) in body" :key="index"
-            :style="{backgroundColor: watchRowBgc(index),}"
+            :style="{
+            backgroundColor: watchRowBgc(index),
+            color: watchRowTextColor(index),
+            fontSize: watchRowFontSize(index),
+            fontFamily: watchRowFontFamily(index)
+        }"
             :class="{'odd': (index % 2 === 0 && props.multicolor), 'selected': isSelected(bodyElement)}"
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
@@ -48,12 +53,14 @@
 </template>
 
 <script setup lang="ts">
-
 import {computed, ref} from "vue";
 
-interface RowBgc {
+interface RowCustomSettings {
     idx: number
-    color: string
+    textColor: string
+    fontSize: string
+    fontFamily: string
+    bgc: string
 }
 
 const emits = defineEmits(['push', 'dabClick', 'rightClick'])
@@ -134,8 +141,8 @@ const props = defineProps({
         type: Boolean,
         required: false
     },
-    rows_with_bgc: {
-        type: Array<RowBgc>,
+    row_custom_settings: {
+        type: Array<RowCustomSettings>,
         required: false
     },
 })
@@ -181,11 +188,38 @@ function normalizeValue(field: any) {
 }
 
 function watchRowBgc(rowIndex: number){
-    if(!props.rows_with_bgc) return 'transparent'
+    if(!props.row_custom_settings) return 'transparent'
     else {
-        const object = props.rows_with_bgc.find(obj => obj.idx === rowIndex)
+        const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
         if(object) {
-            return object.color
+            return object.bgc
+        }
+    }
+}
+
+function watchRowTextColor(rowIndex: number){
+    if(!props.row_custom_settings) return props.cell_font_color ?? 'black'
+    else {
+        const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
+        if(object) {
+            return object.textColor
+        }
+    }
+}
+function watchRowFontSize(rowIndex: number){
+    if(props.row_custom_settings) {
+        const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
+        if(object) {
+            return object.fontSize
+        } else return '14px'
+    } else return '14px'
+}
+
+function watchRowFontFamily(rowIndex: number){
+    if(props.row_custom_settings) {
+        const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
+        if(object) {
+            return object.fontFamily
         }
     }
 }
