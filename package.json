@@ -1,6 +1,6 @@
 {
   "name": "twins-vue",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": ["vue", "vue3", "vue 3", "vue component", "vue-component", "table", "vue table"],
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
