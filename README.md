@@ -34,4 +34,9 @@
 |row_custom_settings    | Нет      |Array<{idx: Number, textColor: String, fontSize: String, fontFamily: String}>      |Массив объектов формата {idx: Number, textColor: String, fontSize: String, fontFamily: String, bgc: String}, позволяющий поменять стили конкретной строки в таблице. idx - номер строки, textColor - цвет текста в строке, fontSize - размер текста в строке, fontFamily - название шрифта в строке, bgc - цвет заливки этой строки.|
 
 
-
+   **Emits of component TwTableBase**
+|Название | Аргументы | Описание |
+|----------|----------|----------|
+|@push     | {bodyElement, $event}    |Клик по строке таблицы левой кнопкой мыши |
+|@dab-click |{bodyElement, $event}    |Двойной клик по строке таблицы левой кнопкой мыши |
+|@right-click | {bodyElement, $event} |Клик по строке таблицы правой кнопкой мыши |
