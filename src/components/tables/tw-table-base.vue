@@ -30,12 +30,12 @@
                 padding: props.cell_padding,
                 fontSize: props.cell_font_size,
                 color: props.cell_font_color,
-                minWidth: cell_min_width
+                minWidth: cell_min_width,
             }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
-                    <div v-if="props.elementsWithTabulation">
-                        <div v-for="(el, indInTabulation) in elementsWithTabulation" :key="indInTabulation">
+                    <div v-if="props.elements_with_tabulation">
+                        <div v-for="(el, indInTabulation) in elements_with_tabulation" :key="indInTabulation">
                             <pre v-if="el[0] === index && el[1] === bodyElIndex">   </pre>
                         </div>
                     </div>
@@ -74,19 +74,19 @@ const props = defineProps({
         type: Boolean,
         required: false
     },
-    elementsWithTabulation: {
+    elements_with_tabulation: {
         type: Array,
         required: false
     },
-    redWhenSubZero: {
+    red_when_sub_zero: {
         type: Boolean,
         required: false
     },
-    tableWithSelect: {
+    table_with_select: {
         type: Boolean,
         required: false
     },
-    withFixed: {
+    with_fixed: {
         type: Number,
         required: false
     },
@@ -134,10 +134,10 @@ const props = defineProps({
         type: Boolean,
         required: false
     },
-    rowsWithBgc: {
+    rows_with_bgc: {
         type: Array<RowBgc>,
         required: false
-    }
+    },
 })
 
 const selectedElement = ref('')
@@ -158,21 +158,21 @@ function emitRightClick(bodyElement: any, $event: MouseEvent) {
 }
 
 function isSelected(bodyElement: any) {
-    if (props.tableWithSelect) {
+    if (props.table_with_select) {
         return selectedElement.value === JSON.stringify(bodyElement)
     }
 }
 
 
 const subZero = computed(() => {
-    return props.redWhenSubZero
+    return props.red_when_sub_zero
 })
 
 function normalizeValue(field: any) {
     if (field === ' ' || field === '') return field
     if (!isNaN(field)) {
-        if (props.withFixed) {
-            return Number(field).toFixed(props.withFixed)
+        if (props.with_fixed) {
+            return Number(field).toFixed(props.with_fixed)
         }
         return Number(field)
     } else {
@@ -181,9 +181,9 @@ function normalizeValue(field: any) {
 }
 
 function watchRowBgc(rowIndex: number){
-    if(!props.rowsWithBgc) return 'transparent'
+    if(!props.rows_with_bgc) return 'transparent'
     else {
-        const object = props.rowsWithBgc.find(obj => obj.idx === rowIndex)
+        const object = props.rows_with_bgc.find(obj => obj.idx === rowIndex)
         if(object) {
             return object.color
         }
