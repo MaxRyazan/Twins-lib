@@ -21,14 +21,16 @@
             </td>
         </tr>
         <tr v-for="(bodyElement, index) in body" :key="index"
-            :class="{'odd': index % 2 === 0, 'selected': isSelected(bodyElement)}"
+            :style="{backgroundColor: watchRowBgc(index),}"
+            :class="{'odd': (index % 2 === 0 && props.multicolor), 'selected': isSelected(bodyElement)}"
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
             <td :style="{
                 padding: props.cell_padding,
                 fontSize: props.cell_font_size,
-                color: props.cell_font_color
+                color: props.cell_font_color,
+                minWidth: cell_min_width
             }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
@@ -49,6 +51,10 @@
 
 import {computed, ref} from "vue";
 
+interface RowBgc {
+    idx: number
+    color: string
+}
 
 const emits = defineEmits(['push', 'dabClick', 'rightClick'])
 const props = defineProps({
@@ -80,16 +86,8 @@ const props = defineProps({
         type: Boolean,
         required: false
     },
-    withFixedToZero: {
-        type: Boolean,
-        required: false
-    },
-    withFixedToOne: {
-        type: Boolean,
-        required: false
-    },
-    withFixedToTwo: {
-        type: Boolean,
+    withFixed: {
+        type: Number,
         required: false
     },
     width: {
@@ -128,6 +126,18 @@ const props = defineProps({
         type: String,
         required: false
     },
+    cell_min_width: {
+        type: String,
+        required: false
+    },
+    multicolor: {
+        type: Boolean,
+        required: false
+    },
+    rowsWithBgc: {
+        type: Array<RowBgc>,
+        required: false
+    }
 })
 
 const selectedElement = ref('')
@@ -161,14 +171,8 @@ const subZero = computed(() => {
 function normalizeValue(field: any) {
     if (field === ' ' || field === '') return field
     if (!isNaN(field)) {
-        if (props.withFixedToZero) {
-            return Number(field).toFixed()
-        }
-        if (props.withFixedToOne) {
-            return Number(field).toFixed(1)
-        }
-        if (props.withFixedToTwo) {
-            return Number(field).toFixed(2)
+        if (props.withFixed) {
+            return Number(field).toFixed(props.withFixed)
         }
         return Number(field)
     } else {
@@ -176,4 +180,13 @@ function normalizeValue(field: any) {
     }
 }
 
+function watchRowBgc(rowIndex: number){
+    if(!props.rowsWithBgc) return 'transparent'
+    else {
+        const object = props.rowsWithBgc.find(obj => obj.idx === rowIndex)
+        if(object) {
+            return object.color
+        }
+    }
+}
 </script>
