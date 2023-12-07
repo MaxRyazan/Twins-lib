@@ -4,7 +4,7 @@
             :style="{
                 width: width,
                 height: height,
-                color: textColor ? textColor : (color_gamma ? color_gamma : (outline ? (success ? 'forestgreen': (error ? 'crimson' : (warn ? 'orange' : 'white'))) : 'white')),
+                color: textColor ? textColor : (color_gamma ? (outline ? color_gamma : 'white') : (outline ? (success ? 'forestgreen': (error ? 'crimson' : (warn ? 'orange' : 'white'))) : 'white')),
                 backgroundColor: bgc ? bgc : color_gamma,
                 border: border,
                 borderColor: color_gamma
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 
 const btn = ref()
 
@@ -62,6 +62,17 @@ onMounted(() => {
             btn.value.style.backgroundColor = props.bgcHover
         })
         btn.value.addEventListener('mouseout', () => {
+            btn.value.style.backgroundColor = props.bgc
+        })
+    }
+})
+
+onUnmounted(() => {
+    if (props.bgcHover) {
+        btn.value.removeEventListener('mouseover', () => {
+            btn.value.style.backgroundColor = props.bgcHover
+        })
+        btn.value.removeEventListener('mouseout', () => {
             btn.value.style.backgroundColor = props.bgc
         })
     }
