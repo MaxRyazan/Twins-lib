@@ -4,9 +4,10 @@
             :style="{
                 width: width,
                 height: height,
-                color: textColor ? textColor : (outline ? (success ? 'forestgreen': (error ? 'crimson' : (warn ? 'orange' : 'white'))) : 'white'),
-                backgroundColor: bgc,
+                color: textColor ? textColor : (color_gamma ? color_gamma : (outline ? (success ? 'forestgreen': (error ? 'crimson' : (warn ? 'orange' : 'white'))) : 'white')),
+                backgroundColor: bgc ? bgc : color_gamma,
                 border: border,
+                borderColor: color_gamma
             }"
             :class="{
                 success,
