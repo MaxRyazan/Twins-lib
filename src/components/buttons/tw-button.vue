@@ -17,7 +17,8 @@
                 outline,
                 round,
                 rounded,
-                default_hover : color_gamma
+                default_hover : color_gamma,
+                default: !color_gamma && !textColor && !success && !error && !warn
             }">
         <i class="pi" :class="prime_icon" v-if="prime_icon"></i>
         <slot/>
