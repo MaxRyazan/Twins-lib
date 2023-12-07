@@ -32,6 +32,9 @@
 |cell_font_color    | Нет      |String      | Цвет текста в ячейках таблицы.|
 |multicolor    | Нет      |Boolean      | Двойная заливка для таблицы. Четные строки имеют другой оттенок, чем нечетные|
 |row_custom_settings    | Нет      |Array<{idx: Number, textColor: String, fontSize: String, fontFamily: String}>      |Массив объектов формата {idx: Number, textColor: String, fontSize: String, fontFamily: String, bgc: String}, позволяющий поменять стили конкретной строки в таблице. idx - номер строки, textColor - цвет текста в строке, fontSize - размер текста в строке, fontFamily - название шрифта в строке, bgc - цвет заливки этой строки.|
+|multicolor    | Нет      |Boolean      | Двойная заливка для таблицы. Четные строки имеют другой оттенок, чем нечетные|
+|header_padding    | Нет      |String      | Паддинг в строке хидера|
+|table_border    | Нет      |String      | Border всей таблицы|
 
 
    **Emits of component TwTableBase**
