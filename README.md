@@ -1,11 +1,13 @@
-1. Add - @import 'twins-vue/tw-styles.css'; in your main.js or main.scss file
-2. Add - import TwTableBase from 'twins-vue' in your main.js file
-3. Add -  app.use(TwTableBase)
+1. Add - @import 'twins-vue/tw-styles.css' in your main.scss file
+2. Add - import twins from 'twins-vue' in your main.js file
+3. Add - app.use(twins)
 
-  - At the moment lib in first steps of development.
+At the moment lib in first steps of development.
 
+- TwTableBase component
 
-   **PROPS for component TwTableBase**
+  ***PROPS***
+  
 |Входной параметр (props) | Обязательный | Тип значения параметра | Описание |
 |----------|----------|----------|---------|
 | Основные параметры: |
@@ -37,9 +39,37 @@
 |table_border    | Нет      |String      | Border всей таблицы|
 
 
-   **Emits of component TwTableBase**
+   ***Emits***
 |Название | Аргументы | Описание |
 |----------|----------|----------|
 |@push     | {bodyElement, $event}    |Клик по строке таблицы левой кнопкой мыши |
 |@dab-click |{bodyElement, $event}    |Двойной клик по строке таблицы левой кнопкой мыши |
 |@right-click | {bodyElement, $event} |Клик по строке таблицы правой кнопкой мыши |
+
+******************************************************************************************************************************************************************************
+
+- TwButton component
+
+|Входной параметр (props) | Обязательный | Тип значения параметра | Описание |
+|----------|----------|----------|---------|
+|success    | Нет      | boolean      | Success type button, green |
+|error    | Нет      | boolean      | Error type button, crimson |
+|warn    | Нет      | boolean      | Warning type button, orange |
+|color_gamma    | Нет      | String  | Color schema for button based on color ('violet' or '#886e6e', etc) |
+|outline    | Нет      | boolean  | Button without backGround color |
+|rounded    | Нет      | boolean  | Button with rounded borders (12px) |
+|round    | Нет      | boolean  | Round button, 50% border-radius |
+|disabled    | Нет      | boolean  | Button, without events, color - #6d6d6d(typeof gray) |
+|width    | Нет      | String  | Button width. Format - '100px' or '10rem', etc |
+|height    | Нет      | String  | Button height. Format - '100px' or '10rem', etc |
+|bgc    | Нет      | String  | Background color |
+|bgcHover    | Нет      | String  | Custom color of background hover |
+|textColor    | Нет      | String  | Custom text or primeicons color inside button |
+|border    | Нет      | String  | Border attribute for button. Format '1px solid black' |
+|prime_icon    | Нет      | String  | If you use PrimeIcons in your project, you can specify type of icon. Format 'pi-check' |
+
+   ***Emits***
+
+|Название | Аргументы | Описание |
+|----------|----------|----------|
+|@push     |  -   |Клик по строке таблицы левой кнопкой мыши |
