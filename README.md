@@ -50,7 +50,7 @@ At the moment lib in first steps of development.
 
 - TwButton component
 
-TwButton have one <slot />. You can provide there a custom icon or some picture/
+TwButton have one slot. You can provide there a custom icon or some picture/
 
 |Входной параметр (props) | Обязательный | Тип значения параметра | Описание |
 |----------|----------|----------|---------|
