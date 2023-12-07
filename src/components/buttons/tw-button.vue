@@ -4,32 +4,38 @@
             :style="{
                 width: width,
                 height: height,
-                color: textColor,
+                color: textColor ? textColor : (outline ? (success ? 'forestgreen': (error ? 'crimson' : (warn ? 'orange' : 'white'))) : 'white'),
                 backgroundColor: bgc,
-                borderColor: borderColor,
-                borderWidth: borderWidth,
-                borderRadius: borderRadius,
-                borderStyle: borderType,
+                border: border,
             }"
-            :class="{success,warn,error,f_success,f_warn,f_error,disabled}">
+            :class="{
+                success,
+                warn,
+                error,
+                disabled,
+                outline,
+                round,
+                rounded
+            }">
+        <i class="pi" :class="prime_icon" v-if="prime_icon"></i>
         <slot/>
     </button>
 </template>
 
 <script setup lang="ts">
 
-import {onMounted, onUnmounted, ref} from "vue";
+import {onMounted, ref} from "vue";
+
 const btn = ref()
 
 const props = defineProps<{
     success?: boolean
     error?: boolean
     warn?: boolean
+    outline?: boolean
 
-    f_success?: boolean
-    f_error?: boolean
-    f_warn?: boolean
-
+    rounded?: boolean
+    round?: boolean
     disabled?: boolean,
 
     width?: string,
@@ -37,11 +43,10 @@ const props = defineProps<{
     bgc?: string,
     bgcHover?: string,
     textColor?: string,
-    borderColor?: string,
-    borderWidth?: string,
-    borderRadius?: string,
-    borderType?: string,
+    border?: string,
+    color_gamma?: string,
 
+    prime_icon?: string
 }>()
 defineEmits<{
     (e: 'push'): void
@@ -49,7 +54,7 @@ defineEmits<{
 
 
 onMounted(() => {
-    if(props.bgcHover) {
+    if (props.bgcHover) {
         btn.value.addEventListener('mouseover', () => {
             btn.value.style.backgroundColor = props.bgcHover
         })
@@ -58,14 +63,5 @@ onMounted(() => {
         })
     }
 })
-onUnmounted(() => {
-    if(props.bgcHover) {
-        btn.value.removeEventListener('mouseover', () => {
-            btn.value.style.backgroundColor = props.bgcHover
-        })
-        btn.value.removeEventListener('mouseout', () => {
-            btn.value.style.backgroundColor = props.bgc
-        })
-    }
-})
+
 </script>
