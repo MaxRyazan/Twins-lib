@@ -16,7 +16,8 @@
                 disabled,
                 outline,
                 round,
-                rounded
+                rounded,
+                default_hover : color_gamma
             }">
         <i class="pi" :class="prime_icon" v-if="prime_icon"></i>
         <slot/>

@@ -13,6 +13,24 @@
   }
 }
 
+.default_hover:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .8));
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transform: skewX(-45deg);
+}
+.default_hover:hover {
+  background: #83bec5;
+}
+.default_hover:hover:before {
+  left: 100%;
+  transition: .75s ease-in-out;
+}
+
 .disabled {
   background-color: #6d6d6d !important;
   pointer-events: none !important;
