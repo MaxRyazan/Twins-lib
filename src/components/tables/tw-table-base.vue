@@ -1,16 +1,20 @@
 <template>
     <table :style="{
-                width: props.width,
-                height: props.height,
-                backgroundColor: props.table_bgc ?? 'darkblue'
+                width: props.width ?? '200px',
+                height: props.height ?? 'auto',
+                backgroundColor: props.table_bgc ?? 'white',
+                border: table_border ?? '1px solid black'
             }"
            class="global-table" :class="{td_align_left, td_align_right}">
         <thead>
         <tr>
             <th :style="{
-                    backgroundColor: props.header_bgc,
-                    color: props.header_font_color,
-                    fontSize: header_font_size
+                    backgroundColor: props.header_bgc ?? '#ecffe8',
+                    color: props.header_font_color ?? '#66cc03',
+                    fontSize: header_font_size ?? '18px',
+                    padding: props.header_padding ?? '5px 10px',
+                    border: table_border ?? '1px solid black',
+                    borderBottom: table_border ?? '2px solid black'
             }" v-for="(columnName, idx) in header" :key="idx">{{ columnName }}</th>
         </tr>
         </thead>
@@ -25,17 +29,18 @@
             backgroundColor: watchRowBgc(index),
             color: watchRowTextColor(index),
             fontSize: watchRowFontSize(index),
-            fontFamily: watchRowFontFamily(index)
+            fontFamily: watchRowFontFamily(index),
         }"
             :class="{'odd': (index % 2 === 0 && props.multicolor), 'selected': isSelected(bodyElement)}"
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
             <td :style="{
-                padding: props.cell_padding,
-                fontSize: props.cell_font_size,
-                color: props.cell_font_color,
-                minWidth: cell_min_width,
+                padding: props.cell_padding ?? '5px 10px',
+                fontSize: props.cell_font_size ?? '14px',
+                color: props.cell_font_color ?? 'black',
+                minWidth: cell_min_width ?? '50px',
+                border: table_border ?? '1px solid black'
             }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
@@ -145,6 +150,14 @@ const props = defineProps({
         type: Array<RowCustomSettings>,
         required: false
     },
+    header_padding:{
+        type: String,
+        required: false
+    },
+    table_border: {
+        type: String,
+        required: false
+    }
 })
 
 const selectedElement = ref('')
