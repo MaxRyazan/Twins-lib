@@ -66,7 +66,7 @@ TwButton have one slot. You can provide there a custom icon or some picture.
 |height    | Нет      | String  | Button height. Format - '100px' or '10rem', etc |
 |bgc    | Нет      | String  | Background color |
 |bgcHover    | Нет      | String  | Custom color of background hover |
-|textColor    | Нет      | String  | Custom text or primeicons color inside button |
+|textColor    | Нет      | String  | Custom text color or primeicon color inside button |
 |border    | Нет      | String  | Border attribute for button. Format '1px solid black' |
 |prime_icon    | Нет      | String  | If you use PrimeIcons in your project, you can specify type of icon. Format 'pi-check' |
 
