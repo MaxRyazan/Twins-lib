@@ -1,0 +1,21 @@
+.wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.vertical_start {
+  flex-direction: column;
+  align-items: start;
+}
+.vertical_center {
+  flex-direction: column;
+  align-items: center;
+}
+.input{
+  outline: none;
+  border: 1px solid transparent;
+  padding: 0 2px;
+}
+.w100 {
+  width: 100%;
+}
