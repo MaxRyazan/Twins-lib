@@ -32,23 +32,24 @@ import {onMounted, onUnmounted, ref} from "vue";
 const btn = ref()
 
 const props = defineProps<{
+    width?: string,
+    height?: string,
+
     success?: boolean
     error?: boolean
     warn?: boolean
-    color_gamma?: string,
 
     outline?: boolean
-
     rounded?: boolean
     round?: boolean
     disabled?: boolean,
 
-    width?: string,
-    height?: string,
+
+    border?: string,
     bgc?: string,
     bgcHover?: string,
     textColor?: string,
-    border?: string,
+    color_gamma?: string,
 
     prime_icon?: string
 }>()

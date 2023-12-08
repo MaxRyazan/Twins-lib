@@ -1,4 +1,5 @@
 .tw_button {
+  padding: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,6 +9,7 @@
   outline: none;
   cursor: pointer;
   gap: 10px;
+  border: 1px solid transparent;
   &:active {
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.75);
   }
@@ -20,7 +22,7 @@
   width: 100%;
   position: absolute;
   top: 0;
-  left: -110%;
+  left: -125%;
   transform: skewX(-45deg);
 }
 .default_hover:hover {
@@ -44,6 +46,7 @@
 
 .round{
   border-radius: 50%;
+  width: 30px;
 }
 
 .rounded{
@@ -52,7 +55,6 @@
 
 .success {
   height: 26px;
-  width: 100px;
   border: 1px solid forestgreen;
   color: white;
   background-color: forestgreen;
@@ -71,20 +73,18 @@
 
 .error {
   height: 26px;
-  width: 100px;
   color: white;
   border: 1px solid crimson;
   background-color: crimson;
 
   &:hover {
-    border-color: lighten(crimson, 35%);
-    background-color: lighten(crimson, 15%);
+    border-color: lighten(crimson, 20%);
+    background-color: lighten(crimson, 20%);
   }
 }
 
 .warn {
   height: 26px;
-  width: 100px;
   color: white;
   border: 1px solid orange;
   background-color: orange;
