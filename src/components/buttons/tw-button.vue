@@ -35,6 +35,8 @@ const props = defineProps<{
     success?: boolean
     error?: boolean
     warn?: boolean
+    color_gamma?: string,
+
     outline?: boolean
 
     rounded?: boolean
@@ -47,7 +49,6 @@ const props = defineProps<{
     bgcHover?: string,
     textColor?: string,
     border?: string,
-    color_gamma?: string,
 
     prime_icon?: string
 }>()
