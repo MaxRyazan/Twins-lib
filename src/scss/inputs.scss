@@ -2,15 +2,14 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-}
-.vertical_start {
-  flex-direction: column;
-  align-items: start;
-}
-.vertical_center {
-  flex-direction: column;
   align-items: center;
 }
+.vertical {
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+}
+
 .input{
   outline: none;
   border: 1px solid transparent;
