@@ -1,27 +1,29 @@
 <script setup lang="ts">
 const props = defineProps<{
     modelValue: any,
+
+    width?: string
+    inputWidth?: string
+    height?: string
     type?: string
     min?: number
     max?: number
     step?: number
     maxLength?: number
+    vertical?: boolean
+    inputTextCenter?: boolean
+    rounded: boolean
 
     placeholder?: string
     disabled?: boolean
     prefix?: string
     postfix?: string
 
-    width?: string
-    height?: string
     bgc?: string
     border?: string
-
     bbColor?: string
     caretColor?: string
     input_color?: string
-
-    vertical?: boolean
 
     prefix_color?:string
     postfix_color?:string
@@ -29,8 +31,6 @@ const props = defineProps<{
     postfix_fz?: string
     prefix_ff?: string
     postfix_ff?: string
-
-    inputTextPosition?: string
 
 }>()
 const emits = defineEmits<{
@@ -60,8 +60,12 @@ function handleAction($event: any){
                         class="input"
                         :class="{'w100': !prefix}"
                         :style="{
+                            width: inputWidth,
+                            height: height,
                             border: border,
-                            textAlign: inputTextPosition,
+                            borderRadius: rounded ? '12px' : '',
+                            padding: rounded ? '0 0 0 10px' : '',
+                            textAlign: inputTextCenter ? 'center' : '',
                             backgroundColor: bgc,
                             borderBottomColor: bbColor ? bbColor : (bgc === 'transparent' ? (border ? border : 'white') : bgc),
                             caretColor: caretColor ? caretColor : (bbColor ? bbColor : (bgc === 'transparent' ? 'black' : bgc)),
