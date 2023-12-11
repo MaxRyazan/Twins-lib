@@ -47,20 +47,18 @@ function handleAction($event: any){
 
 <template>
     <div :style="{width: width, height: height}">
-        <div class="wrap" :class="{vertical}">
+        <div class="tw_wrap" :class="{'tw_vertical':vertical}">
             <span :style="{
                       color: prefix_color,
                       fontSize: prefix_fz,
                       fontFamily: prefix_ff
                    }"
                     v-if="prefix">{{ prefix }}</span>
-            <div :class="{'w100': !prefix}" style="gap:10px; display: flex; align-items: center">
+            <div :style="{ width: inputWidth}" :class="{'tw_w100': !prefix}" style="gap:10px; display: flex; align-items: center">
                 <input  :value="modelValue"
                         @input="handleAction"
-                        class="input"
-                        :class="{'w100': !prefix}"
+                        class="tw_input tw_w100"
                         :style="{
-                            width: inputWidth,
                             height: height,
                             border: border,
                             borderRadius: rounded ? '12px' : '',
