@@ -10,3 +10,5 @@ export default {
         app.component("tw-dropdown", TwDropdown);
     }
 }
+
+export {TwInput, TwButton, TwTableBase, TwDropdown}

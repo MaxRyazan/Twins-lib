@@ -14,14 +14,15 @@ const props = defineProps<{
     fontSize?:string
     itemHeight?: string
     initialHeight?: string
+    textCenter?: boolean
 }>()
 const emit = defineEmits<{
-    (e: 'update:modelValue', param: T)
+    (e: 'update:modelValue', param: any)
 }>()
 const isOpen = ref(false)
 const tw_variant_ref = ref()
 
-function chooseVariant(variant: T) {
+function chooseVariant(variant: any) {
     emit('update:modelValue', variant)
     isOpen.value = false
 }
@@ -88,6 +89,7 @@ watch(tw_variant_ref, () => {
                     type="text"
                     :value="props.modelValue"
                     :style="{
+                        textAlign: textCenter ? 'center' : 'start',
                         backgroundColor: initialBgc ?? 'white',
                         fontSize: fontSize ?? '14px',
                         height: initialHeight ? initialHeight : (itemHeight ?? '28px')
@@ -111,6 +113,7 @@ watch(tw_variant_ref, () => {
                                v-if="variant !== modelValue"
                                @click="chooseVariant(variant)"
                                :style="{
+                                   justifyContent: textCenter ? 'center' : 'start',
                                    height: itemHeight ?? '28px'
                                }"
                          >{{ variant }}</span>
