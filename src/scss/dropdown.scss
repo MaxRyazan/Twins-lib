@@ -1,19 +1,15 @@
 .tw_dropdown{
-  box-sizing: border-box;
   position: relative;
   cursor: default;
   overflow: hidden;
 }
 .tw_dropdown-base{
   position: relative;
-  border-top: 1px solid red;
-  border-left: 1px solid red;
-  border-right: 1px solid red;
-  width: calc(100% - 2px);
+  background-color: white;
+  z-index: 3;
   & input {
     width: calc(100% - 51px);
     height: 100%;
-    background-color: transparent;
     padding: 5px 40px 5px 10px;
     outline: none;
     border: none;
@@ -31,34 +27,32 @@
   height: 14px;
 }
 .tw_dropdown-icon-left{
+  transition: .5s;
   position: absolute;
   width: 18px;
-  left: 0;
+  left: 2px;
   top: 5px;
-  border: 1px solid red;
-  transform: rotate(35deg);
+  border-style: solid;
 }
 .tw_dropdown-icon-right{
+  transition: .5s;
   position: absolute;
   width: 18px;
-  right: 0;
+  right: 2px;
   top: 5px;
-  border: 1px solid red;
-  transform: rotate(-35deg);
+  border-style: solid;
 }
 .tw_dropdown-variants{
-  width: calc(100% - 2px);
+  width: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 .tw_dropdown-variants-item{
   width: 100%;
-  border-left: 1px solid red;
-  border-right: 1px solid red;
-  border-bottom: 1px solid red;
 }
 .tw_variant{
-  width: calc(100% - 20px);
+  width: 100%;
   padding: 5px 10px;
   display: inline-block;
   &:hover {
@@ -67,6 +61,7 @@
 }
 .tr_dropdown-enter-from{
   opacity: 0;
+  transform: translateY(-100%);
 }
 .tr_dropdown-enter-active{
   transition: .5s;
