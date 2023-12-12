@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 const props = defineProps<{
     modelValue: any
@@ -8,16 +8,41 @@ const props = defineProps<{
     border?: string
     largeArrow?: boolean
     arrowColor?: string
+    hoverColor?: string
+    bgc?: string
 }>()
 const emit = defineEmits<{
     (e: 'update:modelValue', param: any)
 }>()
 const isOpen = ref(false)
+const tw_variant_ref = ref()
 
 function chooseVariant(variant: any) {
     emit('update:modelValue', variant)
     isOpen.value = false
 }
+
+watch(tw_variant_ref, () => {
+    if (tw_variant_ref.value) {
+        if (isOpen.value) {
+            tw_variant_ref.value.forEach((item:HTMLElement) => item.addEventListener('mouseover', () => {
+                item.style.backgroundColor = props.hoverColor ? props.hoverColor : 'lightblue'
+            }))
+            tw_variant_ref.value.forEach((item:HTMLElement) => item.addEventListener('mouseout', () => {
+                item.style.backgroundColor = props.bgc ? props.bgc : 'white'
+            }))
+        } else {
+            tw_variant_ref.value.forEach((item:HTMLElement) => item.removeEventListener('mouseover', () => {
+                item.style.backgroundColor = props.hoverColor ? props.hoverColor : 'lightblue'
+            }))
+            tw_variant_ref.value.forEach((item:HTMLElement) => item.removeEventListener('mouseout', () => {
+                item.style.backgroundColor = props.bgc ? props.bgc : 'white'
+            }))
+        }
+    }
+}, {deep: true})
+
+
 </script>
 
 <template>
@@ -35,7 +60,7 @@ function chooseVariant(variant: any) {
         >
             <div class="tw_dropdown-icon">
                 <div class="tw_dropdown-icon-left"
-                    :style="{
+                     :style="{
                         transform: isOpen ? 'rotate(-35deg)' : 'rotate(35deg)',
                         borderWidth: largeArrow ? '2px': '1px',
                         borderColor: arrowColor ?? 'black',
@@ -43,7 +68,7 @@ function chooseVariant(variant: any) {
                     }"
                 ></div>
                 <div class="tw_dropdown-icon-right"
-                    :style="{
+                     :style="{
                         transform: isOpen ? 'rotate(35deg)' : 'rotate(-35deg)',
                         borderWidth: largeArrow ? '2px': '1px',
                         borderColor: arrowColor ?? 'black',
@@ -56,14 +81,15 @@ function chooseVariant(variant: any) {
         <div class="tw_dropdown-variants">
             <transition name="tr_dropdown">
                 <div class="tw_dropdown-variants-item"
-                     :style="{
-                        borderLeft: (border ? border : '1px solid black'),
-                        borderRight: (border ? border : '1px solid black'),
-                        borderBottom: (border ? border : '1px solid black'),
+                     v-if="isOpen"
+                    :style="{
+                    borderLeft: (border ? border : '1px solid black'),
+                    borderRight: (border ? border : '1px solid black'),
+                    borderBottom: (border ? border : '1px solid black'),
                     }"
-                     v-if="isOpen">
+                >
                     <span v-for="variant in props.variants" :key="variant">
-                         <span class="tw_variant" v-if="variant !== modelValue"
+                         <span ref="tw_variant_ref" class="tw_variant" v-if="variant !== modelValue"
                                @click="chooseVariant(variant)">{{ variant }}</span>
                     </span>
                 </div>
