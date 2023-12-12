@@ -47,21 +47,20 @@
   transform: rotate(-35deg);
 }
 .tw_dropdown-variants{
-  border-left: 1px solid red;
-  border-right: 1px solid red;
-  border-bottom: 1px solid red;
   width: calc(100% - 2px);
   display: flex;
   flex-direction: column;
 }
 .tw_dropdown-variants-item{
   width: 100%;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+  border-bottom: 1px solid red;
 }
 .tw_variant{
   width: calc(100% - 20px);
   padding: 5px 10px;
   display: inline-block;
-  //border-top: 1px solid red;
   &:hover {
     background-color: lightblue;
   }
@@ -70,5 +69,5 @@
   opacity: 0;
 }
 .tr_dropdown-enter-active{
-  transition: 1s;
+  transition: .5s;
 }
