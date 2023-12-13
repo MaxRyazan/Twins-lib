@@ -26,11 +26,11 @@
         </tr>
         <tr v-for="(bodyElement, index) in body" :key="index"
             :style="{
-            backgroundColor: watchRowBgc(index),
-            color: watchRowTextColor(index),
-            fontSize: watchRowFontSize(index),
-            fontFamily: watchRowFontFamily(index),
-        }"
+                backgroundColor: watchRowBgc(index),
+                color: watchRowTextColor(index),
+                fontSize: watchRowFontSize(index),
+                fontFamily: watchRowFontFamily(index),
+            }"
             :class="{'odd': (index % 2 === 0 && props.multicolor), 'selected': isSelected(bodyElement)}"
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
@@ -38,7 +38,7 @@
             <td :style="{
                 padding: props.cell_padding ?? '5px 10px',
                 fontSize: props.cell_font_size ?? '14px',
-                color: props.cell_font_color ?? 'black',
+                color: watchRowTextColor(index),
                 minWidth: cell_min_width ?? '50px',
                 border: table_border ?? '1px solid black'
             }"
@@ -214,7 +214,9 @@ function watchRowTextColor(rowIndex: number){
     if(!props.row_custom_settings) return props.cell_font_color ?? 'black'
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
+        console.log(object)
         if(object) {
+        console.log(object.textColor)
             return object.textColor
         }
     }

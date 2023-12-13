@@ -1,6 +1,6 @@
 {
   "name": "twins-vue",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "keywords": [
     "vue",
     "vue3",
@@ -30,10 +30,9 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "b": "concurrently \"vite build\" \"gulp\""
   },
-  "dependencies": {
-    "vue": "^3.3.4"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "vue": "^3.3.4",
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^18.18.5",
     "@vitejs/plugin-vue": "^4.4.0",
