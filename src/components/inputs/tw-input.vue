@@ -61,9 +61,9 @@ function handleAction($event: any){
                         :style="{
                             height: height,
                             border: border,
-                            borderRadius: rounded ? '12px' : '',
-                            padding: rounded ? '0 0 0 10px' : '',
-                            textAlign: inputTextCenter ? 'center' : '',
+                            borderRadius: rounded ? '12px' : '0px',
+                            padding: rounded ? '0 0 0 10px' : '0px',
+                            textAlign: inputTextCenter ? 'center' : 'start',
                             backgroundColor: bgc,
                             borderBottomColor: bbColor ? bbColor : (bgc === 'transparent' ? (border ? border : 'white') : bgc),
                             caretColor: caretColor ? caretColor : (bbColor ? bbColor : (bgc === 'transparent' ? 'black' : bgc)),
@@ -85,6 +85,8 @@ function handleAction($event: any){
                         v-if="postfix">{{ postfix }}</span>
             </div>
         </div>
-        <span><slot /></span>
+        <span style="margin-top: 2px; color: red;">
+            <slot name="validator"/>
+        </span>
     </div>
 </template>

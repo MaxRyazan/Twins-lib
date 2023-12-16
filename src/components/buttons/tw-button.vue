@@ -21,7 +21,9 @@
                 default: !color_gamma && !textColor && !success && !error && !warn
             }">
         <i class="pi" :class="prime_icon" v-if="prime_icon"></i>
-        <slot/>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 0">
+            <slot/>
+        </div>
     </button>
 </template>
 
