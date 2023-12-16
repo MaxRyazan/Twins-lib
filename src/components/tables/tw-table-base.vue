@@ -12,6 +12,7 @@
                     backgroundColor: props.header_bgc ?? '#ecffe8',
                     color: props.header_font_color ?? '#66cc03',
                     fontSize: header_font_size ?? '18px',
+                    fontFamily: props.header_font_family ?? '',
                     padding: props.header_padding ?? '5px 10px',
                     border: table_border ?? '1px solid black',
                     borderBottom: table_border ?? '2px solid black'
@@ -37,10 +38,11 @@
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
             <td :style="{
                 padding: props.cell_padding ?? '5px 10px',
-                fontSize: props.cell_font_size ?? '14px',
+                fontSize: props.cell_font_size ?? watchRowFontSize(index),
                 color: watchRowTextColor(index),
                 minWidth: cell_min_width ?? '50px',
-                border: table_border ?? '1px solid black'
+                border: table_border ?? '1px solid black',
+                fontFamily: watchRowFontFamily(index),
             }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
@@ -62,10 +64,10 @@ import {computed, ref} from "vue";
 
 interface RowCustomSettings {
     idx: number
-    textColor: string
-    fontSize: string
-    fontFamily: string
-    bgc: string
+    textColor?: string
+    fontSize?: string
+    fontFamily?: string
+    bgc?: string
 }
 
 const emits = defineEmits(['push', 'dabClick', 'rightClick'])
@@ -157,6 +159,10 @@ const props = defineProps({
     table_border: {
         type: String,
         required: false
+    },
+    header_font_family: {
+        type: String,
+        required: false
     }
 })
 
@@ -201,7 +207,7 @@ function normalizeValue(field: any) {
 }
 
 function watchRowBgc(rowIndex: number){
-    if(!props.row_custom_settings) return 'transparent'
+    if(!props.row_custom_settings) return 'white'
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
         if(object) {
@@ -211,6 +217,7 @@ function watchRowBgc(rowIndex: number){
 }
 
 function watchRowTextColor(rowIndex: number){
+    console.log(props.row_custom_settings)
     if(!props.row_custom_settings) return props.cell_font_color ?? 'black'
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
