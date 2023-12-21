@@ -5,6 +5,8 @@ const props = defineProps<{
     modelValue: T
     variants: Array<T>
     width?: string
+    initialHeight?: string
+    variantsHeight?: string
     border?: string
     largeArrow?: boolean
     arrowColor?: string
@@ -12,8 +14,8 @@ const props = defineProps<{
     bgc?: string
     initialBgc?: string
     fontSize?:string
+    fontColor?: string
     itemHeight?: string
-    initialHeight?: string
     textCenter?: boolean
 }>()
 const emit = defineEmits<{
@@ -31,17 +33,17 @@ watch(tw_variant_ref, () => {
     if (tw_variant_ref.value) {
         if (isOpen.value) {
             tw_variant_ref.value.forEach((item:HTMLElement) => item.addEventListener('mouseover', () => {
-                item.style.backgroundColor = props.hoverColor ? props.hoverColor : 'lightgreen'
+                item.style.backgroundColor = props.hoverColor ?? 'lightgreen'
             }))
             tw_variant_ref.value.forEach((item:HTMLElement) => item.addEventListener('mouseout', () => {
-                item.style.backgroundColor = props.bgc ? props.bgc : 'white'
+                item.style.backgroundColor = props.bgc ?? 'white'
             }))
         } else {
             tw_variant_ref.value.forEach((item:HTMLElement) => item.removeEventListener('mouseover', () => {
-                item.style.backgroundColor = props.hoverColor ? props.hoverColor : 'lightgreen'
+                item.style.backgroundColor = props.hoverColor ?? 'lightgreen'
             }))
             tw_variant_ref.value.forEach((item:HTMLElement) => item.removeEventListener('mouseout', () => {
-                item.style.backgroundColor = props.bgc ? props.bgc : 'white'
+                item.style.backgroundColor = props.bgc ?? 'white'
             }))
         }
     }
@@ -54,7 +56,7 @@ watch(tw_variant_ref, () => {
     <div class="tw_dropdown"
          :style="{
             width: width ?? '170px',
-            fontSize: fontSize ?? '14px'
+            fontSize: fontSize ?? '14px',
          }">
         <div :style="{
                 borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
@@ -101,6 +103,7 @@ watch(tw_variant_ref, () => {
                 <div class="tw_dropdown-variants-item"
                      v-if="isOpen"
                     :style="{
+                        maxHeight: variantsHeight ?? 'auto',
                         borderLeft: (border ? border : '1px solid black'),
                         borderRight: (border ? border : '1px solid black'),
                         borderBottom: (border ? border : '1px solid black'),
@@ -113,6 +116,7 @@ watch(tw_variant_ref, () => {
                                v-if="variant !== modelValue"
                                @click="chooseVariant(variant)"
                                :style="{
+                                   color: fontColor ?? 'black',
                                    justifyContent: textCenter ? 'center' : 'start',
                                    height: itemHeight ?? '28px'
                                }"
