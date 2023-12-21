@@ -17,6 +17,7 @@ const props = defineProps<{
     fontColor?: string
     itemHeight?: string
     textCenter?: boolean
+    borderRadius?: string
 }>()
 const emit = defineEmits<{
     (e: 'update:modelValue', param: any)
@@ -57,6 +58,7 @@ watch(tw_variant_ref, () => {
          :style="{
             width: width ?? '170px',
             fontSize: fontSize ?? '14px',
+            borderRadius: borderRadius ?? '0px'
          }">
         <div :style="{
                 borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
