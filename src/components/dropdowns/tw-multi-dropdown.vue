@@ -3,9 +3,10 @@ import {ref, watch} from "vue";
 
 type T = number | string
 type Item = { title: T, value: Array<T> }
+type Multi = {title: T, value: Array<Item>}
 const props = defineProps<{
     modelValue: T
-    variants: Array<Item>
+    variants: Array<Multi>
     width?: string
     initialHeight?: string
     variantsHeight?: string
@@ -26,15 +27,22 @@ const emit = defineEmits<{
 }>()
 const isOpen = ref(false)
 const showSubVariants = ref(false)
+const showSubSubVariants = ref(false)
 const chosenVariant = ref()
+const chosenSubVariant = ref()
 const tw_variant_ref = ref()
 
-function openSub(variant: Item) {
+function openSub(variant: Multi) {
     showSubVariants.value = true
     chosenVariant.value = variant
 }
+function openSubSub(subVariant: Item){
+    chosenSubVariant.value = subVariant
+    showSubSubVariants.value = true
+}
 
 function chooseSubVariant(variant: T) {
+    console.log(variant)
     showSubVariants.value = false
     isOpen.value = false
     chosenVariant.value = {}
@@ -134,19 +142,26 @@ watch(tw_variant_ref, () => {
                                            height: itemHeight ?? '28px'
                                        }"
                             >{{ variant.title }}</span>
-                            <div class="sub_variants"
-                                 :style="{
-                                    width: width ?? '170px',
-                                 }"
-                                 v-if="showSubVariants && variant.title === chosenVariant.title">
-                                <div :style="{
-                                        width: width ?? '170px',
-                                     }"
-                                     @click="chooseSubVariant(item)"
-                                     v-for="item in chosenVariant.value" :key="item">
-                                    <span ref="tw_variant_ref" class="tw_multi_variant">{{item}}</span>
+                                <div class="sub_variants"
+                                     :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}"
+                                     v-if="showSubVariants && variant.title === chosenVariant.title">
+
+
+                                    <div @click="openSubSub(subVariant)"
+                                         ref="tw_variant_ref"
+                                            class="tw_variant" style="display: flex; position: relative" v-for="subVariant in variant.value">
+                                        {{subVariant.title}}
+                                        <div   v-if="showSubSubVariants && subVariant.title === chosenSubVariant.title"
+                                                :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}"
+                                                style="display: flex;flex-direction: column; position: absolute;right: -100%">
+                                            <span class="tw_variant"
+                                                    ref="tw_variant_ref"
+                                                  @click="chooseSubVariant(item)"
+                                                    v-for="item in subVariant.value">{{item}}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
