@@ -1,0 +1,18 @@
+.tw_multi_dropdown{
+  position: relative;
+  cursor: default;
+}
+.sub_variants{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: -100%;
+}
+.tw_multi_variant {
+  width: 100%;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: white;
+}
