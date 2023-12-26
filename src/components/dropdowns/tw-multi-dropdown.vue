@@ -44,6 +44,13 @@ function chooseVariant(variant: Multi) {
 function chooseSubVariant(sub: any) {
     subVariant.value = sub
     subSubVariants = Object.values(subVariant.value)[1]
+    if(typeof sub === 'string' || typeof sub === 'number') {
+        emit('update:modelValue', sub)
+        isOpen.value = false
+        chosenVariant.value = {}
+        subVariant.value = {}
+        subSubVariants = []
+    }
 }
 
 function chooseSubSubVariant(variant: any) {
@@ -149,6 +156,15 @@ onMounted(() => {
                                      :class="{'selectedP' : subVariant === sub}"
                                      @click="chooseSubVariant(sub)">
                                     <span class="variant_span"
+                                          v-if="typeof sub === 'string' || typeof sub === 'number'"
+                                          :style="{
+                                               color: fontColor ?? 'black',
+                                               justifyContent: textCenter ? 'center' : 'start',
+                                               minHeight: itemHeight ?? '28px'
+                                          }"
+                                    >{{ sub }}</span>
+                                    <span class="variant_span"
+                                          v-else
                                           :style="{
                                                color: fontColor ?? 'black',
                                                justifyContent: textCenter ? 'center' : 'start',
