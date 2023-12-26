@@ -120,15 +120,24 @@ onMounted(() => {
                 >
                     <div v-for="(variant, idx) in props.variants" :key="idx">
                         <div class="tw_multi_variant"
+                             @click="chooseVariant(variant)"
                              :class="{'selectedP' : chosenVariant === variant}">
                             <span class="variant_span"
-                                  @click="chooseVariant(variant)"
+                                  v-if="typeof variant === 'string' || typeof variant === 'number'"
                                   :style="{
                                            color: fontColor ?? 'black',
                                            justifyContent: textCenter ? 'center' : 'start',
                                            minHeight: itemHeight ?? '28px'
                                        }"
-                            >{{ (typeof variant === 'string' || typeof variant === 'number') ? variant : Object.values(variant)[0] }}</span>
+                            >{{ variant }}</span>
+                            <span class="variant_span"
+                                  v-else
+                                  :style="{
+                                           color: fontColor ?? 'black',
+                                           justifyContent: textCenter ? 'center' : 'start',
+                                           minHeight: itemHeight ?? '28px'
+                                       }"
+                            >{{ Object.values(variant)[0] }}</span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
                                 <div class="tw_multi_variant"
