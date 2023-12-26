@@ -134,6 +134,7 @@ watch(tw_variant_ref, () => {
                     <div v-for="variant in props.variants" :key="variant.title">
                         <div style="display:flex;">
                             <span ref="tw_variant_ref"
+                                  style="overflow: hidden; padding: 0 2px"
                                   class="tw_variant"
                                   @click="openSub(variant)"
                                   :style="{
@@ -149,19 +150,20 @@ watch(tw_variant_ref, () => {
 
                                     <div @click="openSubSub(subVariant)"
                                          ref="tw_variant_ref"
-                                            class="tw_variant" style="display: flex; position: relative" v-for="subVariant in variant.value">
-                                        {{subVariant.title}}
+                                         class="tw_variant" style="display: flex; position: relative;align-items: start;" v-for="subVariant in variant.value">
+                                        <span style="width: 100%; overflow: hidden;padding: 0 2px">{{subVariant.title}}</span>
                                         <div   v-if="showSubSubVariants && subVariant.title === chosenSubVariant.title"
-                                                :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}"
-                                                style="display: flex;flex-direction: column; position: absolute;right: -100%">
+                                               :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}"
+                                               style="display: flex;flex-direction: column; position: absolute;right: -100.5%;top:0">
                                             <span class="tw_variant"
-                                                    ref="tw_variant_ref"
+                                                  style="overflow: hidden; width: 100%; padding: 0 2px;"
+                                                  ref="tw_variant_ref"
                                                   @click="chooseSubVariant(item)"
-                                                    v-for="item in subVariant.value">{{item}}</span>
+                                                  v-for="item in subVariant.value">{{item}}</span>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
                         </div>
                     </div>
                 </div>
