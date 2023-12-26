@@ -62,16 +62,16 @@ onMounted(() => {
 <template>
     <div class="tw_multi_dropdown"
          :style="{
-            width: width ?? '170px',
-            fontSize: fontSize ?? '14px',
-            borderRadius: borderRadius ?? '0px'
+              width: width ?? '170px',
+              fontSize: fontSize ?? '14px',
+              borderRadius: borderRadius ?? '0px'
          }">
         <div :style="{
-                borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
-                borderTop: (border ? border : '1px solid black'),
-                borderLeft: (border ? border : '1px solid black'),
-                borderRight: (border ? border : '1px solid black'),
-                backgroundColor: initialBgc ?? 'white'
+                  borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
+                  borderTop: (border ? border : '1px solid black'),
+                  borderLeft: (border ? border : '1px solid black'),
+                  borderRight: (border ? border : '1px solid black'),
+                  backgroundColor: initialBgc ?? 'white'
             }"
              class="tw_dropdown-base"
              @click="isOpen = !isOpen"
@@ -79,18 +79,18 @@ onMounted(() => {
             <div class="tw_dropdown-icon">
                 <div class="tw_dropdown-icon-left"
                      :style="{
-                        transform: isOpen ? 'rotate(-35deg)' : 'rotate(35deg)',
-                        borderWidth: largeArrow ? '2px': '1px',
-                        borderColor: arrowColor ?? 'black',
-                        backgroundColor: arrowColor ?? 'black'
+                          transform: isOpen ? 'rotate(-35deg)' : 'rotate(35deg)',
+                          borderWidth: largeArrow ? '2px': '1px',
+                          borderColor: arrowColor ?? 'black',
+                          backgroundColor: arrowColor ?? 'black'
                     }"
                 ></div>
                 <div class="tw_dropdown-icon-right"
                      :style="{
-                        transform: isOpen ? 'rotate(35deg)' : 'rotate(-35deg)',
-                        borderWidth: largeArrow ? '2px': '1px',
-                        borderColor: arrowColor ?? 'black',
-                        backgroundColor: arrowColor ?? 'black'
+                          transform: isOpen ? 'rotate(35deg)' : 'rotate(-35deg)',
+                          borderWidth: largeArrow ? '2px': '1px',
+                          borderColor: arrowColor ?? 'black',
+                          backgroundColor: arrowColor ?? 'black'
                     }"
                 ></div>
             </div>
@@ -99,10 +99,10 @@ onMounted(() => {
                     type="text"
                     :value="props.modelValue"
                     :style="{
-                        textAlign: textCenter ? 'center' : 'start',
-                        backgroundColor: initialBgc ?? 'white',
-                        fontSize: fontSize ?? '14px',
-                        height: initialHeight ? initialHeight : (itemHeight ?? '28px')
+                         textAlign: textCenter ? 'center' : 'start',
+                         backgroundColor: initialBgc ?? 'white',
+                         fontSize: fontSize ?? '14px',
+                         height: initialHeight ? initialHeight : (itemHeight ?? '28px')
                     }"
             >
         </div>
@@ -111,11 +111,11 @@ onMounted(() => {
                 <div class="tw_dropdown-variants-item"
                      v-if="isOpen"
                      :style="{
-                        maxHeight: variantsHeight ?? 'auto',
-                        borderLeft: (border ? border : '1px solid black'),
-                        borderRight: (border ? border : '1px solid black'),
-                        borderBottom: (border ? border : '1px solid black'),
-                        backgroundColor: bgc ?? 'white'
+                          maxHeight: variantsHeight ?? 'auto',
+                          borderLeft: (border ? border : '1px solid black'),
+                          borderRight: (border ? border : '1px solid black'),
+                          borderBottom: (border ? border : '1px solid black'),
+                          backgroundColor: bgc ?? 'white'
                     }"
                 >
                     <div v-for="(variant, idx) in props.variants" :key="idx">
@@ -125,18 +125,18 @@ onMounted(() => {
                             <span class="variant_span"
                                   v-if="typeof variant === 'string' || typeof variant === 'number'"
                                   :style="{
-                                           color: fontColor ?? 'black',
-                                           justifyContent: textCenter ? 'center' : 'start',
-                                           minHeight: itemHeight ?? '28px'
+                                       color: fontColor ?? 'black',
+                                       justifyContent: textCenter ? 'center' : 'start',
+                                       minHeight: itemHeight ?? '28px'
                                        }"
                             >{{ variant }}</span>
                             <span class="variant_span"
                                   v-else
                                   :style="{
-                                           color: fontColor ?? 'black',
-                                           justifyContent: textCenter ? 'center' : 'start',
-                                           minHeight: itemHeight ?? '28px'
-                                       }"
+                                       color: fontColor ?? 'black',
+                                       justifyContent: textCenter ? 'center' : 'start',
+                                       minHeight: itemHeight ?? '28px'
+                                  }"
                             >{{ Object.values(variant)[0] }}</span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
@@ -158,10 +158,10 @@ onMounted(() => {
                                              @click="chooseSubSubVariant(subSub)">
                                              <span class="variant_span"
                                                    :style="{
-                                                       color: fontColor ?? 'black',
-                                                       justifyContent: textCenter ? 'center' : 'start',
-                                                       minHeight: itemHeight ?? '28px'
-                                                    }"
+                                                        color: fontColor ?? 'black',
+                                                        justifyContent: textCenter ? 'center' : 'start',
+                                                        minHeight: itemHeight ?? '28px'
+                                                   }"
                                              >{{ subSub }}</span>
                                         </div>
                                     </div>
