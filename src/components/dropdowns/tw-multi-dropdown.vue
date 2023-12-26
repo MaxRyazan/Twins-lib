@@ -7,19 +7,19 @@ type Multi = { field1: T, field2: Array<Item> }
 const props = defineProps<{
     modelValue: T
     variants: Array<Multi>
-    width?: string
-    initialHeight?: string
-    variantsHeight?: string
-    border?: string
-    largeArrow?: boolean
-    arrowColor?: string
-    hoverColor?: string
     bgc?: string
-    initialBgc?: string
+    border?: string
+    itemHeight?: string
     fontSize?: string
     fontColor?: string
-    itemHeight?: string
     textCenter?: boolean
+    hoverColor?: string
+    width?: string
+    largeArrow?: boolean
+    arrowColor?: string
+
+
+
     borderRadius?: string
 }>()
 const emit = defineEmits<{
@@ -33,7 +33,7 @@ let subSubVariants: any = reactive([])
 function chooseVariant(variant: Multi) {
     chosenVariant.value = variant
     subSubVariants = []
-    if(!(Object.values(variant)[1] instanceof Array) && (typeof variant === 'string' || typeof variant === 'number')) {
+    if (!(Object.values(variant)[1] instanceof Array) && (typeof variant === 'string' || typeof variant === 'number')) {
         emit('update:modelValue', variant)
         isOpen.value = false
         chosenVariant.value = {}
@@ -44,7 +44,7 @@ function chooseVariant(variant: Multi) {
 function chooseSubVariant(sub: any) {
     subVariant.value = sub
     subSubVariants = Object.values(subVariant.value)[1]
-    if(typeof sub === 'string' || typeof sub === 'number') {
+    if (typeof sub === 'string' || typeof sub === 'number') {
         emit('update:modelValue', sub)
         isOpen.value = false
         chosenVariant.value = {}
@@ -62,7 +62,7 @@ function chooseSubSubVariant(variant: any) {
     subSubVariants = []
 }
 
-function toggleVisible(){
+function toggleVisible() {
     isOpen.value = !isOpen.value
     chosenVariant.value = {}
     subVariant.value = {}
@@ -70,8 +70,32 @@ function toggleVisible(){
 }
 
 onMounted(() => {
-    if(props.hoverColor){
+    if (props.hoverColor) {
         document.body.style.setProperty('--tw_dropdown_multi_hoverColor', props.hoverColor)
+    }
+    if (props.bgc) {
+        document.body.style.setProperty('--tw_dropdown_multi_bgc', props.bgc)
+    }
+    if (props.textCenter) {
+        document.body.style.setProperty('--tw_dropdown_multi_text_align', 'center')
+    }
+    if (props.fontColor) {
+        document.body.style.setProperty('--tw_dropdown_multi_font_color', props.fontColor)
+    }
+    if (props.fontSize) {
+        document.body.style.setProperty('--tw_dropdown_multi_font_size', props.fontSize)
+    }
+    if (props.itemHeight) {
+        document.body.style.setProperty('--tw_dropdown_multi_item_height', props.itemHeight)
+    }
+    if (props.border) {
+        document.body.style.setProperty('--tw_dropdown_multi_border', props.border)
+    }
+    if (props.arrowColor) {
+        document.body.style.setProperty('--tw_dropdown_multi_arrow_color', props.arrowColor)
+    }
+    if (props.largeArrow) {
+        document.body.style.setProperty('--tw_dropdown_multi_arrow_width', '2px')
     }
 })
 
@@ -81,20 +105,18 @@ onMounted(() => {
     <div class="tw_multi_dropdown"
          :style="{
               width: width ?? '170px',
-              fontSize: fontSize ?? '14px',
          }">
         <div :style="{
                   borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
                   borderTop: (border ? border : '1px solid black'),
                   borderLeft: (border ? border : '1px solid black'),
                   borderRight: (border ? border : '1px solid black'),
-                  backgroundColor: initialBgc ?? 'white'
             }"
              class="tw_multi_dropdown-base"
              @click="toggleVisible"
         >
-            <div class="tw_dropdown-icon">
-                <div class="tw_dropdown-icon-left"
+            <div class="tw_dropdown_multi-icon">
+                <div class="tw_dropdown_multi-icon-left"
                      :style="{
                           transform: isOpen ? 'rotate(-35deg)' : 'rotate(35deg)',
                           borderWidth: largeArrow ? '2px': '1px',
@@ -102,7 +124,7 @@ onMounted(() => {
                           backgroundColor: arrowColor ?? 'rgba(0,0,0,.2)'
                     }"
                 ></div>
-                <div class="tw_dropdown-icon-right"
+                <div class="tw_dropdown_multi-icon-right"
                      :style="{
                           transform: isOpen ? 'rotate(35deg)' : 'rotate(-35deg)',
                           borderWidth: largeArrow ? '2px': '1px',
@@ -111,16 +133,10 @@ onMounted(() => {
                     }"
                 ></div>
             </div>
-            <input
-                    readonly
-                    type="text"
-                    :value="props.modelValue"
-                    :style="{
-                         textAlign: textCenter ? 'center' : 'start',
-                         backgroundColor: initialBgc ?? 'white',
-                         fontSize: fontSize ?? '14px',
-                         height: initialHeight ? initialHeight : (itemHeight ?? '28px')
-                    }"
+            <input class="tw_multi_dropdown_input"
+                   readonly
+                   type="text"
+                   :value="props.modelValue"
             >
         </div>
         <div class="tw_dropdown-variants">
@@ -128,110 +144,52 @@ onMounted(() => {
                 <div class="tw_multi_dropdown-variants-item"
                      v-if="isOpen"
                      :style="{
-                          maxHeight: variantsHeight ?? 'auto',
                           borderLeft: (border ? border : '1px solid black'),
                           borderRight: (border ? border : '1px solid black'),
                           borderBottom: (border ? border : '1px solid black'),
-                          backgroundColor: bgc ?? 'white'
                     }"
                 >
                     <div v-for="(variant, idx) in props.variants" :key="idx">
                         <div class="tw_multi_variant"
                              @click="chooseVariant(variant)"
-                             :class="{'selectedP' : chosenVariant === variant}">
+                             :class="{'tw_multi_dropdown_selected' : chosenVariant === variant}">
                             <span class="variant_span"
                                   v-if="typeof variant === 'string' || typeof variant === 'number'"
-                                  :style="{
-                                       color: fontColor ?? 'black',
-                                       justifyContent: textCenter ? 'center' : 'start',
-                                       minHeight: itemHeight ?? '28px'
-                                       }"
                             >{{ variant }}</span>
                             <span class="variant_span"
                                   v-else
-                                  :style="{
-                                       color: fontColor ?? 'black',
-                                       justifyContent: textCenter ? 'center' : 'start',
-                                       minHeight: itemHeight ?? '28px'
-                                  }"
                             >{{ Object.values(variant)[0] }}
                             </span>
-                            <span class="tw_multi_dropdown-icon" v-if="typeof variant !== 'string' && typeof variant !== 'number'">
-                                    <span class="tw_multi_dropdown-icon-left"
-                                          :style="{
-                                              borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
-                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
-                                        }"
-                                    ></span>
-                                    <span class="tw_multi_dropdown-icon-right"
-                                          :style="{
-                                              borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
-                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
-                                        }"
-                                    ></span>
+                            <span class="tw_multi_dropdown-icon"
+                                  v-if="typeof variant !== 'string' && typeof variant !== 'number'">
+                                    <span class="tw_multi_dropdown-icon-left"></span>
+                                    <span class="tw_multi_dropdown-icon-right"></span>
                             </span>
                             <div class="sub_variants"
-                                 :style="{
-                                      border: border ? border : '1px solid black',
-                                 }"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
-
                                 <div class="tw_multi_variant"
                                      v-for="sub in Object.values(variant)[1]"
-                                     :class="{'selectedP' : subVariant === sub}"
+                                     :class="{'tw_multi_dropdown_selected' : subVariant === sub}"
                                      @click="chooseSubVariant(sub)">
                                     <span class="variant_span"
-                                          v-if="typeof sub === 'string' || typeof sub === 'number'"
-                                          :style="{
-                                               color: fontColor ?? 'black',
-                                               justifyContent: textCenter ? 'center' : 'start',
-                                               minHeight: itemHeight ?? '28px'
-                                          }"
-                                    >{{ sub }}</span>
+                                          v-if="typeof sub === 'string' || typeof sub === 'number'">{{ sub }}</span>
                                     <span class="variant_span"
-                                          v-else
-                                          :style="{
-                                               color: fontColor ?? 'black',
-                                               justifyContent: textCenter ? 'center' : 'start',
-                                               minHeight: itemHeight ?? '28px'
-                                          }"
-                                    >{{ Object.values(sub)[0] }}</span>
-                                    <span class="tw_multi_dropdown-icon" v-if="typeof sub !== 'string' && typeof sub !== 'number'">
-                                    <span class="tw_multi_dropdown-icon-left"
-                                          :style="{
-                                              borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
-                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
-                                        }"
-                                    ></span>
-                                    <span class="tw_multi_dropdown-icon-right"
-                                          :style="{
-                                              borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
-                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
-                                        }"
-                                    ></span>
+                                          v-else>{{ Object.values(sub)[0] }}
+                                    </span>
+                                    <span class="tw_multi_dropdown-icon"
+                                          v-if="typeof sub !== 'string' && typeof sub !== 'number'">
+                                    <span class="tw_multi_dropdown-icon-left"></span>
+                                    <span class="tw_multi_dropdown-icon-right"></span>
                             </span>
                                 </div>
-                                    <div class="sub_variants"
-                                         :style="{
-                                              border: border ? border : '1px solid black',
-                                         }"
-                                         v-if="subSubVariants.length">
-                                        <div class="tw_multi_variant"
-                                             v-for="subSub in subSubVariants" :key="subSub"
-                                             @click="chooseSubSubVariant(subSub)">
-                                             <span class="variant_span"
-                                                   :style="{
-                                                        color: fontColor ?? 'black',
-                                                        justifyContent: textCenter ? 'center' : 'start',
-                                                        minHeight: itemHeight ?? '28px'
-                                                   }"
-                                             >{{ subSub }}</span>
-                                        </div>
+                                <div class="sub_variants"
+                                     v-if="subSubVariants.length">
+                                    <div class="tw_multi_variant"
+                                         v-for="subSub in subSubVariants" :key="subSub"
+                                         @click="chooseSubSubVariant(subSub)">
+                                        <span class="variant_span">{{ subSub }}</span>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
