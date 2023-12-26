@@ -59,6 +59,14 @@ function chooseSubSubVariant(variant: any) {
     emit('update:modelValue', variant)
     chosenVariant.value = {}
     subVariant.value = {}
+    subSubVariants = []
+}
+
+function toggleVisible(){
+    isOpen.value = !isOpen.value
+    chosenVariant.value = {}
+    subVariant.value = {}
+    subSubVariants = []
 }
 
 onMounted(() => {
@@ -74,7 +82,6 @@ onMounted(() => {
          :style="{
               width: width ?? '170px',
               fontSize: fontSize ?? '14px',
-              borderRadius: borderRadius ?? '0px'
          }">
         <div :style="{
                   borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
@@ -83,8 +90,8 @@ onMounted(() => {
                   borderRight: (border ? border : '1px solid black'),
                   backgroundColor: initialBgc ?? 'white'
             }"
-             class="tw_dropdown-base"
-             @click="isOpen = !isOpen"
+             class="tw_multi_dropdown-base"
+             @click="toggleVisible"
         >
             <div class="tw_dropdown-icon">
                 <div class="tw_dropdown-icon-left"
@@ -117,7 +124,7 @@ onMounted(() => {
             >
         </div>
         <div class="tw_dropdown-variants">
-            <transition name="tr_dropdown">
+            <transition name="tr_multi_dropdown">
                 <div class="tw_dropdown-variants-item"
                      v-if="isOpen"
                      :style="{
@@ -170,7 +177,7 @@ onMounted(() => {
                                                justifyContent: textCenter ? 'center' : 'start',
                                                minHeight: itemHeight ?? '28px'
                                           }"
-                                    >{{ Object.values(sub)[0] }}</span>
+                                    >{{ Object.values(sub)[0] }}></span>
                                 </div>
                                     <div class="sub_variants" v-if="subSubVariants.length">
                                         <div class="tw_multi_variant"
