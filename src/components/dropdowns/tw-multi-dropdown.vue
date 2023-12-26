@@ -154,7 +154,24 @@ onMounted(() => {
                                        justifyContent: textCenter ? 'center' : 'start',
                                        minHeight: itemHeight ?? '28px'
                                   }"
-                            >{{ Object.values(variant)[0] }}</span>
+                            >{{ Object.values(variant)[0] }}
+                                <span class="tw_multi_dropdown-icon">
+                                    <span class="tw_multi_dropdown-icon-left"
+                                         :style="{
+                                              borderWidth: largeArrow ? '2px': '1px',
+                                              borderColor: arrowColor ?? 'black',
+                                              backgroundColor: arrowColor ?? 'black'
+                                        }"
+                                    ></span>
+                                    <div class="tw_multi_dropdown-icon-right"
+                                         :style="{
+                                              borderWidth: largeArrow ? '2px': '1px',
+                                              borderColor: arrowColor ?? 'black',
+                                              backgroundColor: arrowColor ?? 'black'
+                                        }"
+                                    ></div>
+                                </span>
+                            </span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
 
