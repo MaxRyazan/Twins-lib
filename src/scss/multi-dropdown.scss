@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  right: -100%;
+  right: -100.5%;
 }
 .tw_multi_variant {
   width: 100%;
@@ -15,4 +15,13 @@
   align-items: center;
   cursor: pointer;
   background-color: white;
+}
+.variant_span{
+  width: 100%;
+  overflow: hidden;
+}
+.transition_container {
+  display: flex;
+  position: relative;
+  align-items: start
 }
