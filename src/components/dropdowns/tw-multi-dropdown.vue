@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {Ref, ref, watch} from "vue";
+import {onMounted, Ref, ref} from "vue";
 
 type T = number | string
 type Item = { field1: T, field2: Array<T> }
@@ -27,15 +27,13 @@ const emit = defineEmits<{
 }>()
 const isOpen = ref(false)
 const chosenVariant = ref()
-const subVariant: Ref<Item> = ref()
-const tw_variant_ref = ref()
+const subVariant: Ref<any> = ref()
 
 function chooseVariant(variant: Multi) {
     chosenVariant.value = variant
 }
 
 function chooseSubVariant(sub: any) {
-    console.log(sub)
     subVariant.value = sub
 }
 
@@ -45,26 +43,11 @@ function chooseSubSubVariant(variant: any) {
     emit('update:modelValue', variant)
 }
 
-watch(tw_variant_ref, () => {
-    if (tw_variant_ref.value) {
-        if (isOpen.value) {
-            tw_variant_ref.value.forEach((item: HTMLElement) => item.addEventListener('mouseover', () => {
-                item.style.backgroundColor = props.hoverColor ?? 'lightgreen'
-            }))
-            tw_variant_ref.value.forEach((item: HTMLElement) => item.addEventListener('mouseout', () => {
-                item.style.backgroundColor = props.bgc ?? 'white'
-            }))
-        } else {
-            tw_variant_ref.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
-                item.style.backgroundColor = props.hoverColor ?? 'lightgreen'
-            }))
-            tw_variant_ref.value.forEach((item: HTMLElement) => item.removeEventListener('mouseout', () => {
-                item.style.backgroundColor = props.bgc ?? 'white'
-            }))
-        }
+onMounted(() => {
+    if(props.hoverColor){
+        document.body.style.setProperty('--tw_dropdown_multi_hoverColor', props.hoverColor)
     }
-}, {deep: true})
-
+})
 
 </script>
 
@@ -128,7 +111,8 @@ watch(tw_variant_ref, () => {
                     }"
                 >
                     <div v-for="(variant, idx) in props.variants" :key="idx">
-                        <div class="tw_variant_multi" ref="tw_variant_ref">
+                        <div class="tw_variant_multi"
+                             :class="{'selectedP' : chosenVariant === variant}">
                             <span class="variant_span"
                                   @click="chooseVariant(variant)"
                                   :style="{
@@ -139,15 +123,14 @@ watch(tw_variant_ref, () => {
                             >{{ Object.values(variant)[0] }}</span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
-                                <div ref="tw_variant_ref"
-                                     class="tw_multi_variant"
-                                     @click="chooseSubVariant(sub)"
-                                     v-for="sub in Object.values(variant)[1]">
+                                <div class="tw_multi_variant"
+                                     v-for="sub in Object.values(variant)[1]"
+                                     :class="{'selectedP' : subVariant === sub}"
+                                     @click="chooseSubVariant(sub)">
                                     <span class="variant_span">{{ Object.values(sub)[0] }}</span>
                                 </div>
                                     <div class="sub_variants" v-if="subVariant">
-                                        <div ref="tw_variant_ref"
-                                             class="tw_multi_variant"
+                                        <div class="tw_multi_variant"
                                              v-for="subSub in Object.values(subVariant)[1]" :key="subSub"
                                              @click="chooseSubSubVariant(subSub)">
                                              <span class="variant_span">{{ subSub }}</span>

@@ -1,3 +1,7 @@
+:root {
+  --tw_dropdown_multi_hoverColor: lightgray;
+}
+
 .tw_multi_dropdown{
   position: relative;
   cursor: default;
@@ -16,6 +20,9 @@
   align-items: center;
   cursor: pointer;
   background-color: white;
+  &:hover{
+    background-color: var(--tw_dropdown_multi_hoverColor);
+  }
 }
 
 .transition_container {
@@ -31,8 +38,14 @@
   cursor: pointer;
   overflow: hidden;
   justify-content: center;
+  &:hover{
+    background-color: var(--tw_dropdown_multi_hoverColor);
+  }
 }
 .variant_span {
   width: calc(100% - 10px);
   overflow: hidden;
+}
+.selectedP {
+  background-color: var(--tw_dropdown_multi_hoverColor);
 }
