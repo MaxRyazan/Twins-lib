@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ref, watch} from "vue";
+import {Ref, ref, watch} from "vue";
 
 type T = number | string
-type Item = { title: T, value: Array<T> }
-type Multi = {title: T, value: Array<Item>}
+type Item = { field1: T, field2: Array<T> }
+type Multi = { field1: T, field2: Array<Item> }
 const props = defineProps<{
     modelValue: T
     variants: Array<Multi>
@@ -26,24 +26,20 @@ const emit = defineEmits<{
     (e: 'update:modelValue', param: any)
 }>()
 const isOpen = ref(false)
-const showSubVariants = ref(false)
-const showSubSubVariants = ref(false)
 const chosenVariant = ref()
-const chosenSubVariant = ref()
+const subVariant: Ref<Item> = ref()
 const tw_variant_ref = ref()
 
-function openSub(variant: Multi) {
-    showSubVariants.value = true
+function chooseVariant(variant: Multi) {
     chosenVariant.value = variant
 }
-function openSubSub(subVariant: Item){
-    chosenSubVariant.value = subVariant
-    showSubSubVariants.value = true
+
+function chooseSubVariant(sub: any) {
+    console.log(sub)
+    subVariant.value = sub
 }
 
-function chooseSubVariant(variant: T) {
-    console.log(variant)
-    showSubVariants.value = false
+function chooseSubSubVariant(variant: any) {
     isOpen.value = false
     chosenVariant.value = {}
     emit('update:modelValue', variant)
@@ -131,36 +127,33 @@ watch(tw_variant_ref, () => {
                         backgroundColor: bgc ?? 'white'
                     }"
                 >
-                    <div v-for="variant in props.variants" :key="variant.title">
-                        <div style="display:flex;">
-                            <span ref="tw_variant_ref"
-                                  class="tw_variant variant_span"
-                                  @click="openSub(variant)"
+                    <div v-for="(variant, idx) in props.variants" :key="idx">
+                        <div class="tw_variant_multi" ref="tw_variant_ref">
+                            <span class="variant_span"
+                                  @click="chooseVariant(variant)"
                                   :style="{
                                            color: fontColor ?? 'black',
                                            justifyContent: textCenter ? 'center' : 'start',
-                                           height: itemHeight ?? '28px'
+                                           minHeight: itemHeight ?? '28px'
                                        }"
-                            >{{ variant.title }}</span>
-                                <div class="sub_variants"
-                                     :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}"
-                                     v-if="showSubVariants && variant.title === chosenVariant.title">
-
-
-                                    <div @click="openSubSub(subVariant)" ref="tw_variant_ref"
-                                         class="tw_variant transition_container" v-for="subVariant in variant.value">
-                                        <span class="variant_span">{{subVariant.title}}</span>
-                                        <div class="sub_variants"
-                                             v-if="showSubSubVariants && subVariant.title === chosenSubVariant.title"
-                                             :style="{width: width ?? '170px', backgroundColor: bgc ?? 'white'}">
-                                            <span class="tw_variant variant_span tw_multi_variant"
-                                                  ref="tw_variant_ref"
-                                                  @click="chooseSubVariant(item)"
-                                                  v-for="item in subVariant.value">{{item}}</span>
+                            >{{ Object.values(variant)[0] }}</span>
+                            <div class="sub_variants"
+                                 v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
+                                <div ref="tw_variant_ref"
+                                     class="tw_multi_variant"
+                                     @click="chooseSubVariant(sub)"
+                                     v-for="sub in Object.values(variant)[1]">
+                                    <span class="variant_span">{{ Object.values(sub)[0] }}</span>
+                                </div>
+                                    <div class="sub_variants" v-if="subVariant">
+                                        <div ref="tw_variant_ref"
+                                             class="tw_multi_variant"
+                                             v-for="subSub in Object.values(subVariant)[1]" :key="subSub"
+                                             @click="chooseSubSubVariant(subSub)">
+                                             <span class="variant_span">{{ subSub }}</span>
                                         </div>
                                     </div>
-
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
