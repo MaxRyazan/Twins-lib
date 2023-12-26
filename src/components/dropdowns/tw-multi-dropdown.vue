@@ -19,7 +19,7 @@ const props = defineProps<{
     arrowColor?: string
 
 
-
+    // TODO не работает, не подключал!
     borderRadius?: string
 }>()
 const emit = defineEmits<{
