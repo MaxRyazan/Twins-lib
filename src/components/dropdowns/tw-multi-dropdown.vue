@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, Ref, ref} from "vue";
+import {onMounted, reactive, Ref, ref} from "vue";
 
 type T = number | string
 type Item = { field1: T, field2: Array<T> }
@@ -28,9 +28,11 @@ const emit = defineEmits<{
 const isOpen = ref(false)
 const chosenVariant = ref()
 const subVariant: Ref<any> = ref()
+let subSubVariants: any = reactive([])
 
 function chooseVariant(variant: Multi) {
     chosenVariant.value = variant
+    subSubVariants = []
     if(!(Object.values(variant)[1] instanceof Array) && (typeof variant === 'string' || typeof variant === 'number')) {
         emit('update:modelValue', variant)
         isOpen.value = false
@@ -41,6 +43,7 @@ function chooseVariant(variant: Multi) {
 
 function chooseSubVariant(sub: any) {
     subVariant.value = sub
+    subSubVariants = Object.values(subVariant.value)[1]
 }
 
 function chooseSubSubVariant(variant: any) {
@@ -140,6 +143,7 @@ onMounted(() => {
                             >{{ Object.values(variant)[0] }}</span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
+
                                 <div class="tw_multi_variant"
                                      v-for="sub in Object.values(variant)[1]"
                                      :class="{'selectedP' : subVariant === sub}"
@@ -152,9 +156,9 @@ onMounted(() => {
                                           }"
                                     >{{ Object.values(sub)[0] }}</span>
                                 </div>
-                                    <div class="sub_variants" v-if="subVariant">
+                                    <div class="sub_variants" v-if="subSubVariants.length">
                                         <div class="tw_multi_variant"
-                                             v-for="subSub in Object.values(subVariant)[1]" :key="subSub"
+                                             v-for="subSub in subSubVariants" :key="subSub"
                                              @click="chooseSubSubVariant(subSub)">
                                              <span class="variant_span"
                                                    :style="{

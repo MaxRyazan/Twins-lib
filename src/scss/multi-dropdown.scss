@@ -5,6 +5,7 @@
 .tw_multi_dropdown{
   position: relative;
   cursor: default;
+  z-index: 99;
 }
 .sub_variants{
   display: flex;
