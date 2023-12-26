@@ -31,6 +31,12 @@ const subVariant: Ref<any> = ref()
 
 function chooseVariant(variant: Multi) {
     chosenVariant.value = variant
+    if(!(Object.values(variant)[1] instanceof Array) && (typeof variant === 'string' || typeof variant === 'number')) {
+        emit('update:modelValue', variant)
+        isOpen.value = false
+        chosenVariant.value = {}
+        subVariant.value = {}
+    }
 }
 
 function chooseSubVariant(sub: any) {
@@ -41,6 +47,8 @@ function chooseSubSubVariant(variant: any) {
     isOpen.value = false
     chosenVariant.value = {}
     emit('update:modelValue', variant)
+    chosenVariant.value = {}
+    subVariant.value = {}
 }
 
 onMounted(() => {
@@ -111,7 +119,7 @@ onMounted(() => {
                     }"
                 >
                     <div v-for="(variant, idx) in props.variants" :key="idx">
-                        <div class="tw_variant_multi"
+                        <div class="tw_multi_variant"
                              :class="{'selectedP' : chosenVariant === variant}">
                             <span class="variant_span"
                                   @click="chooseVariant(variant)"
@@ -120,20 +128,32 @@ onMounted(() => {
                                            justifyContent: textCenter ? 'center' : 'start',
                                            minHeight: itemHeight ?? '28px'
                                        }"
-                            >{{ Object.values(variant)[0] }}</span>
+                            >{{ (typeof variant === 'string' || typeof variant === 'number') ? variant : Object.values(variant)[0] }}</span>
                             <div class="sub_variants"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
                                 <div class="tw_multi_variant"
                                      v-for="sub in Object.values(variant)[1]"
                                      :class="{'selectedP' : subVariant === sub}"
                                      @click="chooseSubVariant(sub)">
-                                    <span class="variant_span">{{ Object.values(sub)[0] }}</span>
+                                    <span class="variant_span"
+                                          :style="{
+                                               color: fontColor ?? 'black',
+                                               justifyContent: textCenter ? 'center' : 'start',
+                                               minHeight: itemHeight ?? '28px'
+                                          }"
+                                    >{{ Object.values(sub)[0] }}</span>
                                 </div>
                                     <div class="sub_variants" v-if="subVariant">
                                         <div class="tw_multi_variant"
                                              v-for="subSub in Object.values(subVariant)[1]" :key="subSub"
                                              @click="chooseSubSubVariant(subSub)">
-                                             <span class="variant_span">{{ subSub }}</span>
+                                             <span class="variant_span"
+                                                   :style="{
+                                                       color: fontColor ?? 'black',
+                                                       justifyContent: textCenter ? 'center' : 'start',
+                                                       minHeight: itemHeight ?? '28px'
+                                                    }"
+                                             >{{ subSub }}</span>
                                         </div>
                                     </div>
                             </div>
