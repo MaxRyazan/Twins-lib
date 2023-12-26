@@ -98,16 +98,16 @@ onMounted(() => {
                      :style="{
                           transform: isOpen ? 'rotate(-35deg)' : 'rotate(35deg)',
                           borderWidth: largeArrow ? '2px': '1px',
-                          borderColor: arrowColor ?? 'black',
-                          backgroundColor: arrowColor ?? 'black'
+                          borderColor: arrowColor ?? 'rgba(0,0,0,.2)',
+                          backgroundColor: arrowColor ?? 'rgba(0,0,0,.2)'
                     }"
                 ></div>
                 <div class="tw_dropdown-icon-right"
                      :style="{
                           transform: isOpen ? 'rotate(35deg)' : 'rotate(-35deg)',
                           borderWidth: largeArrow ? '2px': '1px',
-                          borderColor: arrowColor ?? 'black',
-                          backgroundColor: arrowColor ?? 'black'
+                          borderColor: arrowColor ?? 'rgba(0,0,0,.2)',
+                          backgroundColor: arrowColor ?? 'rgba(0,0,0,.2)'
                     }"
                 ></div>
             </div>
@@ -125,7 +125,7 @@ onMounted(() => {
         </div>
         <div class="tw_dropdown-variants">
             <transition name="tr_multi_dropdown">
-                <div class="tw_dropdown-variants-item"
+                <div class="tw_multi_dropdown-variants-item"
                      v-if="isOpen"
                      :style="{
                           maxHeight: variantsHeight ?? 'auto',
@@ -155,24 +155,27 @@ onMounted(() => {
                                        minHeight: itemHeight ?? '28px'
                                   }"
                             >{{ Object.values(variant)[0] }}
-                                <span class="tw_multi_dropdown-icon">
+                            </span>
+                            <span class="tw_multi_dropdown-icon" v-if="typeof variant !== 'string' && typeof variant !== 'number'">
                                     <span class="tw_multi_dropdown-icon-left"
-                                         :style="{
+                                          :style="{
                                               borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'black',
-                                              backgroundColor: arrowColor ?? 'black'
+                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
+                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
                                         }"
                                     ></span>
-                                    <div class="tw_multi_dropdown-icon-right"
-                                         :style="{
+                                    <span class="tw_multi_dropdown-icon-right"
+                                          :style="{
                                               borderWidth: largeArrow ? '2px': '1px',
-                                              borderColor: arrowColor ?? 'black',
-                                              backgroundColor: arrowColor ?? 'black'
+                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
+                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
                                         }"
-                                    ></div>
-                                </span>
+                                    ></span>
                             </span>
                             <div class="sub_variants"
+                                 :style="{
+                                      border: border ? border : '1px solid black',
+                                 }"
                                  v-if="chosenVariant && Object.values(chosenVariant)[0] === Object.values(variant)[0] && Object.values(variant)[1] instanceof Array">
 
                                 <div class="tw_multi_variant"
@@ -194,9 +197,29 @@ onMounted(() => {
                                                justifyContent: textCenter ? 'center' : 'start',
                                                minHeight: itemHeight ?? '28px'
                                           }"
-                                    >{{ Object.values(sub)[0] }}></span>
+                                    >{{ Object.values(sub)[0] }}</span>
+                                    <span class="tw_multi_dropdown-icon" v-if="typeof sub !== 'string' && typeof sub !== 'number'">
+                                    <span class="tw_multi_dropdown-icon-left"
+                                          :style="{
+                                              borderWidth: largeArrow ? '2px': '1px',
+                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
+                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
+                                        }"
+                                    ></span>
+                                    <span class="tw_multi_dropdown-icon-right"
+                                          :style="{
+                                              borderWidth: largeArrow ? '2px': '1px',
+                                              borderColor: arrowColor ?? 'rgba(0,0,0,.1)',
+                                              backgroundColor: arrowColor ?? 'rgba(0,0,0,.1)'
+                                        }"
+                                    ></span>
+                            </span>
                                 </div>
-                                    <div class="sub_variants" v-if="subSubVariants.length">
+                                    <div class="sub_variants"
+                                         :style="{
+                                              border: border ? border : '1px solid black',
+                                         }"
+                                         v-if="subSubVariants.length">
                                         <div class="tw_multi_variant"
                                              v-for="subSub in subSubVariants" :key="subSub"
                                              @click="chooseSubSubVariant(subSub)">
