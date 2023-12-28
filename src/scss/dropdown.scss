@@ -1,15 +1,45 @@
-
-.tw_dropdown{
+html {
+  --tw_dropdown_item_height: 28px;
+  --tw_dropdown_variants_height: '28px';
+  --tw_dropdown_arrow_width: 1px;
+  --tw_dropdown_arrow_color: rgba(0, 0, 0, .7);;
+  --tw_dropdown_hoverColor: lightgray;
+  --tw_dropdown_bgc: white;
+  --tw_dropdown_font_size: 14px;
+  --tw_dropdown_font_color: black;
+  --tw_dropdown_text_align: 'start';
+  --tw_dropdown_border_radius: 0px;
+  --tw_dropdown_border: 1px solid black;
+}
+.tw_dropdown {
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  border: var(--tw_dropdown_border);
+  height: var(--tw_dropdown_item_height);
   position: relative;
   cursor: default;
-  overflow: hidden;
+  font-size: var(--tw_dropdown_font_size);
+  border-radius: var(--tw_dropdown_border_radius);
 }
+
+.tw_dropdown_input{
+  height: var(--tw_dropdown_item_height);
+  background-color: var(--tw_dropdown_bgc);
+  font-size: var(--tw_dropdown_font_size);
+  color: var(--tw_dropdown_font_color);
+  text-align: var(--tw_dropdown_text_align);
+  border-top-left-radius: var(--tw_dropdown_border_radius);
+  border-top-right-radius: var(--tw_dropdown_border_radius);
+  border-bottom-left-radius: var(--tw_dropdown_border_radius);
+}
+
 .tw_dropdown-base{
-  height: 100%;
+  border-radius: var(--tw_dropdown_border_radius);
+  height: var(--tw_dropdown_item_height);
   position: relative;
-  background-color: white;
-  z-index: 3;
-  overflow: auto;
+  z-index: 99;
+  background-color: var(--tw_dropdown_bgc);
   & input {
     width: calc(100% - 41px);
     height: 100%;
@@ -36,6 +66,10 @@
   left: 2px;
   top: 5px;
   border-style: solid;
+  border-width: var(--tw_dropdown_arrow_width);
+  border-color: var(--tw_dropdown_arrow_color);
+  background-color: var(--tw_dropdown_arrow_color);
+
 }
 .tw_dropdown-icon-right{
   transition: .5s;
@@ -44,35 +78,46 @@
   right: 2px;
   top: 5px;
   border-style: solid;
+  border-width: var(--tw_dropdown_arrow_width);
+  border-color: var(--tw_dropdown_arrow_color);
+  background-color: var(--tw_dropdown_arrow_color);
 }
 .tw_dropdown-variants{
-  height: 100%;
-  width: 100%;
+  overflow: hidden;
+  height: var(--tw_dropdown_variants_height);
+  margin-top: calc(var(--tw_dropdown_item_height) - 3px);
+  position: absolute;
   display: flex;
   flex-direction: column;
-  z-index: 2;
-
+  z-index: 99;
 }
 .tw_dropdown-variants-item{
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+  border-bottom: var(--tw_dropdown_border);
+  border-left: var(--tw_dropdown_border);
+  border-right: var(--tw_dropdown_border);
+  border-bottom-left-radius: var(--tw_dropdown_border_radius);
+  border-bottom-right-radius: var(--tw_dropdown_border_radius);
   width: 100%;
   overflow: auto;
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-  &::-webkit-scrollbar-track {
-    background: white;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: black;
-    border-radius: 10px;
-  }
+  background-color: var(--tw_dropdown_bgc);
+  height: var(--tw_dropdown_variants_height);
 }
 .tw_variant{
   width: 100%;
+  height: var(--tw_dropdown_item_height);
   padding: 5px 10px;
   display: flex;
   align-items: center;
+  overflow: hidden;
   cursor: pointer;
+  justify-content: var(--tw_dropdown_text_align);
+  color: var(--tw_dropdown_font_color);
+  &:hover {
+    background-color: var(--tw_dropdown_hoverColor);
+  }
 }
 .tr_dropdown-enter-from{
   opacity: 0;
@@ -80,4 +125,54 @@
 }
 .tr_dropdown-enter-active{
   transition: .5s;
+}
+
+.tw_dropdown-scroll-icon {
+  animation: scroll 1.2s linear infinite;
+  cursor: default;
+  &.tw_second_scroll_bar{
+    animation-delay: 0.4s;
+  }
+  &.tw_third_scroll_bar {
+    animation-delay: .8s;
+  }
+  //position: absolute;
+  //right: 2px;
+  //top:50%;
+  //transform: translateY(-60%);
+  //width: 100%;
+  //height: 100%;
+}
+.tw_dropdown-scroll-icon-left{
+  transition: .5s;
+  position: absolute;
+  width: 10px;
+  left: 2px;
+  top: 5px;
+  border-style: solid;
+  transform: rotate(40deg);
+  border-width: 1px;
+  border-color: rgba(0,0,0, 1);
+  background-color: rgba(0,0,0, 1);
+}
+.tw_dropdown-scroll-icon-right{
+  transition: .5s;
+  position: absolute;
+  width: 10px;
+  left: 8px;
+  top: 5px;
+  border-style: solid;
+  transform: rotate(-40deg);
+  border-width: 1px;
+  border-color: rgba(0,0,0, 1);
+  background-color: rgba(0,0,0, 1);
+}
+
+@keyframes scroll {
+  0% {
+   opacity: 0.2;
+   }
+  100% {
+    opacity: 1;
+   }
 }
