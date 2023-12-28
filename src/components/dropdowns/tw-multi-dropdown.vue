@@ -17,10 +17,6 @@ const props = defineProps<{
     width?: string
     largeArrow?: boolean
     arrowColor?: string
-
-
-    // TODO не работает, не подключал!
-    borderRadius?: string
 }>()
 const emit = defineEmits<{
     (e: 'update:modelValue', param: any)
@@ -104,7 +100,7 @@ onMounted(() => {
 <template>
     <div class="tw_multi_dropdown"
          :style="{
-              width: width ?? '170px',
+              width: width ?? '170px'
          }">
         <div :style="{
                   borderBottom: isOpen ? '' : (border ? border : '1px solid black'),
@@ -178,9 +174,9 @@ onMounted(() => {
                                     </span>
                                     <span class="tw_multi_dropdown-icon"
                                           v-if="typeof sub !== 'string' && typeof sub !== 'number'">
-                                    <span class="tw_multi_dropdown-icon-left"></span>
-                                    <span class="tw_multi_dropdown-icon-right"></span>
-                            </span>
+                                        <span class="tw_multi_dropdown-icon-left"></span>
+                                        <span class="tw_multi_dropdown-icon-right"></span>
+                                    </span>
                                 </div>
                                 <div class="sub_variants"
                                      v-if="subSubVariants.length">
