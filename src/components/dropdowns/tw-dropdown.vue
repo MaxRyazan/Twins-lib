@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
-import CustomScroll from "@/components/develop/CustomScroll.vue";
+import {onMounted, ref} from "vue";
 type T = number | string
 
-const isScrollNeed = ref(true)
 const twVariants = ref()
 
 const props = defineProps<{
@@ -34,49 +32,6 @@ function chooseVariant(variant: any) {
     emit('update:modelValue', variant)
     isOpen.value = false
 }
-
-
-watch(isOpen, () => {
-    if(!props.variantsHeight) return false
-     else {
-         setTimeout(() => {
-            if(twVariants.value) {
-                let itemHeight = 28
-                let varHeight = 0
-                if (props.itemHeight) {
-                    if (props.itemHeight.includes('px')) {
-                        itemHeight = +props.itemHeight.replace('px', '')
-                    }
-                    if (props.itemHeight.includes('%')) {
-                        itemHeight = +props.itemHeight.replace('%', '')
-                    }
-                    if (props.itemHeight.includes('rem')) {
-                        itemHeight = +props.itemHeight.replace('rem', '')
-                    }
-                    if (props.itemHeight.includes('em')) {
-                        itemHeight = +props.itemHeight.replace('em', '')
-                    }
-
-                }
-                if (props.variantsHeight) {
-                    if (props.itemHeight.includes('px')) {
-                        varHeight = +props.variantsHeight.replace('px', '')
-                    }
-                    if (props.itemHeight.includes('%')) {
-                        varHeight = +props.variantsHeight.replace('%', '')
-                    }
-                    if (props.itemHeight.includes('rem')) {
-                        varHeight = +props.variantsHeight.replace('rem', '')
-                    }
-                    if (props.itemHeight.includes('em')) {
-                        varHeight = +props.variantsHeight.replace('em', '')
-                    }
-                }
-                isScrollNeed.value = varHeight < itemHeight * props.variants.length
-            }
-        }, 0)
-     }
-}, {immediate: true})
 
 onMounted(() => {
     if (props.itemHeight) {
@@ -161,7 +116,6 @@ onMounted(() => {
                                @click="chooseVariant(variant)"
                          >{{ variant }}</span>
                     </span>
-                    <custom-scroll v-if="isScrollNeed"/>
                 </div>
             </transition>
         </div>

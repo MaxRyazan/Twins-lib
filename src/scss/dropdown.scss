@@ -1,15 +1,16 @@
 html {
   --tw_dropdown_item_height: 28px;
-  --tw_dropdown_variants_height: '28px';
+  --tw_dropdown_variants_height: 28px;
   --tw_dropdown_arrow_width: 1px;
-  --tw_dropdown_arrow_color: rgba(0, 0, 0, .7);;
+  --tw_dropdown_arrow_color: rgba(0, 0, 0, .7);
   --tw_dropdown_hoverColor: lightgray;
   --tw_dropdown_bgc: white;
   --tw_dropdown_font_size: 14px;
   --tw_dropdown_font_color: black;
-  --tw_dropdown_text_align: 'start';
+  --tw_dropdown_text_align: start;
   --tw_dropdown_border_radius: 0px;
   --tw_dropdown_border: 1px solid black;
+  --tw_dropdown_scroll_width: 5px
 }
 .tw_dropdown {
   z-index: 99;
@@ -93,7 +94,14 @@ html {
 }
 .tw_dropdown-variants-item{
   &::-webkit-scrollbar {
-    width: 0;
+    width: var(--tw_dropdown_scroll_width);
+    border: 1px solid rgba(0,0,0, .2);
+    border-radius: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    height: 15px;
+    background-color: rgba(0,0,0, .2);
   }
   border-bottom: var(--tw_dropdown_border);
   border-left: var(--tw_dropdown_border);
@@ -127,52 +135,3 @@ html {
   transition: .5s;
 }
 
-.tw_dropdown-scroll-icon {
-  animation: scroll 1.2s linear infinite;
-  cursor: default;
-  &.tw_second_scroll_bar{
-    animation-delay: 0.4s;
-  }
-  &.tw_third_scroll_bar {
-    animation-delay: .8s;
-  }
-  //position: absolute;
-  //right: 2px;
-  //top:50%;
-  //transform: translateY(-60%);
-  //width: 100%;
-  //height: 100%;
-}
-.tw_dropdown-scroll-icon-left{
-  transition: .5s;
-  position: absolute;
-  width: 10px;
-  left: 2px;
-  top: 5px;
-  border-style: solid;
-  transform: rotate(40deg);
-  border-width: 1px;
-  border-color: rgba(0,0,0, 1);
-  background-color: rgba(0,0,0, 1);
-}
-.tw_dropdown-scroll-icon-right{
-  transition: .5s;
-  position: absolute;
-  width: 10px;
-  left: 8px;
-  top: 5px;
-  border-style: solid;
-  transform: rotate(-40deg);
-  border-width: 1px;
-  border-color: rgba(0,0,0, 1);
-  background-color: rgba(0,0,0, 1);
-}
-
-@keyframes scroll {
-  0% {
-   opacity: 0.2;
-   }
-  100% {
-    opacity: 1;
-   }
-}
