@@ -1,11 +1,12 @@
 html {
   --tw_button_width: auto;
   --tw_button_round_width: 30px;
+  --tw_button_round_height: 30px;
   --tw_button_rounded_border_radius: 12px;
 
   --tw_button_height: 28px;
   --tw_button_bgc: white;
-  --tw_button_border: 1px solid transparent;
+  --tw_button_border: 1px solid black;
   --tw_button_padding: 4px;
   --tw_button_freespace_between: 10px;
   --tw_button_border_radius: 0px;
@@ -13,16 +14,20 @@ html {
   --tw_button_text_color: black;
 
   --tw_button_success_color: forestgreen;
-  --tw_button_success_text_color: white;
+  --tw_button_success_text_color: var(--tw_button_success_color);
   --tw_button_success_hover_color: #50ca05;
+  --tw_button_success_bgc_hover_color: #50ca05;
 
   --tw_button_warn_color: orange;
-  --tw_button_warn_text_color: white;
+  --tw_button_warn_text_color: var(--tw_button_warn_color);
   --tw_button_warn_hover_color: #ffc656;
+  --tw_button_warn_bgc_hover_color: #ffc656;
+
 
   --tw_button_error_color: crimson;
-  --tw_button_error_text_color: white;
+  --tw_button_error_text_color: var(--tw_button_error_color);
   --tw_button_error_hover_color: #ff4848;
+  --tw_button_error_bgc_hover_color: #ff4848;
 
   --tw_button_disabled_bgc: lightgray;
   --tw_button_disabled_color: rgba(0,0,0, .2);
@@ -33,7 +38,7 @@ html {
   width: var(--tw_button_width);
   height: var(--tw_button_height);
   background-color: var(--tw_button_bgc);
-  border: 1px solid var(--tw_button_border);
+  border: var(--tw_button_border);
   padding: var(--tw_button_padding);
   border-radius: var(--tw_button_border_radius);
   color: var(--tw_button_text_color);
@@ -59,9 +64,25 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  & img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+  }
 }
-
+.tw_round_img{
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
 .default_hover:before {
   content: "";
   background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .8));
@@ -69,14 +90,14 @@ html {
   width: 100%;
   position: absolute;
   top: 0;
-  left: -125%;
+  left: calc(-100% - 30px);
   transform: skewX(-45deg);
 }
 .default_hover:hover {
   background-color: var(--tw_button_default_hover_color);
 }
 .default_hover:hover:before {
-  left: 100%;
+  left: calc(100% + 30px);
   transition: .75s ease-in-out;
 }
 
@@ -95,6 +116,8 @@ html {
 .round{
   border-radius: 50%;
   width: var(--tw_button_round_width);
+  height: var(--tw_button_round_height);
+  padding: 2px;
 }
 
 .rounded{
@@ -106,8 +129,9 @@ html {
   color: var(--tw_button_success_text_color);
   background-color: var(--tw_button_success_color);
   &:hover {
-    border-color: var(--tw_button_success_hover_color);
-    background-color: var(--tw_button_success_hover_color);
+    border-color: var(--tw_button_success_bgc_hover_color);
+    background-color: var(--tw_button_success_bgc_hover_color);
+    color: var(--tw_button_success_hover_color);
   }
 }
 
@@ -116,8 +140,9 @@ html {
   border: 1px solid var(--tw_button_error_color);
   background-color: var(--tw_button_error_color);
   &:hover {
-    border-color: var(--tw_button_error_hover_color);
-    background-color: var(--tw_button_error_hover_color);
+    border-color: var(--tw_button_error_bgc_hover_color);
+    background-color: var(--tw_button_error_bgc_hover_color);
+    color: var(--tw_button_error_hover_color);
   }
 }
 
@@ -126,8 +151,9 @@ html {
   border: 1px solid var(--tw_button_warn_color);
   background-color: var(--tw_button_warn_color);
   &:hover {
-    border-color: var(--tw_button_warn_hover_color);
-    background-color: var(--tw_button_warn_hover_color);
+    border-color: var(--tw_button_warn_bgc_hover_color);
+    background-color: var(--tw_button_warn_bgc_hover_color);
+    color: var(--tw_button_warn_hover_color);
   }
 }
 
@@ -135,4 +161,15 @@ html {
   color: black !important;
   border: 1px solid black !important;
   padding: 5px 10px !important;
+  &:hover{
+    background-color: rgb(230, 230, 230);
+  }
+  & img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+  }
 }

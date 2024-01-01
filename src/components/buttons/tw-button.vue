@@ -9,11 +9,11 @@
                 outline,
                 round,
                 rounded,
-                default_hover : color_gamma,
+                default_hover : color_gamma && !bgc_hover,
                 default: !color_gamma && !text_color && !success && !error && !warn
             }">
         <i class="pi" :class="prime_icon" v-if="prime_icon"></i>
-        <span class="tw_button_slot">
+        <span class="tw_button_slot" :class="{tw_round_img: props.round}">
             <slot/>
         </span>
     </button>
@@ -82,6 +82,28 @@ onMounted(() => {
         document.body.style.setProperty('--tw_button_border', props.color_gamma)
         document.body.style.setProperty('--tw_button_bgc', props.color_gamma)
         document.body.style.setProperty('--tw_button_default_hover_color', props.color_gamma)
+    }
+    if(props.success && !props.outline && !props.text_color) {
+        document.body.style.setProperty('--tw_button_success_text_color', 'white')
+        document.body.style.setProperty('--tw_button_success_hover_color', 'white')
+    }
+    if(props.warn && !props.outline && !props.text_color) {
+        document.body.style.setProperty('--tw_button_warn_text_color', 'white')
+        document.body.style.setProperty('--tw_button_warn_hover_color', 'white')
+    }
+    if(props.error && !props.outline && !props.text_color) {
+        document.body.style.setProperty('--tw_button_error_text_color', 'white')
+        document.body.style.setProperty('--tw_button_error_hover_color', 'white')
+    }
+
+    if(props.success && props.text_color) {
+        document.body.style.setProperty('--tw_button_success_text_color', props.text_color)
+    }
+    if(props.warn && props.text_color) {
+        document.body.style.setProperty('--tw_button_warn_text_color', props.text_color)
+    }
+    if(props.error && props.text_color) {
+        document.body.style.setProperty('--tw_button_error_text_color', props.text_color)
     }
 })
 
