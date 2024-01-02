@@ -14,6 +14,12 @@ html {
   --tw_button_error_color: white;
   --tw_button_error_background_color: crimson;
   --tw_button_error_color_hover: #ff0000;
+
+  --tw_button_default_background_color: rgb(240, 240, 240);
+
+  --tw_button_disabled_background_color: #6d6d6d;
+  --tw_button_disabled_color: white;
+  --tw_button_disabled_border: none;
 }
 
 .tw_button{
@@ -21,6 +27,9 @@ html {
   cursor: pointer;
   padding: 0 4px;
   height: var(--tw_button_height);
+  &.outline {
+    background-color: transparent;
+  }
   &.rounded {
     border-radius: var(--tw_button_rounded_radius);
   }
@@ -37,10 +46,10 @@ html {
 
 
 .disabled {
-  background-color: #6d6d6d !important;
+  background-color: var(--tw_button_disabled_background_color) !important;
   pointer-events: none !important;
-  color: white !important;
-  border: none !important;
+  color: var(--tw_button_disabled_color) !important;
+  border: var(--tw_button_disabled_border) !important;
 }
 
 .success {

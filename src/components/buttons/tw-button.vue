@@ -1,5 +1,12 @@
 <template>
     <button @click="$emit('push')"
+            :style="{
+                width: width,
+                height: height,
+                border: border,
+                backgroundColor: bgc,
+                color: text_color
+            }"
             class="tw_button"
             :class="{
                 success,
@@ -10,31 +17,26 @@
                 rounded,
                 round,
             }">
-            <slot/>
+        <slot/>
     </button>
 </template>
 
 <script setup lang="ts">
-
-const props = defineProps<{
+defineProps<{
     width?: string,
     height?: string,
 
     success?: boolean
-    error?: boolean
     warning?: boolean
-
+    error?: boolean
     outline?: boolean
     rounded?: boolean
     round?: boolean
     disabled?: boolean,
 
-
     border?: string,
     bgc?: string,
-    bgc_hover?: string,
     text_color?: string,
-    color_gamma?: string,
 
     prime_icon?: string
 }>()
