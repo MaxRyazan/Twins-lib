@@ -43,7 +43,6 @@ const props = defineProps<{
     bgc?: string,
     text_color?: string,
     hover?: string
-    prime_icon?: string
 }>()
 defineEmits<{
     (e: 'push'): void
