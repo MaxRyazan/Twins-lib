@@ -1,37 +1,40 @@
-.tw_button {
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
-  outline: none;
+html {
+  --tw_button_height: 28px;
+  --tw_button_rounded_radius: 10px;
+  --tw_button_round_size: 30px;
+
+  --tw_button_success_color: white;
+  --tw_button_success_background_color: forestgreen;
+  --tw_button_success_color_hover: #04c000;
+
+  --tw_button_warning_color: white;
+  --tw_button_warning_background_color: orange;
+  --tw_button_warning_color_hover: #ffc227;
+
+  --tw_button_error_color: white;
+  --tw_button_error_background_color: crimson;
+  --tw_button_error_color_hover: #ff0000;
+}
+
+.tw_button{
+  border: 1px solid black;
   cursor: pointer;
-  gap: 10px;
-  border: 1px solid transparent;
-  &:active {
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.75);
+  padding: 0 4px;
+  height: var(--tw_button_height);
+  &.rounded {
+    border-radius: var(--tw_button_rounded_radius);
+  }
+  &.round {
+    width: var(--tw_button_round_size);
+    height: var(--tw_button_round_size);
+    border-radius: 50%;
+    padding: 2px;
+  }
+  &:active{
+    box-shadow: 0 0 2px 1px rgba(0,0,0,0.35);
   }
 }
 
-.default_hover:before {
-  content: "";
-  background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .8));
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: -125%;
-  transform: skewX(-45deg);
-}
-.default_hover:hover {
-  background: #83bec5;
-}
-.default_hover:hover:before {
-  left: 100%;
-  transition: .75s ease-in-out;
-}
 
 .disabled {
   background-color: #6d6d6d !important;
@@ -40,58 +43,59 @@
   border: none !important;
 }
 
-.outline{
-  background-color: transparent !important;
-}
-
-.round{
-  border-radius: 50%;
-  width: 30px;
-}
-
-.rounded{
-  border-radius: 12px;
-}
-
 .success {
-  height: 26px;
-  border: 1px solid forestgreen;
-  color: white;
-  background-color: forestgreen;
-
-  &:hover {
-    border-color: lighten(forestgreen, 20%);
-    background-color: lighten(forestgreen, 20%);
+  color: var(--tw_button_success_color);
+  background-color: var(--tw_button_success_background_color);
+  border: 1px solid var(--tw_button_success_background_color);
+  &:hover{
+    background-color: var(--tw_button_success_color_hover);
+    border: 1px solid var(--tw_button_success_color_hover);
+  }
+  &.outline {
+    color: var(--tw_button_success_background_color);
+    background-color: transparent;
+    border: 1px solid var(--tw_button_success_background_color);
+    &:hover{
+      color: var(--tw_button_success_color_hover);
+      border: 1px solid var(--tw_button_success_color_hover);
+    }
   }
 }
 
-.default {
-  color: black !important;
-  border: 1px solid black !important;
-  padding: 5px 10px !important;
+.warning {
+  color: var(--tw_button_warning_color);
+  background-color: var(--tw_button_warning_background_color);
+  border: 1px solid var(--tw_button_warning_background_color);
+  &:hover{
+    background-color: var(--tw_button_warning_color_hover);
+    border: 1px solid var(--tw_button_warning_color_hover);
+  }
+  &.outline {
+    color: var(--tw_button_warning_background_color);
+    background-color: transparent;
+    border: 1px solid var(--tw_button_warning_background_color);
+    &:hover{
+      color: var(--tw_button_warning_color_hover);
+      border: 1px solid var(--tw_button_warning_color_hover);
+    }
+  }
 }
 
 .error {
-  height: 26px;
-  color: white;
-  border: 1px solid crimson;
-  background-color: crimson;
-
-  &:hover {
-    border-color: lighten(crimson, 20%);
-    background-color: lighten(crimson, 20%);
+  color: var(--tw_button_error_color);
+  background-color: var(--tw_button_error_background_color);
+  border: 1px solid var(--tw_button_error_background_color);
+  &:hover{
+    background-color: var(--tw_button_error_color_hover);
+    border: 1px solid var(--tw_button_error_color_hover);
   }
-}
-
-.warn {
-  height: 26px;
-  color: white;
-  border: 1px solid orange;
-  background-color: orange;
-
-  &:hover {
-    border-color: lighten(orange, 25%);
-    background-color: lighten(orange, 15%);
-    color: lighten(orange, 25%);
+  &.outline {
+    color: var(--tw_button_error_background_color);
+    background-color: transparent;
+    border: 1px solid var(--tw_button_error_background_color);
+    &:hover{
+      color: var(--tw_button_error_color_hover);
+      border: 1px solid var(--tw_button_error_color_hover);
+    }
   }
 }
