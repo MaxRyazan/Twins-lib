@@ -22,23 +22,43 @@ html {
   --tw_button_disabled_color: white;
   --tw_button_disabled_border: none;
 }
+.tw_button_slot{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
 
 .tw_button{
+  position: relative;
   border: 1px solid black;
   cursor: pointer;
   padding: 0 4px;
   height: var(--tw_button_height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &.outline {
     background-color: var(--tw_button_outline_background_color);
   }
   &.rounded {
     border-radius: var(--tw_button_rounded_radius);
+    & img {
+      border-radius: var(--tw_button_rounded_radius);
+    }
   }
   &.round {
     width: var(--tw_button_round_size);
     height: var(--tw_button_round_size);
     border-radius: 50%;
     padding: 2px;
+    & img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
   }
   &:active{
     box-shadow: 0 0 2px 1px rgba(0,0,0,0.35);
@@ -47,7 +67,7 @@ html {
 
 
 .disabled {
-  background-color: var(--tw_button_disabled_bgc) !important;
+  background-color: var(--tw_button_disabled_background_color) !important;
   pointer-events: none !important;
   color: var(--tw_button_disabled_color) !important;
   border: var(--tw_button_disabled_border) !important;

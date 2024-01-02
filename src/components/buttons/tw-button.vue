@@ -18,7 +18,9 @@
                 rounded,
                 round,
             }">
-        <slot/>
+        <span class="tw_button_slot">
+            <slot/>
+        </span>
     </button>
 </template>
 
