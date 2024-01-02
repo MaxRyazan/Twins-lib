@@ -67,8 +67,14 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+    let initialColor = props.bgc ?? document.body.style.getPropertyValue('--tw_button_default_background_color')
     if(props.hover){
-        tw_lib_Button.value.replaceWith(tw_lib_Button.value.cloneNode(true));
+        tw_lib_Button.value.removeEventListener('mouseover', () => {
+            tw_lib_Button.value.style.backgroundColor = props.hover
+        })
+        tw_lib_Button.value.removeEventListener('mouseout', () => {
+            tw_lib_Button.value.style.backgroundColor = initialColor
+        })
     }
 })
 
