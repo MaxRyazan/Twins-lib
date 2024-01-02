@@ -1,11 +1,10 @@
 html {
-  --tw_button_width: auto;
-  --tw_button_round_width: 30px;
-  --tw_button_round_height: 30px;
+  --tw_button_width: 75px;
+  --tw_button_round_size: 30px;
   --tw_button_rounded_border_radius: 12px;
 
   --tw_button_height: 28px;
-  --tw_button_bgc: white;
+  --tw_button_bgc: rgb(240, 240, 240);
   --tw_button_border: 1px solid black;
   --tw_button_padding: 4px;
   --tw_button_freespace_between: 10px;
@@ -53,11 +52,11 @@ html {
   cursor: pointer;
   gap: var(--tw_button_freespace_between);
   &:active {
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.55);
   }
-  &:hover{
-    background-color: var(--tw_button_bgc_hover);
-  }
+  //&:hover{
+  //  background-color: var(--tw_button_bgc_hover);
+  //}
 }
 
 .tw_button_slot{
@@ -67,13 +66,17 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   & img {
     position: absolute;
     left: 0;
     top: 0;
     right: 0;
     bottom: 0;
-    border-radius: 50%;
   }
 }
 .tw_round_img{
@@ -85,7 +88,7 @@ html {
 }
 .default_hover:before {
   content: "";
-  background: linear-gradient(90deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .8));
+  background: linear-gradient(90deg, rgba(255, 255, 255, .2), lightblue);
   height: 100%;
   width: 100%;
   position: absolute;
@@ -98,7 +101,7 @@ html {
 }
 .default_hover:hover:before {
   left: calc(100% + 30px);
-  transition: .75s ease-in-out;
+  transition: .55s ease-in-out;
 }
 
 .disabled {
@@ -115,8 +118,8 @@ html {
 
 .round{
   border-radius: 50%;
-  width: var(--tw_button_round_width);
-  height: var(--tw_button_round_height);
+  width: var(--tw_button_round_size);
+  height: var(--tw_button_round_size);
   padding: 2px;
 }
 
@@ -125,29 +128,44 @@ html {
 }
 
 .success {
+  color: white;
   border: 1px solid var(--tw_button_success_color);
-  color: var(--tw_button_success_text_color);
   background-color: var(--tw_button_success_color);
   &:hover {
     border-color: var(--tw_button_success_bgc_hover_color);
     background-color: var(--tw_button_success_bgc_hover_color);
     color: var(--tw_button_success_hover_color);
   }
+  &.outline{
+    color: var(--tw_button_success_text_color);
+    &:hover {
+      border-color: var(--tw_button_success_bgc_hover_color);
+      background-color: var(--tw_button_success_bgc_hover_color);
+      color: var(--tw_button_success_hover_color);
+    }
+  }
 }
 
 .error {
-  color: var(--tw_button_error_text_color);
+  color: white;
   border: 1px solid var(--tw_button_error_color);
   background-color: var(--tw_button_error_color);
   &:hover {
     border-color: var(--tw_button_error_bgc_hover_color);
     background-color: var(--tw_button_error_bgc_hover_color);
-    color: var(--tw_button_error_hover_color);
+  }
+  &.outline{
+    color: var(--tw_button_error_text_color);
+    &:hover {
+      border-color: var(--tw_button_error_bgc_hover_color);
+      background-color: var(--tw_button_error_bgc_hover_color);
+      color: var(--tw_button_error_hover_color);
+    }
   }
 }
 
 .warn {
-  color: var(--tw_button_warn_text_color);
+  color: white;
   border: 1px solid var(--tw_button_warn_color);
   background-color: var(--tw_button_warn_color);
   &:hover {
@@ -155,21 +173,12 @@ html {
     background-color: var(--tw_button_warn_bgc_hover_color);
     color: var(--tw_button_warn_hover_color);
   }
-}
-
-.default {
-  color: black !important;
-  border: 1px solid black !important;
-  padding: 5px 10px !important;
-  &:hover{
-    background-color: rgb(230, 230, 230);
-  }
-  & img {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
+  &.outline{
+    color: var(--tw_button_warn_text_color);
+    &:hover {
+      border-color: var(--tw_button_warn_bgc_hover_color);
+      background-color: var(--tw_button_warn_bgc_hover_color);
+      color: var(--tw_button_warn_hover_color);
+    }
   }
 }
