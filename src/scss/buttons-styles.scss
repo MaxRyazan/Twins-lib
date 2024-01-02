@@ -16,6 +16,7 @@ html {
   --tw_button_error_color_hover: #ff0000;
 
   --tw_button_default_background_color: rgb(240, 240, 240);
+  --tw_button_outline_background_color: transparent;
 
   --tw_button_disabled_background_color: #6d6d6d;
   --tw_button_disabled_color: white;
@@ -28,7 +29,7 @@ html {
   padding: 0 4px;
   height: var(--tw_button_height);
   &.outline {
-    background-color: transparent;
+    background-color: var(--tw_button_outline_background_color);
   }
   &.rounded {
     border-radius: var(--tw_button_rounded_radius);
