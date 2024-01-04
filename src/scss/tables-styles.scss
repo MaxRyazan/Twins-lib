@@ -1,10 +1,5 @@
-$primeYellow: rgb(212, 190, 50);
-$primeGreen:  #66cc03;
 $tableBGOdd: rgba(237, 255, 253, .56);
-$hoverNoTransparent: rgb(95, 131, 199);
-$tableBorderColor: #73d2e5;
 $tableTRHoverColor: rgba(43,211,237,0.2);
-$primeHeaderBackground: #3b4550;
 
 .global-table{
   border-spacing: 0;
@@ -28,7 +23,7 @@ $primeHeaderBackground: #3b4550;
     background-color: $tableBGOdd !important;
   }
   & tbody tr:hover{
-    background-color: #ecffe8 !important;
+    background-color: rgb(240, 240, 240) !important;
   }
   &.disabled {
     &  tbody tr:hover{

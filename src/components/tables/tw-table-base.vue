@@ -2,21 +2,23 @@
     <table :style="{
                 width: props.width ?? '200px',
                 height: props.height ?? 'auto',
-                backgroundColor: props.table_bgc ?? 'white',
+                backgroundColor: props.table_bgc,
                 border: table_border ?? '1px solid black'
             }"
            class="global-table" :class="{td_align_left, td_align_right}">
         <thead>
         <tr>
             <th :style="{
-                    backgroundColor: props.header_bgc ?? '#ecffe8',
-                    color: props.header_font_color ?? '#66cc03',
+                    backgroundColor: props.header_bgc ?? 'rgb(220, 220, 220)',
+                    color: props.header_font_color ?? 'black',
                     fontSize: header_font_size ?? '18px',
                     fontFamily: props.header_font_family ?? '',
                     padding: props.header_padding ?? '5px 10px',
                     border: table_border ?? '1px solid black',
-                    borderBottom: table_border ?? '2px solid black'
-            }" v-for="(columnName, idx) in header" :key="idx">{{ columnName }}</th>
+                    borderBottom: header_border_bottom ?? (table_border ?? '2px solid black')
+                }"
+                v-for="(columnName, idx) in header" :key="idx"
+            >{{ columnName }}</th>
         </tr>
         </thead>
         <tbody>
@@ -163,6 +165,10 @@ const props = defineProps({
     header_font_family: {
         type: String,
         required: false
+    },
+    header_border_bottom: {
+        type: String,
+        required: false
     }
 })
 
@@ -207,7 +213,7 @@ function normalizeValue(field: any) {
 }
 
 function watchRowBgc(rowIndex: number){
-    if(!props.row_custom_settings) return 'white'
+    if(!props.row_custom_settings) return props.table_bgc
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
         if(object) {
@@ -217,13 +223,10 @@ function watchRowBgc(rowIndex: number){
 }
 
 function watchRowTextColor(rowIndex: number){
-    console.log(props.row_custom_settings)
     if(!props.row_custom_settings) return props.cell_font_color ?? 'black'
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
-        console.log(object)
         if(object) {
-        console.log(object.textColor)
             return object.textColor
         }
     }

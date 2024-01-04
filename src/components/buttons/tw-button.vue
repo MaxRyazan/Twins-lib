@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const props = defineProps<{
     width?: string,
@@ -61,18 +61,6 @@ onMounted(() => {
             tw_lib_Button.value.style.backgroundColor = props.hover
         })
         tw_lib_Button.value.addEventListener('mouseout', () => {
-            tw_lib_Button.value.style.backgroundColor = initialColor
-        })
-    }
-})
-
-onUnmounted(() => {
-    let initialColor = props.bgc ?? document.body.style.getPropertyValue('--tw_button_default_background_color')
-    if(props.hover){
-        tw_lib_Button.value.removeEventListener('mouseover', () => {
-            tw_lib_Button.value.style.backgroundColor = props.hover
-        })
-        tw_lib_Button.value.removeEventListener('mouseout', () => {
             tw_lib_Button.value.style.backgroundColor = initialColor
         })
     }
