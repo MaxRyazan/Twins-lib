@@ -2,7 +2,7 @@
     <table :style="{
                 width: props.width ?? '200px',
                 height: props.height ?? 'auto',
-                backgroundColor: props.table_bgc,
+                // backgroundColor: props.table_bgc,
                 border: table_border ?? '1px solid black'
             }"
            class="global-table" :class="{td_align_left, td_align_right}">
@@ -38,14 +38,15 @@
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
-            <td :style="{
-                padding: props.cell_padding ?? '5px 10px',
-                fontSize: props.cell_font_size ?? watchRowFontSize(index),
-                color: watchRowTextColor(index),
-                minWidth: cell_min_width ?? '50px',
-                border: table_border ?? '1px solid black',
-                fontFamily: watchRowFontFamily(index),
-            }"
+            <td :colspan="props.sub_titles.includes(index) ? header?.length : 1"
+                :style="{
+                    padding: props.cell_padding ?? '5px 10px',
+                    fontSize: props.cell_font_size ?? watchRowFontSize(index),
+                    color: watchRowTextColor(index),
+                    minWidth: cell_min_width ?? '50px',
+                    border: table_border ?? '1px solid black',
+                    fontFamily: watchRowFontFamily(index),
+                }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
                     <div v-if="props.elements_with_tabulation">
@@ -169,6 +170,10 @@ const props = defineProps({
     header_border_bottom: {
         type: String,
         required: false
+    },
+    sub_titles:{
+        type: Array<number>,
+        required: false
     }
 })
 
@@ -218,7 +223,7 @@ function watchRowBgc(rowIndex: number){
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
         if(object) {
             return object.bgc
-        }
+        } else return props.table_bgc
     }
 }
 
