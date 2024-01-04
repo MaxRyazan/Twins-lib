@@ -254,16 +254,21 @@ function watchRowFontFamily(rowIndex: number){
 }
 
 function isSubTitle(index: number){
-    const exist = props.row_custom_settings.find(el => el.idx === index)
-    if(exist && exist.isSubTitle) {
-        return exist.isSubTitle
+    if(props.row_custom_settings) {
+        const exist = props.row_custom_settings.find(el => el.idx === index)
+        if(exist && exist.isSubTitle) {
+            return exist.isSubTitle
+        }
     }
 }
 
 function textAlign(index:number){
-    const exist:RowCustomSettings = props.row_custom_settings.find(el => el.idx === index)
-    if(exist && exist.textAlign) {
-        return exist.textAlign
-    } else return false
+    if(props.row_custom_settings) {
+        const exist:RowCustomSettings = props.row_custom_settings.find(el => el.idx === index)
+        if(exist && exist.textAlign) {
+            return exist.textAlign
+        } else return false
+    }
+    return false
 }
 </script>
