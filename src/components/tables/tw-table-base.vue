@@ -230,9 +230,9 @@ function watchRowTextColor(rowIndex: number){
     if(!props.row_custom_settings) return props.cell_font_color ?? 'black'
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
-        if(object) {
+        if(object && object.textColor) {
             return object.textColor
-        }
+        } else return props.cell_font_color ?? 'black'
     }
 }
 function watchRowFontSize(rowIndex: number){
