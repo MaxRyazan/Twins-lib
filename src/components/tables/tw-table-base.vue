@@ -174,10 +174,6 @@ const props = defineProps({
         type: String,
         required: false
     },
-    sub_titles:{
-        type: Array<number>,
-        required: false
-    }
 })
 
 const selectedElement = ref('')
@@ -224,7 +220,7 @@ function watchRowBgc(rowIndex: number){
     if(!props.row_custom_settings) return props.table_bgc
     else {
         const object = props.row_custom_settings.find(obj => obj.idx === rowIndex)
-        if(object) {
+        if(object && object.bgc) {
             return object.bgc
         } else return props.table_bgc
     }
