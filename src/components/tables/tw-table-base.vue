@@ -38,7 +38,7 @@
             @click="emitAction(bodyElement, $event)"
             @dblclick="emitDblClick(bodyElement, $event)"
             @contextmenu.prevent="emitRightClick(bodyElement, $event)">
-            <td :colspan="props.sub_titles.includes(index) ? header?.length : 1"
+            <td :colspan="isSubTitle(index) ? header?.length : 1"
                 :style="{
                     padding: props.cell_padding ?? '5px 10px',
                     fontSize: props.cell_font_size ?? watchRowFontSize(index),
@@ -46,6 +46,7 @@
                     minWidth: cell_min_width ?? '50px',
                     border: table_border ?? '1px solid black',
                     fontFamily: watchRowFontFamily(index),
+                    textAlign: isSubTitle(index) ? (textAlign(index) ?? td_align_left ? 'left' : (td_align_right ? 'right' : 'center')) : (td_align_left ? 'left' : (td_align_right ? 'right' : 'center'))
                 }"
                 v-for="(value, bodyElIndex) in Object.values(bodyElement)" :key="bodyElIndex">
                 <div style="display: inline-flex">
@@ -67,10 +68,12 @@ import {computed, ref} from "vue";
 
 interface RowCustomSettings {
     idx: number
+    isSubTitle?: boolean
     textColor?: string
     fontSize?: string
     fontFamily?: string
     bgc?: string
+    textAlign?: string
 }
 
 const emits = defineEmits(['push', 'dabClick', 'rightClick'])
@@ -252,5 +255,19 @@ function watchRowFontFamily(rowIndex: number){
             return object.fontFamily
         }
     }
+}
+
+function isSubTitle(index: number){
+    const exist = props.row_custom_settings.find(el => el.idx === index)
+    if(exist && exist.isSubTitle) {
+        return exist.isSubTitle
+    }
+}
+
+function textAlign(index:number){
+    const exist:RowCustomSettings = props.row_custom_settings.find(el => el.idx === index)
+    if(exist && exist.textAlign) {
+        return exist.textAlign
+    } else return false
 }
 </script>
