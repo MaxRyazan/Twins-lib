@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {onMounted} from "vue";
 
 const props = defineProps<{
     modelValue: any,
@@ -16,27 +15,27 @@ const props = defineProps<{
     max?: number
     step?: number
     max_length?: number
-    vertical?: boolean
-    text_align?: string
-    border_radius?: string
+
+    border?: string
+    bgc?: string
+    caret_color?: string
+    input_text_color?: string
+    border_bottom?: string
     padding?: string
     placeholder?: string
+    text_center?: boolean
+    border_radius?: string
     disabled?: boolean
+    readonly?: boolean
+    vertical?: boolean
     prefix?: string
     postfix?: string
-
-    bgc?: string
-    border?: string
-    border_bottom_color?: string
-    caret_color?: string
-    input_color?: string
-
     prefix_color?:string
     postfix_color?:string
-    prefix_fz?: string
-    postfix_fz?: string
-    prefix_ff?: string
-    postfix_ff?: string
+    prefix_font_size?: string
+    prefix_font_family?: string
+    postfix_font_size?: string
+    postfix_font_family?: string
 
 }>()
 const emits = defineEmits<{
@@ -50,79 +49,44 @@ function handleAction($event: any){
     }
 }
 
-onMounted(() => {
-    if (props.input_width) {
-        document.body.style.setProperty('--tw_input_width', props.input_width)
-    }
-    if (props.input_font_family) {
-        document.body.style.setProperty('--tw_input_font_family', props.input_font_family)
-    }
-    if (props.input_font_size) {
-        document.body.style.setProperty('--tw_input_font_size', props.input_font_size)
-    }
-    if (props.prefix_color) {
-        document.body.style.setProperty('--tw_input_prefix_color', props.prefix_color)
-    }
-    if (props.prefix_fz) {
-        document.body.style.setProperty('--tw_input_prefix_font_size', props.prefix_fz)
-    }
-    if (props.prefix_ff) {
-        document.body.style.setProperty('--tw_input_prefix_font_family', props.prefix_ff)
-    }
-    if (props.postfix_color) {
-        document.body.style.setProperty('--tw_input_postfix_color', props.postfix_color)
-    }
-    if (props.postfix_fz) {
-        document.body.style.setProperty('--tw_input_postfix_font_size', props.postfix_fz)
-    }
-    if (props.postfix_ff) {
-        document.body.style.setProperty('--tw_input_postfix_font_family', props.postfix_ff)
-    }
-    if (props.height) {
-        document.body.style.setProperty('--tw_input_height', props.height)
-    }
-    if (props.border) {
-        document.body.style.setProperty('--tw_input_border', props.border)
-    }
-    if (props.border_radius) {
-        document.body.style.setProperty('--tw_input_border_radius', props.border_radius)
-    }
-    if (props.padding) {
-        document.body.style.setProperty('--tw_input_padding', props.padding)
-    }
-    if (props.text_align) {
-        document.body.style.setProperty('--tw_input_text_align', props.text_align)
-    }
-    if (props.bgc) {
-        document.body.style.setProperty('--tw_input_bgc', props.bgc)
-    }
-    if (props.border_bottom_color) {
-        document.body.style.setProperty('--tw_border_bottom_color', props.border_bottom_color)
-    }
-    if (props.caret_color) {
-        document.body.style.setProperty('--tw_input_caret_color', props.caret_color)
-    }
-    if (props.input_color) {
-        document.body.style.setProperty('--tw_input_color', props.input_color)
-    }
-    if (props.width) {
-        document.body.style.setProperty('--tw_input_component_width', props.width)
-    }
-    if (props.height) {
-        document.body.style.setProperty('--tw_input_component_height', props.height)
-    }
-})
 </script>
 
 <template>
-    <div class="tw_input_component">
-        <div class="tw_input_wrap" :class="{'tw_input_vertical':vertical}">
-            <span class="tw_input_prefix" v-if="prefix">{{ prefix }}</span>
-            <div class="tw_input_wrapper" :class="{'tw_input_w100': !prefix}">
+    <div :style="{
+            height: height,
+            width: width
+         }"
+         class="tw_input_component">
+        <div class="tw_input_wrap"
+             :style="{
+                height: height,
+             }"
+             :class="{'tw_input_vertical':vertical}">
+            <span v-if="prefix"
+                  :style="{
+                    color: prefix_color,
+                    fontSize: prefix_font_size,
+                    fontFamily: prefix_font_family
+                  }"
+            >{{ prefix }}</span>
+            <div class="tw_input_wrapper">
                 <input  :value="modelValue"
                         @input="handleAction"
                         class="tw_input"
-                        :class="{'tw_input_disabled': disabled}"
+                        :class="{'tw_input_disabled': disabled, 'tw_input_readonly': props.readonly}"
+                        :style="{
+                            width: input_width,
+                            fontSize: input_font_size,
+                            fontFamily: input_font_family,
+                            border: border,
+                            borderBottom: border_bottom ?? (border ?? '1px solid rgb(240, 240, 240)'),
+                            borderRadius: border_radius,
+                            backgroundColor: bgc,
+                            caretColor: caret_color,
+                            color: input_text_color,
+                            padding: padding,
+                            textAlign: text_center ? 'center' : 'start',
+                        }"
                         :type="type ?? 'text'"
                         :min="min"
                         :max="max"
@@ -130,8 +94,15 @@ onMounted(() => {
                         :maxlength="max_length"
                         :placeholder="placeholder"
                         :disabled="disabled"
+                        :readonly="props.readonly"
                 />
-                <span  class="tw_input_postfix" v-if="postfix">{{ postfix }}</span>
+                <span v-if="postfix"
+                      :style="{
+                        color: postfix_color,
+                        fontSize: postfix_font_size,
+                        fontFamily: postfix_font_family
+                      }"
+                >{{ postfix }}</span>
             </div>
         </div>
         <span>

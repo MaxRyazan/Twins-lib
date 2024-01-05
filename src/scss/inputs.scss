@@ -1,11 +1,8 @@
 html {
-  --tw_input_component_width: 220px;
+  --tw_input_component_width: auto;
   --tw_input_component_height: 28px;
 
   --tw_input_width: 170px;
-  --tw_input_prefix_color: black;
-  --tw_input_prefix_font_size: 16px;
-  --tw_input_prefix_font_family: inherit;
 
   --tw_input_postfix_color: black;
   --tw_input_postfix_font_size: 16px;
@@ -13,13 +10,11 @@ html {
 
   --tw_input_font_family: inherit;
   --tw_input_font_size: 16px;
-  --tw_input_height: 28px;
-  --tw_input_border: 1px solid black;
+  --tw_input_border: 1px solid rgb(240, 240, 240);
   --tw_input_border_radius: 0px;
   --tw_input_padding: 2px 4px;
   --tw_input_text_align: start;
   --tw_input_bgc: white;
-  --tw_border_bottom_color: black;
   --tw_input_caret_color: black;
   --tw_input_color: black;
 
@@ -28,6 +23,7 @@ html {
 
   --tw_input_disabled_color: lightgray;
   --tw_input_disabled_cursor: not-allowed;
+  --tw_input_readonly_cursor: default;
 }
 .tw_input_wrap {
   width: 100%;
@@ -35,11 +31,7 @@ html {
   justify-content: space-between;
   align-items: center;
 }
-.tw_input_prefix{
-  color: var(--tw_input_prefix_color);
-  font-size: var(--tw_input_prefix_font_size);
-  font-family:  var(--tw_input_prefix_font_family);
-}
+
 .tw_input_postfix{
   color: var(--tw_input_postfix_color);
   font-size: var(--tw_input_postfix_font_size);
@@ -54,24 +46,21 @@ html {
   display: flex;
   align-items: center;
   gap:10px;
+  height: 100%;
 }
 .tw_input{
   outline: none;
   font-size: var(--tw_input_font_size);
   font-family: var(--tw_input_font_family);
   width: var(--tw_input_width);
-  height: var(--tw_input_height);
+  height: 100%;
   border: var(--tw_input_border);
   border-radius: var(--tw_input_border_radius);
   padding: var(--tw_input_padding);
   text-align: var(--tw_input_text_align);
   background-color: var(--tw_input_bgc);
-  border-bottom-color: var(--tw_border_bottom_color);
   caret-color: var(--tw_input_caret_color);
   color: var(--tw_input_color);
-}
-.tw_input_w100 {
-  width: 100%;
 }
 .tw_input_validator {
   margin-top: var(--tw_input_validator_margin_top);
@@ -82,8 +71,9 @@ html {
   height: var(--tw_input_component_height);
 }
 .tw_input_disabled{
-  border: 1px solid var(--tw_input_disabled_color);
-  caret-color: var(--tw_input_disabled_color);
-  color: var(--tw_input_disabled_color);
-  cursor: var(--tw_input_disabled_cursor);
+  border: 1px solid var(--tw_input_disabled_color) !important;
+  cursor: var(--tw_input_disabled_cursor) !important;
+}
+.tw_input_readonly{
+  cursor: var(--tw_input_readonly_cursor) !important;
 }
