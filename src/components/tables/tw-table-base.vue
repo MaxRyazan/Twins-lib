@@ -98,6 +98,10 @@ const props = defineProps({
         type: Array,
         required: false
     },
+    cell_padding: {
+        type: String,
+        required: false
+    },
     red_when_sub_zero: {
         type: Boolean,
         required: false
@@ -110,6 +114,9 @@ const props = defineProps({
         type: Number,
         required: false
     },
+
+
+
     width: {
         type: String,
         required: false
@@ -127,10 +134,6 @@ const props = defineProps({
         required: false
     },
     header_font_size: {
-        type: String,
-        required: false
-    },
-    cell_padding: {
         type: String,
         required: false
     },

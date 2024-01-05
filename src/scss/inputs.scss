@@ -4,10 +4,6 @@ html {
 
   --tw_input_width: 170px;
 
-  --tw_input_postfix_color: black;
-  --tw_input_postfix_font_size: 16px;
-  --tw_input_postfix_font_family: inherit;
-
   --tw_input_font_family: inherit;
   --tw_input_font_size: 16px;
   --tw_input_border: 1px solid rgb(240, 240, 240);
@@ -30,12 +26,6 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.tw_input_postfix{
-  color: var(--tw_input_postfix_color);
-  font-size: var(--tw_input_postfix_font_size);
-  font-family:  var(--tw_input_postfix_font_family);
 }
 .tw_input_vertical {
   flex-direction: column;
