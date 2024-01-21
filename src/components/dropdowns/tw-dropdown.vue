@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {ref, watch} from "vue";
 
 type T = number | string
+const dropdownItem = ref()
 
-
-defineProps<{
+const props = defineProps<{
     modelValue: T
     variants: Array<T>
     width?: string
@@ -13,6 +13,11 @@ defineProps<{
     color?: string
     border?: string
     text_center?: boolean
+    bgc?: string
+    hover_color?: string
+    font_size?: string
+    font_family?: string
+    font_weight?: string
 
 }>()
 const emit = defineEmits<{
@@ -25,6 +30,19 @@ function chooseVariant(variant: any) {
     isOpen.value = false
 }
 
+watch(dropdownItem, () => {
+    if(props.hover_color && dropdownItem.value) {
+        dropdownItem.value.forEach((item: HTMLElement) => item.addEventListener('mouseover', () => {
+            item.style.backgroundColor = props.hover_color
+        }))
+        dropdownItem.value.forEach((item:HTMLElement) => item.addEventListener('mouseout', () => {
+            item.style.backgroundColor = props.bgc ?? ''
+        }))
+    }
+})
+watch(isOpen, (value) => {
+    if(!value) dropdownItem.value = null
+})
 
 </script>
 
@@ -39,10 +57,15 @@ function chooseVariant(variant: any) {
                 paddingLeft: padding,
                 border: border,
                 borderBottomWidth : isOpen ? '0px' : '',
+                backgroundColor: bgc
              }">
             <input :style="{
                       color: color,
-                      textAlign: text_center ? 'center' : 'start'
+                      textAlign: text_center ? 'center' : 'start',
+                      backgroundColor: bgc,
+                      fontSize: font_size,
+                      fontFamily: font_family,
+                      fontWeight: font_weight
                     }"
                     class="tw_dropdown__value"
                     :value="modelValue" readonly
@@ -62,13 +85,22 @@ function chooseVariant(variant: any) {
                  borderBottom: border,
              }"
         >
-            <ul class="tw_dropdown__list" v-for="variant in variants" :key="variant">
+            <ul class="tw_dropdown__list"
+                v-for="variant in variants" :key="variant"
+                :style="{
+                    backgroundColor: bgc
+                }"
+            >
                 <li @click="chooseVariant(variant)"
+                    ref="dropdownItem"
                     :style="{
                         height: items_height,
                         padding: padding,
                         color: color,
-                        justifyContent: text_center ? 'center' : 'start'
+                        justifyContent: text_center ? 'center' : 'start',
+                        fontSize: font_size,
+                        fontFamily: font_family,
+                        fontWeight: font_weight
                     }">
                     <span>{{ variant }}</span>
                 </li>

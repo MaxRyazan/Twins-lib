@@ -13,6 +13,7 @@ html {
   background-color: var(--tw_dropdown_bgc);
 
   &__title {
+    height: 100%;
     cursor: pointer;
     position: relative;
     border: var(--tw_dropdown_border);
