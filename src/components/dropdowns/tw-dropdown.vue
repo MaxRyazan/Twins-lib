@@ -21,11 +21,11 @@ const props = defineProps<{
 
 }>()
 const emit = defineEmits<{
-    (e: 'update:modelValue', param: any)
+    (e: 'update:modelValue', param: T)
 }>()
 const isOpen = ref(false)
 
-function chooseVariant(variant: any) {
+function chooseVariant(variant: T) {
     emit('update:modelValue', variant)
     isOpen.value = false
 }
@@ -41,7 +41,15 @@ watch(dropdownItem, () => {
     }
 })
 watch(isOpen, (value) => {
-    if(!value) dropdownItem.value = null
+    if(!value) {
+        dropdownItem.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
+            item.style.backgroundColor = props.hover_color
+        }))
+        dropdownItem.value.forEach((item:HTMLElement) => item.removeEventListener('mouseout', () => {
+            item.style.backgroundColor = props.bgc ?? ''
+        }))
+        dropdownItem.value = null
+    }
 })
 
 </script>
