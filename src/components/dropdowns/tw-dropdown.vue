@@ -57,6 +57,7 @@ watch(isOpen, (value) => {
 <template>
     <div class="tw_dropdown" :style="{width: width}">
         <div class="tw_dropdown__title"
+             :class="{bb_transparent: isOpen}"
              @click="isOpen = !isOpen"
              :style="{
                 height: items_height,
@@ -64,7 +65,6 @@ watch(isOpen, (value) => {
                 paddingBottom: padding,
                 paddingLeft: padding,
                 border: border,
-                borderBottomWidth : isOpen ? '0px' : '',
                 backgroundColor: bgc
              }">
             <input :style="{
