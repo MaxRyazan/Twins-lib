@@ -18,6 +18,7 @@ const props = defineProps<{
     font_size?: string
     font_family?: string
     font_weight?: string
+    arrow_color?: string
 
 }>()
 const emit = defineEmits<{
@@ -80,9 +81,15 @@ watch(isOpen, (value) => {
                     type="text">
             <div class="tw_icon">
                 <div class="tw_icon__left"
-                     :style="{ transform: isOpen ? 'rotate(60deg)' : 'rotate(-60deg)'}"></div>
+                     :style="{
+                        transform: isOpen ? 'rotate(60deg)' : 'rotate(-60deg)',
+                        borderLeftColor: arrow_color
+                     }"></div>
                 <div class="tw_icon__right"
-                     :style="{transform: isOpen ? 'rotate(-60deg)' : 'rotate(60deg)'}"></div>
+                     :style="{
+                        transform: isOpen ? 'rotate(-60deg)' : 'rotate(60deg)',
+                        borderRightColor: arrow_color
+                     }"></div>
             </div>
         </div>
         <div class="tw_dropdown__variants"

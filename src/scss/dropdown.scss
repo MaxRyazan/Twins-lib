@@ -6,6 +6,7 @@ html {
   --tw_dropdown_hover_color: rgba(18,18,18, .1);
   --tw_dropdown_items_padding: 5px;
   --tw_dropdown_text_align: start;
+  --tw_dropdown_arrow_color: #121212;
 }
 
 .tw_dropdown {
@@ -77,7 +78,7 @@ html {
     left: 5px;
     width: 1px;
     height: calc(100% - 6px);
-    border-left: 1px solid var(--tw_dropdown_color);
+    border-left: 1px solid var(--tw_dropdown_arrow_color);
     transition: .3s;
   }
 
@@ -86,7 +87,7 @@ html {
     right: 5px;
     width: 1px;
     height: calc(100% - 6px);
-    border-right: 1px solid var(--tw_dropdown_color);
+    border-right: 1px solid var(--tw_dropdown_arrow_color);
     transition: .3s;
   }
 }
