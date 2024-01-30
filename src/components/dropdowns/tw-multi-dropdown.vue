@@ -37,7 +37,10 @@ function chooseVariant(variant: T) {
     emit('update:modelValue', variant)
     isOpen.value = false
 }
-
+function changeVisible(){
+    isOpen.value = !isOpen.value
+    if(!isOpen.value) currentSelectedItem.value = null
+}
 watch(dropdownMultiItem, () => {
     if(props.hover_color && dropdownMultiItem.value) {
         dropdownMultiItem.value.forEach((item: HTMLElement) => item.addEventListener('mouseover', () => {
@@ -63,10 +66,10 @@ watch(isOpen, (value) => {
 </script>
 
 <template>
-    <div class="tw_dropdown" :style="{width: width}">
-        <div class="tw_dropdown__title"
+    <div class="tw_dropdown_multi" :style="{width: width}">
+        <div class="tw_dropdown_multi__title"
              :class="{bb_transparent: isOpen}"
-             @click="isOpen = !isOpen"
+             @click="changeVisible"
              :style="{
                 height: items_height,
                 paddingTop: padding,
@@ -83,7 +86,7 @@ watch(isOpen, (value) => {
                       fontFamily: font_family,
                       fontWeight: font_weight
                     }"
-                   class="tw_dropdown__value"
+                   class="tw_dropdown_multi__value"
                    :value="modelValue" readonly
                    type="text">
             <div class="tw_icon">
@@ -99,7 +102,7 @@ watch(isOpen, (value) => {
                      }"></div>
             </div>
         </div>
-        <div class="tw_dropdown__variants"
+        <div class="tw_dropdown_multi__variants"
              v-if="isOpen"
              :style="{
                  borderLeft: border,
@@ -107,20 +110,21 @@ watch(isOpen, (value) => {
                  borderBottom: border,
              }"
         >
-            <div class="tw_dropdown__list"
-                v-for="variant in variants" :key="Object.keys(variant)[0]"
+            <div v-for="variant in variants" :key="Object.keys(variant)[0]"
                 :style="{
                     backgroundColor: bgc
                 }"
             >
-                <div v-for="obj in Object.values(variant)" :key="Object.keys(variant)[0]" style="color: #121212; display: flex;">
-                    <div style="width: 100%;height: 100%; cursor:pointer;" @click="currentSelectedItem = Object.keys(variant)[0]">
+                <div v-for="obj in Object.values(variant)" :key="Object.keys(variant)[0]" class="tw_dropdown_multi__first-title">
+                    <div style="width: 100%;height: 100%; cursor:pointer;"
+                         @mouseover="currentSelectedItem = Object.keys(variant)[0]">
                         <span ref="dropdownMultiItem">
                             {{Object.keys(variant)[0]}}
                         </span>
                     </div>
-                    <div style="position: absolute; top: 0; right:-100px" v-if="currentSelectedItem === Object.keys(variant)[0]">
-                        <ul v-for="item in obj" :key="item"
+                    <div class="tw_dropdown_multi__list"
+                         v-if="currentSelectedItem === Object.keys(variant)[0]">
+                        <ul class="tw_dropdown_multi_last_title"
                                 :style="{
                                 height: items_height,
                                 padding: padding,
@@ -131,8 +135,8 @@ watch(isOpen, (value) => {
                                 fontWeight: font_weight
                             }">
                             <li ref="dropdownMultiItem"
-                                @click="chooseVariant(item)"
-                                style="color: white">{{item}}</li>
+                                v-for="item in obj" :key="item"
+                                @click="chooseVariant(item)">{{item}}</li>
                         </ul>
                     </div>
                 </div>
