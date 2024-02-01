@@ -65,11 +65,22 @@ html {
     padding: 0;
     width: 100%;
     position: absolute;
-    right: -100%;
     display: flex;
     align-items: start;
+    right: -100%;
   }
 }
+
+.orientation{
+  &__left{
+    left: -100%;
+  }
+}
+.arrows{
+  background-color: transparent;
+  padding: 0 !important;
+}
+
 .tw_dropdown_multi_last_title {
   margin: 0;
   width: 100%;

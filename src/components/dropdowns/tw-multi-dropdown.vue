@@ -25,6 +25,7 @@ const props = defineProps<{
     font_family?: string
     font_weight?: string
     arrow_color?: string
+    orientation_left?: boolean
 
 }>()
 const emit = defineEmits<{
@@ -69,20 +70,24 @@ watch(dropdownMultiItemLast, () => {
 })
 watch(isOpen, (value) => {
     if (!value) {
-        dropdownMultiItem.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
-            item.style.backgroundColor = props.hover_color
-        }))
-        dropdownMultiItem.value.forEach((item: HTMLElement) => item.removeEventListener('mouseout', () => {
-            item.style.backgroundColor = props.bgc ?? ''
-        }))
-        dropdownMultiItem.value = null
-        dropdownMultiItemLast.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
-            item.style.backgroundColor = props.hover_color
-        }))
-        dropdownMultiItemLast.value.forEach((item: HTMLElement) => item.removeEventListener('mouseout', () => {
-            item.style.backgroundColor = props.bgc ?? ''
-        }))
-        dropdownMultiItemLast.value = null
+        if (dropdownMultiItem.value) {
+            dropdownMultiItem.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
+                item.style.backgroundColor = props.hover_color
+            }))
+            dropdownMultiItem.value.forEach((item: HTMLElement) => item.removeEventListener('mouseout', () => {
+                item.style.backgroundColor = props.bgc ?? ''
+            }))
+            dropdownMultiItem.value = null
+        }
+        if (dropdownMultiItemLast.value) {
+            dropdownMultiItemLast.value.forEach((item: HTMLElement) => item.removeEventListener('mouseover', () => {
+                item.style.backgroundColor = props.hover_color
+            }))
+            dropdownMultiItemLast.value.forEach((item: HTMLElement) => item.removeEventListener('mouseout', () => {
+                item.style.backgroundColor = props.bgc ?? ''
+            }))
+            dropdownMultiItemLast.value = null
+        }
     }
 })
 
@@ -136,12 +141,13 @@ watch(isOpen, (value) => {
             <div v-for="variant in variants"
                  :key="Object.keys(variant)[0]"
                  :style="{ backgroundColor: bgc }">
-                <div  class="tw_dropdown_multi__first-title"
-                      v-if="typeof variant !== 'object' && (typeof variant === 'string' || typeof variant === 'number')">
+                <div class="tw_dropdown_multi__first-title"
+                     v-if="typeof variant !== 'object' && (typeof variant === 'string' || typeof variant === 'number')">
                     <span @mouseover="currentSelectedItem = null"
-                           ref="dropdownMultiItem"
-                           style="width: 100%; height: 100%;"
-                           :style="{
+                          @click="chooseVariant(variant)"
+                          ref="dropdownMultiItem"
+                          style="width: 100%; height: 100%;"
+                          :style="{
                                color: color,
                                height: items_height,
                                padding: padding,
@@ -174,14 +180,25 @@ watch(isOpen, (value) => {
                                   }"
                             >
                                 {{ Object.keys(variant)[0] }}
+                                <span class="arrows"
+                                      v-if="orientation_left"
+                                      style="position: absolute; left: 5px; width: 6px; height: 6px; font-size: 10px; font-family: cursive;"
+                                      :style="{color: arrow_color}"
+                                > &laquo; </span>
+                                <span class="arrows"
+                                      v-else
+                                      style="position: absolute; right: 5px; width: 6px; height: 6px; font-size: 10px; font-family: cursive;"
+                                      :style="{color: arrow_color}"
+                                > &raquo; </span>
                             </span>
                         </div>
                         <div class="tw_dropdown_multi__list"
+                             :class="{'orientation__left': orientation_left}"
                              v-if="currentSelectedItem === Object.keys(variant)[0]">
                             <ul class="tw_dropdown_multi_last_title"
                                 :style="{
                                      border: border,
-                                       backgroundColor: bgc
+                                     backgroundColor: bgc
                             }">
                                 <li ref="dropdownMultiItemLast"
                                     v-for="item in obj" :key="item"
