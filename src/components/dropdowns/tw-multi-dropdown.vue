@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {Ref, ref, watch} from "vue";
 
+
+
 type T = number | string
 const dropdownMultiItem = ref()
 const dropdownMultiItemLast = ref()
@@ -10,12 +12,12 @@ interface TwDropDownMultiValues {
     [key: T]: Array<T>
 }
 
+
 const props = defineProps<{
     modelValue: T
     variants: Array<TwDropDownMultiValues>
     width?: string
     items_height?: string
-    padding?: string
     color?: string
     border?: string
     text_center?: boolean
@@ -26,7 +28,7 @@ const props = defineProps<{
     font_weight?: string
     arrow_color?: string
     orientation_left?: boolean
-
+    horizontal_padding?: string
 }>()
 const emit = defineEmits<{
     (e: 'update:modelValue', param: T)
@@ -100,9 +102,6 @@ watch(isOpen, (value) => {
              @click="changeVisible"
              :style="{
                 height: items_height,
-                paddingTop: padding,
-                paddingBottom: padding,
-                paddingLeft: padding,
                 border: border,
                 backgroundColor: bgc
              }">
@@ -112,7 +111,8 @@ watch(isOpen, (value) => {
                       backgroundColor: bgc,
                       fontSize: font_size,
                       fontFamily: font_family,
-                      fontWeight: font_weight
+                      fontWeight: font_weight,
+                      padding: `0 ${horizontal_padding}`
                     }"
                    class="tw_dropdown_multi__value"
                    :value="modelValue" readonly
@@ -150,12 +150,11 @@ watch(isOpen, (value) => {
                           :style="{
                                color: color,
                                height: items_height,
-                               padding: padding,
-                               paddingRight: '35px',
                                justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                fontSize: font_size,
                                fontFamily: font_family,
-                               fontWeight: font_weight
+                               fontWeight: font_weight,
+                               padding: `0 ${horizontal_padding}`
                            }"
                     >
                           {{ variant }}
@@ -171,12 +170,11 @@ watch(isOpen, (value) => {
                                   :style="{
                                       color: color,
                                       height: items_height,
-                                      padding: padding,
-                                      paddingRight: '35px',
                                       justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                       fontSize: font_size,
                                       fontFamily: font_family,
-                                      fontWeight: font_weight
+                                      fontWeight: font_weight,
+                                      padding: `0 ${horizontal_padding}`
                                   }"
                             >
                                 {{ Object.keys(variant)[0] }}
@@ -204,12 +202,12 @@ watch(isOpen, (value) => {
                                     v-for="item in obj" :key="item"
                                     :style="{
                                     height: items_height,
-                                    padding: padding,
                                     color: color,
                                     justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                     fontSize: font_size,
                                     fontFamily: font_family,
-                                    fontWeight: font_weight
+                                    fontWeight: font_weight,
+                                    padding: `0 ${horizontal_padding}`
                                 }"
                                     @click="chooseVariant(item)">{{ item }}
                                 </li>

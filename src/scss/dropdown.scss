@@ -73,6 +73,7 @@ html {
   transform: translateY(-50%);
   display: flex;
   align-items: center;
+  z-index: 99;
   &__left {
     position: absolute;
     left: 5px;

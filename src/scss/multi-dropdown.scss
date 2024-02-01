@@ -19,7 +19,7 @@ html {
     cursor: pointer;
     position: relative;
     border: var(--tw_dropdown_multi_border);
-    padding: var(--tw_dropdown_multi_items_padding) 35px var(--tw_dropdown_multi_items_padding) var(--tw_dropdown_multi_items_padding);
+    padding: var(--tw_dropdown_multi_items_padding);
   }
 
   &__value {
