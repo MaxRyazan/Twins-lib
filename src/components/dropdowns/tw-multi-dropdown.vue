@@ -108,7 +108,7 @@ watch(isOpen, (value) => {
              }">
             <input :style="{
                       color: color,
-                      textAlign: text_center ? 'center' : 'start',
+                      textAlign: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                       backgroundColor: bgc,
                       fontSize: font_size,
                       fontFamily: font_family,
@@ -117,7 +117,7 @@ watch(isOpen, (value) => {
                    class="tw_dropdown_multi__value"
                    :value="modelValue" readonly
                    type="text">
-            <div class="tw_icon">
+            <div :style="{left: orientation_left ? '5px' : ''}" class="tw_icon">
                 <div class="tw_icon__left"
                      :style="{
                         transform: isOpen ? 'rotate(60deg)' : 'rotate(-60deg)',
@@ -152,7 +152,7 @@ watch(isOpen, (value) => {
                                height: items_height,
                                padding: padding,
                                paddingRight: '35px',
-                               justifyContent: text_center ? 'center' : 'start',
+                               justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                fontSize: font_size,
                                fontFamily: font_family,
                                fontWeight: font_weight
@@ -173,7 +173,7 @@ watch(isOpen, (value) => {
                                       height: items_height,
                                       padding: padding,
                                       paddingRight: '35px',
-                                      justifyContent: text_center ? 'center' : 'start',
+                                      justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                       fontSize: font_size,
                                       fontFamily: font_family,
                                       fontWeight: font_weight
@@ -206,7 +206,7 @@ watch(isOpen, (value) => {
                                     height: items_height,
                                     padding: padding,
                                     color: color,
-                                    justifyContent: text_center ? 'center' : 'start',
+                                    justifyContent: text_center ? 'center' : (orientation_left ? 'end' : 'start'),
                                     fontSize: font_size,
                                     fontFamily: font_family,
                                     fontWeight: font_weight
