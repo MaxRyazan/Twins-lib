@@ -1,0 +1,34 @@
+.tw_checkbox{
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #121212;
+    background-color: white;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    &:focus {
+      caret-color: transparent;
+      outline-width: 2px;
+      padding: 0;
+      margin: 0;
+    }
+  }
+  &__inner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+  }
+}
+.tw_checkbox-hidden{
+  display: none;
+}
