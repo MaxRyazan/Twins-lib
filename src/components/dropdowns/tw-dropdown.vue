@@ -77,7 +77,8 @@ watch(isOpen, (value) => {
                       fontWeight: font_weight
                     }"
                     class="tw_dropdown__value"
-                    :value="modelValue" readonly
+                    :value="modelValue"
+                    readonly
                     type="text">
             <div class="tw_icon">
                 <div class="tw_icon__left"

@@ -13,4 +13,4 @@ export default {
     }
 }
 
-export {TwInput, TwButton, TwTableBase, TwDropdown}
+export {TwInput, TwButton, TwTableBase, TwDropdown, TwMultiDropdown}

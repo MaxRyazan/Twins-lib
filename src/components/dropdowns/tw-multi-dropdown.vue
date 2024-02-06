@@ -112,10 +112,12 @@ watch(isOpen, (value) => {
                       fontSize: font_size,
                       fontFamily: font_family,
                       fontWeight: font_weight,
-                      padding: `0 ${horizontal_padding}`
+                      paddingLeft:  horizontal_padding,
+                      paddingRight: horizontal_padding
                     }"
                    class="tw_dropdown_multi__value"
-                   :value="modelValue" readonly
+                   :value="modelValue"
+                   readonly
                    type="text">
             <div :style="{left: orientation_left ? '5px' : ''}" class="tw_icon">
                 <div class="tw_icon__left"
@@ -154,7 +156,8 @@ watch(isOpen, (value) => {
                                fontSize: font_size,
                                fontFamily: font_family,
                                fontWeight: font_weight,
-                               padding: `0 ${horizontal_padding}`
+                               paddingLeft:  horizontal_padding,
+                               paddingRight: horizontal_padding
                            }"
                     >
                           {{ variant }}
@@ -174,7 +177,8 @@ watch(isOpen, (value) => {
                                       fontSize: font_size,
                                       fontFamily: font_family,
                                       fontWeight: font_weight,
-                                      padding: `0 ${horizontal_padding}`
+                                      paddingLeft:  horizontal_padding,
+                                      paddingRight: horizontal_padding
                                   }"
                             >
                                 {{ Object.keys(variant)[0] }}
@@ -207,7 +211,8 @@ watch(isOpen, (value) => {
                                     fontSize: font_size,
                                     fontFamily: font_family,
                                     fontWeight: font_weight,
-                                    padding: `0 ${horizontal_padding}`
+                                    paddingLeft:  horizontal_padding,
+                                    paddingRight: horizontal_padding
                                 }"
                                     @click="chooseVariant(item)">{{ item }}
                                 </li>
