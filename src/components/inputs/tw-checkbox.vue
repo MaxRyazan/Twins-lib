@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import {ref} from "vue";
 
-const inner = ref()
+const emits = defineEmits<{
+    (e: 'update:modelValue', param:boolean): void
+}>()
+
 const props = defineProps<{
+    modelValue: boolean
     label?: string
 }>()
 
 function check() {
-    inner.value.classList.toggle('tw_checkbox-hidden')
+    if(props.modelValue) emits('update:modelValue', false)
+    else emits('update:modelValue', true)
 }
 </script>
 
@@ -17,6 +21,6 @@ function check() {
          @keydown.enter.prevent="check"
          @click="check"
     >
-        <span ref="inner" class="tw_checkbox__inner tw_checkbox-hidden"></span>
+        <span v-if="modelValue" class="tw_checkbox__inner"></span>
     </div>
 </template>
