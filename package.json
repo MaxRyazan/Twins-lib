@@ -1,6 +1,6 @@
 {
   "name": "twins-vue",
-  "version": "0.0.32",
+  "version": "0.0.34",
   "keywords": [
     "vue",
     "vue3",
@@ -24,6 +24,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "publish": "npm publish --access=public",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",

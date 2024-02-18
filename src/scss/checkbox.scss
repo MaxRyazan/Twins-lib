@@ -46,4 +46,26 @@ html {
   &__hide {
     display: none;
   }
+  &__message {
+    position: absolute;
+    bottom: -15px;
+    color: red;
+    font-size: 12px;
+    cursor: default;
+    animation: errorAnimation 2s linear infinite;
+    z-index: 99;
+  }
+}
+
+.invalid{
+  border-color: red !important;
+}
+
+@keyframes errorAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }

@@ -8,8 +8,10 @@ At the moment lib in first steps of development.
 
 - TwButton component
 - TwInput component
-- TwDropdown component
 - TwTableBase component
+- TwDropdown component
+- TwMultiDropdown component
+- TwCheckbox component
 
 
 ******************************************************************************************************************************************************************************
