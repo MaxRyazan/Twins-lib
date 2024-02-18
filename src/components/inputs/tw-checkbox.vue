@@ -17,7 +17,7 @@ const props = defineProps<{
     border?: string
     size?: string
     bgc?: string
-    checkedColor?: string
+    checked_color?: string
     gap?: string
     font_size?: string
     color?: string
@@ -68,7 +68,7 @@ onMounted(() => {
                 <div ref="twInnerWrapper"
                      class="tw_checkbox__check-symbol tw_checkbox__hide"
                      :style="{
-                        border: `2px solid ${checkedColor}`,
+                        border: `2px solid ${checked_color}`,
                         borderWidth: '0 2px 2px 0'
                      }"
                 ></div>
