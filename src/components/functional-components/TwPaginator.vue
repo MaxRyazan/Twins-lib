@@ -23,6 +23,12 @@ function handleChangePage() {
     }
 }
 
+function handleButtonClick(param: number) {
+    if(currentPage.value > 0 && currentPage.value < props.total_pages) {
+        currentPage.value += param
+    }
+}
+
 watch(currentPage, async (v) => {
     if(currentPage.value <= props.total_pages && currentPage.value > 0) {
         emits('changePage', currentPage.value - 1)
@@ -39,7 +45,7 @@ onMounted(() => {
 
 <template>
     <div class="tw_paginator" v-if="props.total_pages > 1">
-        <button v-if="with_buttons" class="tw_paginator__control-button" @click="currentPage -= 1">Предыдущая</button>
+        <button v-if="with_buttons" class="tw_paginator__control-button" @click="handleButtonClick(-1)">Предыдущая</button>
         <div class="tw_pg-buttons">
 
             <div class="tw_pg-buttons__item">
@@ -67,7 +73,7 @@ onMounted(() => {
             </div>
 
         </div>
-        <button v-if="with_buttons" class="tw_paginator__control-button" @click="currentPage += 1">Следующая</button>
+        <button v-if="with_buttons" class="tw_paginator__control-button" @click="handleButtonClick(1)">Следующая</button>
 
         <div v-if="with_go_to" class="tw_go_to">
             <label>Перейти на:</label>
