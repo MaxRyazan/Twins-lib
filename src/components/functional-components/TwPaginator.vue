@@ -3,6 +3,7 @@ import {onMounted, ref, watch} from "vue";
 
 const currentPage = ref(1)
 const MAX_PAGES = ref(3)
+const paginatorInput = ref()
 
 const emits = defineEmits<{
     (e: 'changePage', param: number): void
@@ -11,10 +12,21 @@ const emits = defineEmits<{
 const props = defineProps<{
     total_pages: number
     max_pages_around_current: number
+    with_go_to: boolean
+    with_buttons: boolean
 }>()
 
-watch(currentPage, async () => {
-    emits('changePage', currentPage.value - 1)
+
+function handleChangePage() {
+    if(paginatorInput.value.value > 0 && paginatorInput.value.value <= props.total_pages) {
+        currentPage.value = +paginatorInput.value.value
+    }
+}
+
+watch(currentPage, async (v) => {
+    if(currentPage.value <= props.total_pages && currentPage.value > 0) {
+        emits('changePage', currentPage.value - 1)
+    }
 })
 
 onMounted(() => {
@@ -27,7 +39,7 @@ onMounted(() => {
 
 <template>
     <div class="tw_paginator" v-if="props.total_pages > 1">
-        <button style="border: 1px solid black; cursor: pointer" @click="currentPage -= 1">Предыдущая</button>
+        <button v-if="with_buttons" class="tw_paginator__control-button" @click="currentPage -= 1">Предыдущая</button>
         <div class="tw_pg-buttons">
 
             <div class="tw_pg-buttons__item">
@@ -55,6 +67,15 @@ onMounted(() => {
             </div>
 
         </div>
-        <button style="border: 1px solid black;" @click="currentPage += 1">Следующая</button>
+        <button v-if="with_buttons" class="tw_paginator__control-button" @click="currentPage += 1">Следующая</button>
+
+        <div v-if="with_go_to" class="tw_go_to">
+            <label>Перейти на:</label>
+            <input ref="paginatorInput" class="tw_go_to__input"
+                   @change="handleChangePage"
+                   @keydown.enter="handleChangePage"
+                   type="number">
+        </div>
+
     </div>
 </template>
