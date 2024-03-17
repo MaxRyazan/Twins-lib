@@ -1,58 +1,60 @@
 <script setup lang="ts">
-import {computed, ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 
 const currentPage = ref(1)
+const MAX_PAGES = ref(3)
 
 const emits = defineEmits<{
     (e: 'changePage', param: number): void
 }>()
 
 const props = defineProps<{
-    totalPages: number
+    total_pages: number
+    max_pages_around_current: number
 }>()
-
-const numberOfPages = computed(() => {
-    let arrayOfPages = []
-    for (let i = 2; i < props.totalPages + 1; i++) {
-        arrayOfPages.push(i)
-    }
-    return arrayOfPages.slice(currentPage.value - 1, props.totalPages)
-})
-
 
 watch(currentPage, async () => {
     emits('changePage', currentPage.value - 1)
 })
 
+onMounted(() => {
+    if(props.max_pages_around_current) {
+        MAX_PAGES.value = props.max_pages_around_current
+    }
+})
+
 </script>
 
 <template>
-    <div class="flex align-items-center gap-5" v-if="props.totalPages > 1">
-        <div class="pages_buttons">
-            <div>
-                <button style="border: 1px solid red" @push="currentPage -= 1">{{`<-`}}</button>
-                <button style="border: 1px solid red; margin-left: -4px" @push="currentPage += 1" >{{`->`}}</button>
+    <div class="tw_paginator" v-if="props.total_pages > 1">
+        <button style="border: 1px solid black; cursor: pointer" @click="currentPage -= 1">Предыдущая</button>
+        <div class="tw_pg-buttons">
+
+            <div class="tw_pg-buttons__item">
+                <span :class="{'tw_pg-active': currentPage === 1}" @click="currentPage = 1">1</span>
             </div>
+
+            <div v-if="currentPage > MAX_PAGES + 2">
+                <pre>. . .</pre>
+            </div>
+
+            <div class="tw_pg-buttons__item" v-for="page in total_pages"
+                 :class="{'tw_pg-hide' : Math.abs(page - currentPage) > MAX_PAGES || page === 1 || page === total_pages}">
+                <span v-if="page !== 1 && page !== total_pages"
+                      :class="{'tw_pg-active': page === currentPage}"
+                      @click="currentPage = page"
+                >{{ page }}</span>
+            </div>
+
+            <div v-if="currentPage < total_pages - (MAX_PAGES + 1)">
+                <pre>. . .</pre>
+            </div>
+
+            <div class="tw_pg-buttons__item">
+                <span :class="{'tw_pg-active': currentPage === total_pages}" @click="currentPage = total_pages">{{ total_pages }}</span>
+            </div>
+
         </div>
-        <div class="pages_wrapper">
-            <div class="panel_wrapper-pages pages">
-                <div :class="{'curr_page': currentPage===1}" class="pages_item" @click="currentPage = 1">1</div>
-                <div class="curr_page pages_item" v-if="currentPage>1">{{ currentPage }}</div>
-                <div :class="{'curr_page': page===currentPage}" class="pages_item" v-for="page in numberOfPages"
-                     :key="page" @click="currentPage = page">{{ page }}
-                </div>
-            </div>
-            <div v-if="currentPage < props.totalPages-5">
-                <pre style="cursor: default"> . . . </pre>
-            </div>
-            <div class="panel_wrapper-pages">
-                <div v-if="currentPage < totalPages-4" :class="{'curr_page': currentPage===totalPages-1}"
-                     class="pages_item" @click="currentPage = props.totalPages-1">{{ props.totalPages - 1 }}
-                </div>
-                <div v-if="currentPage < totalPages-5" :class="{'curr_page': currentPage===props.totalPages}"
-                     class="pages_item" @click="currentPage = props.totalPages">{{ props.totalPages }}
-                </div>
-            </div>
-        </div>
+        <button style="border: 1px solid black;" @click="currentPage += 1">Следующая</button>
     </div>
 </template>
