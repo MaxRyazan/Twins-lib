@@ -44,10 +44,14 @@ onMounted(() => {
             <input :id="uuids[idx]" type="radio" name="radio" :value="variant">
             <label :for="uuids[idx]"
                     @click="choose(variant, uuids[idx])"
+                   :style="{
+                        borderRight: group ? 'none' : ''
+                   }"
                    :class="{
                             tw_radio__checked: modelValue === variant,
-                            'tw_radio__last-child' : group && (idx === variants.length - 1)
-                        }"
+                            'tw_radio__last-child' : group && (idx === variants.length - 1),
+
+                            }"
             >{{variant}}</label>
         </div>
     </div>
