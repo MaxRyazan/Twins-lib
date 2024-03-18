@@ -1,27 +1,68 @@
+html {
+  --tw_paginator_pages_border_color: black;
+  --tw_paginator_pages_border_width: 1px;
+  --tw_paginator_pages_active_border_color: darkorange;
+  --tw_paginator_pages_active_border_width: 2px;
+  --tw_paginator_pages_border_radius: 0px;
+  --tw_paginator_pages_color: black;
+  --tw_paginator_pages_width: 26px;
+  --tw_paginator_height: 20px;
+  --tw_paginator_pages_gap: 2px;
+
+  --tw_paginator_input_border_width: 2px;
+  --tw_paginator_input_width: 44px;
+  --tw_paginator_input_color: black;
+  --tw_paginator_input_bgc: transparent;
+  --tw_paginator_input_border_radius: 0px;
+
+  --tw_paginator_buttons_border_color: black;
+  --tw_paginator_buttons_border_width: 1px;
+  --tw_paginator_buttons_color: black;
+  --tw_paginator_buttons_bgc: #f0f0f0;
+  --tw_paginator_buttons_padding: 1px 2px;
+
+  --tw_paginator_label_color: black;
+  --tw_paginator_label_font_size: 14px;
+  --tw_paginator_label_font_family: sans-serif;
+}
+
 .tw_paginator {
   display: flex;
   align-items: center;
   gap: 5px;
+  height: var(--tw_paginator_height);
+  &__pre {
+    display: flex;
+    align-items: end;
+    cursor: default;
+  }
 }
 .tw_pg-buttons {
   display: flex;
-  gap: 2px;
+  gap: var(--tw_paginator_pages_gap);
   &__item {
-    width: 26px;
-    height: 20px;
+    width: var(--tw_paginator_pages_width);
+    height: var(--tw_paginator_height);
     position: relative;
     & span {
-      display: block;
+      color: var(--tw_paginator_pages_color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      width: 26px;
-      height: 20px;
-      text-align: center;
-      border: 1px solid black;
+      width: var(--tw_paginator_pages_width);
+      height: 100%;
+      border-color: var(--tw_paginator_pages_border_color);
+      border-width: var(--tw_paginator_pages_border_width);
+      border-style: solid;
+      border-radius: var(--tw_paginator_pages_border_radius);
     }
   }
 }
 .tw_pg-active {
-  border: 2px solid red !important;
+  border-color: var(--tw_paginator_pages_active_border_color) !important;
+  border-width: var(--tw_paginator_pages_active_border_width) !important;
+  border-style: solid !important;
 }
 .tw_pg-hide {
   display: none;
@@ -30,12 +71,23 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  height: var(--tw_paginator_height);
+  & label {
+    color: var(--tw_paginator_label_color);
+    font-size: var(--tw_paginator_label_font_size);
+    font-family: var(--tw_paginator_label_font_family);
+  }
   &__input {
     outline: none;
-    border: 2px solid black;
+    color: var(--tw_paginator_input_color);
+    border-color: var(--tw_paginator_pages_border_color);
+    border-width: var(--tw_paginator_input_border_width);
+    border-style: solid;
+    border-radius: var(--tw_paginator_input_border_radius);
     padding: 2px;
-    width: 44px;
-    height: 20px;
+    height: 100%;
+    width: var(--tw_paginator_input_width);
+    background-color: var(--tw_paginator_input_bgc);
     text-align: center;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
@@ -48,7 +100,12 @@
   }
 }
 .tw_paginator__control-button {
-  border: 1px solid black;
+  border-color: var(--tw_paginator_buttons_border_color);
+  border-width: var(--tw_paginator_buttons_border_width);
+  border-style: solid;
+  background-color: var(--tw_paginator_buttons_bgc);
   cursor:pointer;
-  padding: 2px;
+  padding: var(--tw_paginator_buttons_padding);
+  height: 100%;
+  color: var(--tw_paginator_buttons_color);
 }
