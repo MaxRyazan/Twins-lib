@@ -1,6 +1,12 @@
-.html {
-  --fdfdf: 1px solid red;
-  --border-right: 1px solid red;
+html {
+  --tw_radio_border: 1px solid #999;
+  --tw_radio_color: #121212;
+  --tw_radio_bgc: white;
+  --tw_radio_bgc_checked: #ffe0a6;
+  --tw_radio_item_gap: 10px;
+  --tw_radio_item_width: 40px;
+  --tw_radio_item_height: 25px;
+  --tw_radio_item_padding: 4px;
 }
 
 
@@ -9,11 +15,12 @@
   overflow: hidden;
   &__item {
     display: inline-block;
-    gap: 10px;
+    background-color: var(--tw_radio_bgc);
+    gap: var(--tw_radio_item_gap);
     float: left;
   }
   &__checked {
-    background: #ffe0a6;
+    background-color: var(--tw_radio_bgc_checked);
   }
 }
 
@@ -21,23 +28,19 @@
   display: none;
 }
 .tw_radio label {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 0 15px;
-  line-height: 34px;
-  border: 1px solid #999;
-  //border-right: none;
+  width: var(--tw_radio_item_width);
+  height: var(--tw_radio_item_height);
+  border: var(--tw_radio_border);
   user-select: none;
-  color: #121212;
+  color: var(--tw_radio_color);
 }
 
-//.tw_radio .tw_radio__item:first-child label {
-//  border-radius: 6px 0 0 6px;
-//}
-
 .tw_radio__last-child {
-  //border-radius: 0 6px 6px 0;
-  border-right: 1px solid #999 !important;
+  border-right: var(--tw_radio_border) !important;
 }
 
 .tw_radio label:hover {

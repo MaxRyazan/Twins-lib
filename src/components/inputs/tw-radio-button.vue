@@ -7,9 +7,12 @@ type T = number | string
 const props = defineProps<{
     modelValue: T,
     variants: Array<T> | null,
-    group?: boolean,
-    border?: string,
-    border_right?: string
+    settings?: {
+        in_group?: boolean,
+    }
+    styles?: {
+
+    }
 }>()
 
 let uuids = ref([])
@@ -35,7 +38,7 @@ onMounted(() => {
 <template>
     <div class="tw_radio"
         :style="{
-            gap: group ? '0' : '10px'
+            gap: props.settings?.in_group ? '0' : '10px'
         }"
     >
         <div v-for="(variant, idx) in props.variants" :key="variant"
@@ -45,13 +48,12 @@ onMounted(() => {
             <label :for="uuids[idx]"
                     @click="choose(variant, uuids[idx])"
                    :style="{
-                        borderRight: group ? 'none' : ''
+                        borderRight: props.settings?.in_group ? 'none' : ''
                    }"
                    :class="{
                             tw_radio__checked: modelValue === variant,
-                            'tw_radio__last-child' : group && (idx === variants.length - 1),
-
-                            }"
+                            'tw_radio__last-child' : props.settings?.in_group && (idx === variants.length - 1),
+                   }"
             >{{variant}}</label>
         </div>
     </div>
