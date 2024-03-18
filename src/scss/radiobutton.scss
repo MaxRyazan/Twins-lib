@@ -20,7 +20,7 @@ html {
     float: left;
   }
   &__checked {
-    background-color: var(--tw_radio_bgc_checked);
+    background-color: var(--tw_radio_bgc_checked) !important;
   }
 }
 
