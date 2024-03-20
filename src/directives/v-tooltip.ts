@@ -1,8 +1,7 @@
 import {Directive, DirectiveBinding} from "vue";
 
 interface TTStyles {
-    styleName: string,
-    styleValue: string | number
+    [key: string] : string | number,
 }
 
 interface Tooltip {
@@ -11,26 +10,16 @@ interface Tooltip {
 }
 
 
-
 export const tooltip: Directive<HTMLElement, Tooltip> = {
     mounted(el: HTMLElement, bind: DirectiveBinding<Tooltip>) {
         let cursorOnElement:boolean = false
         const div: HTMLDivElement = document.createElement('div');
-        if (bind.value) {
-            div.style.position = 'absolute';
-            div.style.display = 'block';
-            if(bind.value.styles){
-                bind.value.styles?.forEach((styleCard:TTStyles) => {
-                    div.style[styleCard.styleName] = styleCard.styleValue;
-                })
-            } else {
-                div.style.padding = '5px 10px';
-                div.style.backgroundColor = 'white';
-                div.style.color = '#121212';
-                div.style.border = '1px solid #121212';
-            }
 
-            div.innerHTML = bind.value.text
+        if (bind.value) {
+            setDefaultStyles(div);
+            setCustomStyles(bind.value, div);
+            setTooltipText(bind.value, div);
+
             el.addEventListener('mouseover', (ev: MouseEvent) => {
                 cursorOnElement = true
                 setTimeout(() => {
@@ -51,5 +40,32 @@ function showTooltip(cursorOnElement: boolean, div: HTMLDivElement, ev: MouseEve
         div.style.left = ev.clientX + 2 + 'px'
         div.style.top = ev.clientY + 5 + 'px'
         document.body.append(div)
+    }
+}
+
+function setDefaultStyles(div: HTMLDivElement) {
+    div.style.position = 'absolute';
+    div.style.display = 'block';
+    div.style.padding = '5px 10px';
+    div.style.color = '#121212';
+    div.style.border = '1px solid #121212';
+    div.style.backgroundColor = 'white';
+}
+
+function setTooltipText(bindValue: Tooltip, div: HTMLDivElement) {
+    if(typeof bindValue === 'string') {
+        div.innerHTML = bindValue
+    } else {
+        div.innerHTML = bindValue.text
+    }
+}
+
+function setCustomStyles(bindValue: Tooltip, div: HTMLDivElement) {
+    if(bindValue.styles){
+        bindValue.styles?.forEach((styleCard:TTStyles) => {
+            for (const [key, value] of Object.entries(styleCard)) {
+                div.style[key] = value;
+            }
+        })
     }
 }
