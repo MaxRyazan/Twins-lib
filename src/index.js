@@ -6,8 +6,10 @@ import TwMultiDropdown from "@/components/dropdowns/tw-multi-dropdown.vue";
 import TwCheckbox from "@/components/inputs/tw-checkbox.vue";
 import TwRadioButton from "@/components/inputs/tw-radio-button.vue";
 import TwPaginator from "@/components/functional-components/TwPaginator.vue";
+import {tooltip} from "@/directives/v-tooltip";
 export default {
     install: (app) => {
+        app.directive('tooltip', tooltip)
         app.component("tw-button", TwButton);
         app.component("tw-table-base", TwTableBase);
         app.component("tw-input", TwInput);
@@ -19,4 +21,4 @@ export default {
     }
 }
 
-export {TwInput, TwButton, TwTableBase, TwDropdown, TwMultiDropdown, TwCheckbox, TwRadioButton, TwPaginator}
+export {TwInput, TwButton, TwTableBase, TwDropdown, TwMultiDropdown, TwCheckbox, TwRadioButton, TwPaginator, tooltip}
