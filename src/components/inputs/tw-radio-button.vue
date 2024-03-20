@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, onUnmounted, ref, ShallowRef, shallowRef} from "vue";
 import {generateUUID} from '@/helpers'
 
 type T = number | string
@@ -9,17 +9,26 @@ const props = defineProps<{
     variants: Array<T> | null,
     settings?: {
         in_group?: boolean,
+        disabled?: boolean
     }
     styles?: {
+        item_width?: string
+        item_height?: string
         item_bgc?: string
         item_border?: string
-        item_color?: string
+        text_color?: string
         active_color?: string
+        hover_color?: string
+        font_size?: string,
+        font_family?: string,
+        font_weight?: string,
     }
 }>()
 
 let uuids = ref([])
 const BASE_ACTIVE_COLOR = ref('')
+const BASE_HOVER_COLOR = ref('')
+const twRadioLabel: ShallowRef<HTMLElement[]> = shallowRef([])
 
 const emits = defineEmits<{
     (e: 'update:modelValue', param: T)
@@ -43,12 +52,35 @@ function watchBorderRight(idx: number) {
     }
 }
 
+function changeHoverColor(el: HTMLElement) {
+    return el.style.color = props.styles?.hover_color
+}
+function setBaseHoverColor(el: HTMLElement) {
+    return el.style.color = props.styles?.text_color ?? getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_color')
+}
+
 onMounted(() => {
     for(let i = 0; i < props.variants.length; i++) {
         const uuid = generateUUID();
         uuids.value.push(uuid);
     }
-    BASE_ACTIVE_COLOR.value = getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_bgc_checked')
+    BASE_ACTIVE_COLOR.value = getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_bgc_checked');
+    BASE_HOVER_COLOR.value = getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_hover_color');
+    if(props.styles?.hover_color && twRadioLabel.value) {
+        twRadioLabel.value.forEach((el: HTMLElement) => {
+            el.addEventListener('mouseover', () => changeHoverColor(el))
+            el.addEventListener('mouseout', () => setBaseHoverColor(el))
+        })
+    }
+})
+
+onUnmounted(() => {
+    if(props.styles?.hover_color && twRadioLabel.value) {
+        twRadioLabel.value.forEach(el => {
+            el.removeEventListener('mouseover', () => changeHoverColor(el))
+            el.removeEventListener('mouseout', () => setBaseHoverColor(el))
+        })
+    }
 })
 
 </script>
@@ -62,14 +94,17 @@ onMounted(() => {
         <div v-for="(variant, idx) in props.variants" :key="variant"
              class="tw_radio__item"
         >
-            <input :id="uuids[idx]" type="radio" name="radio" :value="variant">
+            <input :id="uuids[idx]" type="radio" name="radio" :disabled="props.settings?.disabled" :value="variant">
             <label :for="uuids[idx]"
+                   ref="twRadioLabel"
                     @click="choose(variant, uuids[idx])"
                    :style="{
                         backgroundColor: modelValue === variant ? (props.styles?.active_color ?? BASE_ACTIVE_COLOR) : props.styles?.item_bgc,
                         border: props.styles?.item_border,
                         borderRight: watchBorderRight(idx),
-                        color: props.styles?.item_color,
+                        color: props.styles?.text_color,
+                        width: props.styles?.item_width,
+                        height: props.styles?.item_height,
                    }"
             >{{variant}}</label>
         </div>

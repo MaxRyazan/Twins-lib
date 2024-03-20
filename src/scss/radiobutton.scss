@@ -2,11 +2,12 @@ html {
   --tw_radio_border: 1px solid #999;
   --tw_radio_color: #121212;
   --tw_radio_bgc: white;
-  --tw_radio_bgc_checked: #ffe0a6;
   --tw_radio_item_gap: 10px;
   --tw_radio_item_width: 40px;
   --tw_radio_item_height: 25px;
   --tw_radio_item_padding: 4px;
+  --tw_radio_bgc_checked: #ffe0a6;
+  --tw_radio_hover_color: rgba(0,0,0, .3);
 }
 
 
@@ -37,18 +38,15 @@ html {
   border: var(--tw_radio_border);
   user-select: none;
   color: var(--tw_radio_color);
+  &:hover {
+    color: var(--tw_radio_hover_color);
+  }
 }
 
-.tw_radio__last-child {
-  border-right: var(--tw_radio_border) !important;
-}
-
-.tw_radio label:hover {
-  color: #666;
-}
 
 /* Disabled */
 .tw_radio input[type=radio]:disabled + label {
-  background: #efefef;
-  color: #666;
+  background: #efefef !important;
+  color: #666 !important;
+  pointer-events: none;
 }
