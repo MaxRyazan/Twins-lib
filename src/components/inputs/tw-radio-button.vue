@@ -8,8 +8,9 @@ const props = defineProps<{
     modelValue: T,
     variants: Array<T> | null,
     settings?: {
-        in_group?: boolean,
+        in_group?: boolean
         disabled?: boolean
+        rounded?: boolean
     }
     styles?: {
         item_width?: string
@@ -19,9 +20,9 @@ const props = defineProps<{
         text_color?: string
         active_color?: string
         hover_color?: string
-        font_size?: string,
-        font_family?: string,
-        font_weight?: string,
+        font_size?: string
+        font_family?: string
+        font_weight?: string
     }
 }>()
 
@@ -40,6 +41,25 @@ function choose(variant: any, uuid: string){
     input.checked = true
 }
 
+
+function watchBorderRadius(idx: number) {
+    if(props.settings.rounded) {
+        const radius = getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_border_radius');
+        if(props.settings?.in_group) {
+            if(idx === props.variants.length - 1) {
+                return `0 ${radius} ${radius} 0`
+            }
+            if(idx === 0) {
+                return `${radius} 0 0 ${radius}`
+            }
+        } else {
+            return radius
+        }
+    }
+}
+
+
+
 function watchBorderRight(idx: number) {
     if(!props.settings?.in_group) {
         return props.styles?.item_border
@@ -56,7 +76,7 @@ function changeHoverColor(el: HTMLElement) {
     return el.style.color = props.styles?.hover_color
 }
 function setBaseHoverColor(el: HTMLElement) {
-    return el.style.color = props.styles?.text_color ?? getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_color')
+    return el.style.color = props.styles?.text_color ?? getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_color');
 }
 
 onMounted(() => {
@@ -105,6 +125,7 @@ onUnmounted(() => {
                         color: props.styles?.text_color,
                         width: props.styles?.item_width,
                         height: props.styles?.item_height,
+                        borderRadius: watchBorderRadius(idx)
                    }"
             >{{variant}}</label>
         </div>
