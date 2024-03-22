@@ -37,6 +37,15 @@ const props = defineProps<{
     }
 }>()
 
+//TODO
+/*
+добавить dots_color
+добавить buttons_text_color
+добавить buttons_pages_bgc
+к input добавить свойство color  = text_color
+
+исправить "перейти на предыдущую страницу с 1 страницы
+ */
 
 function handleChangePage() {
     if(paginatorInput.value.value > 0 && paginatorInput.value.value <= props.total_pages) {

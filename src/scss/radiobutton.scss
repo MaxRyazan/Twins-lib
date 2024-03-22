@@ -15,6 +15,7 @@ html {
 .tw_radio {
   display: flex;
   overflow: hidden;
+  background-color: transparent;
   &__item {
     display: inline-block;
     background-color: var(--tw_radio_bgc);

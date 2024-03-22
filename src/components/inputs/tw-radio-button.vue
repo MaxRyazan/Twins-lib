@@ -43,7 +43,7 @@ function choose(variant: any, uuid: string){
 
 
 function watchBorderRadius(idx: number) {
-    if(props.settings.rounded) {
+    if(props.settings?.rounded) {
         const radius = getComputedStyle(document.documentElement).getPropertyValue('--tw_radio_border_radius');
         if(props.settings?.in_group) {
             if(idx === props.variants.length - 1) {
@@ -112,6 +112,9 @@ onUnmounted(() => {
         }"
     >
         <div v-for="(variant, idx) in props.variants" :key="variant"
+             :style="{
+                 borderRadius: watchBorderRadius(idx)
+             }"
              class="tw_radio__item"
         >
             <input :id="uuids[idx]" type="radio" name="radio" :disabled="props.settings?.disabled" :value="variant">

@@ -25,12 +25,15 @@ html {
   --tw_paginator_label_font_size: 14px;
   --tw_paginator_label_font_family: sans-serif;
 }
-
+pre {
+  margin: 0;
+}
 .tw_paginator {
   display: flex;
   align-items: center;
   gap: 5px;
   height: var(--tw_paginator_height);
+  position: relative;
   &__pre {
     display: flex;
     align-items: end;
@@ -40,6 +43,7 @@ html {
 .tw_pg-buttons {
   display: flex;
   gap: var(--tw_paginator_pages_gap);
+  max-height: 100%;
   &__item {
     width: var(--tw_paginator_pages_width);
     height: var(--tw_paginator_height);
