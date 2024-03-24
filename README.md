@@ -5,13 +5,18 @@ https://maxryazan.github.io/tw-lib-documentation/
 3. Add - app.use(twins)
 
 At the moment lib in first steps of development.
-
+Components:
 - TwButton component
 - TwInput component
-- TwTableBase component
+- TwCheckbox component
+- TWRadioButton component
 - TwDropdown component
 - TwMultiDropdown component
-- TwCheckbox component
+- TwTableBase component
+- TwPaginator component
+
+Directives:
+- v-tooltip
 
 
 ******************************************************************************************************************************************************************************
