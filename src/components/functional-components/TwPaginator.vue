@@ -24,24 +24,29 @@ const props = defineProps<{
         font_size?: string,
         font_family?: string,
         font_weight?: string,
+
         item_width?: string,
         item_border?: string,
+        item_border_radius?: string,
+        item_bgc?: string,
+
         buttons_border?: string,
         buttons_border_radius?: string,
         buttons_bgc?: string,
+        buttons_font_color?: string,
+
         input_border?: string,
         input_border_radius?: string,
         input_bgc?: string,
-        item_border_radius?: string,
         go_to_margin_left?: string
+
+        dots_color?: string
     }
 }>()
 
 //TODO
 /*
-добавить dots_color
-добавить buttons_text_color
-добавить buttons_pages_bgc
+
 к input добавить свойство color  = text_color
 
 исправить "перейти на предыдущую страницу с 1 страницы
@@ -83,7 +88,7 @@ onMounted(() => {
         <button v-if="props.settings.with_buttons"
                 class="tw_paginator__control-button"
                 :style="{
-                    color: props.styles?.text_color,
+                    color: props.styles?.buttons_font_color ?? props.styles?.text_color,
                     fontSize: props.styles?.font_size,
                     fontFamily: props.styles?.font_family,
                     fontWeight: props.styles?.font_weight,
@@ -113,13 +118,14 @@ onMounted(() => {
                          width: props.styles?.item_width,
                          border: props.styles?.item_border,
                          borderRadius: props.styles?.item_border_radius,
+                         backgroundColor: props.styles?.item_bgc
                       }"
                       @click="currentPage = 1"
                 >1</span>
             </div>
 
             <div class="tw_paginator__pre" v-if="currentPage > MAX_PAGES + 2">
-                <pre>. . .</pre>
+                <pre :style="{color: props.styles?.dots_color}">. . .</pre>
             </div>
 
             <div class="tw_pg-buttons__item" v-for="page in total_pages"
@@ -139,13 +145,14 @@ onMounted(() => {
                          width: props.styles?.item_width,
                          border: props.styles?.item_border,
                          borderRadius: props.styles?.item_border_radius,
+                         backgroundColor: props.styles?.item_bgc
                       }"
                       @click="currentPage = page"
                 >{{ page }}</span>
             </div>
 
             <div class="tw_paginator__pre" v-if="currentPage < total_pages - (MAX_PAGES + 1)">
-                <pre>. . .</pre>
+                <pre :style="{color: props.styles?.dots_color}">. . .</pre>
             </div>
 
             <div class="tw_pg-buttons__item"
@@ -163,6 +170,7 @@ onMounted(() => {
                           width: props.styles?.item_width,
                           border: props.styles?.item_border,
                           borderRadius: props.styles?.item_border_radius,
+                          backgroundColor: props.styles?.item_bgc
                       }"
                       @click="currentPage = total_pages">{{ total_pages }}</span>
             </div>
@@ -171,7 +179,7 @@ onMounted(() => {
         <button v-if="props.settings?.with_buttons"
                 class="tw_paginator__control-button"
                 :style="{
-                    color: props.styles?.text_color,
+                    color: props.styles?.buttons_font_color ?? props.styles?.text_color,
                     fontSize: props.styles?.font_size,
                     fontFamily: props.styles?.font_family,
                     fontWeight: props.styles?.font_weight,
@@ -208,7 +216,8 @@ onMounted(() => {
                        fontWeight: props.styles?.font_weight,
                        backgroundColor: props.styles?.input_bgc,
                        border: props.styles?.input_border,
-                       borderRadius: props.styles?.input_border_radius
+                       borderRadius: props.styles?.input_border_radius,
+                       color: props.styles?.text_color
                    }"
                    class="tw_go_to__input"
                    @change="handleChangePage"
